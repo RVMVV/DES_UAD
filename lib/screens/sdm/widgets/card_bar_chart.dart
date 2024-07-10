@@ -1,18 +1,110 @@
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
 import 'package:flutter/material.dart';
 
 import '../../../core/constant_finals.dart';
+import '../../../data/data_chart.dart';
 import '../../widgets/base_container.dart';
+
+class HorizontalBarLabelChart extends StatelessWidget {
+  final List<charts.Series<dynamic, String>> seriesList;
+
+  final bool animate;
+
+  const HorizontalBarLabelChart(this.seriesList,
+      {Key? key, this.animate = true});
+
+  factory HorizontalBarLabelChart.withSampleData() {
+    return HorizontalBarLabelChart(
+      _createSampleData(),
+      animate: false,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return charts.BarChart(
+      seriesList,
+      animate: animate,
+      barGroupingType: charts.BarGroupingType.stacked,
+      vertical: false,
+      barRendererDecorator: charts.BarLabelDecorator<String>(),
+      // Hide domain axis.
+      domainAxis:
+          const charts.OrdinalAxisSpec(renderSpec: charts.NoneRenderSpec()),
+    );
+  }
+
+  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
+    final data = [
+      OrdinalSales('2014', 5),
+      OrdinalSales('2015', 25),
+      OrdinalSales('2016', 100),
+      OrdinalSales('2017', 75),
+    ];
+
+    return [
+      charts.Series<OrdinalSales, String>(
+        id: 'Sales',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: data,
+        labelAccessorFn: (OrdinalSales sales, _) =>
+            '${sales.year}: \$${sales.sales.toString()}',
+      ),
+    ];
+  }
+}
+
+//data temporary
+final akreditasis = [
+  PendidikanDosen('S1', '32%', '53'),
+  // PendidikanDosen('S2', '32%', '53'),
+  // PendidikanDosen('S3', '32%', '53'),
+  // PendidikanDosen('Profesi', '32%', '53'),
+  // PendidikanDosen('Speasialis 1 ', '32%', '53'),
+];
+
+final dataAkreditasi = [
+  charts.Series<PendidikanDosen, String>(
+    id: 'Akreditasi',
+    domainFn: (datum, index) => datum.pendidikanDosen,
+    measureFn: (datum, index) =>
+        double.parse(datum.persentase.replaceAll('%', '')),
+    data: akreditasis,
+    // labelAccessorFn: (datum, index) => '${datum.percent}% ● ${datum.value}',
+    labelAccessorFn: (datum, index) =>
+        '${datum.pendidikanDosen}: ${datum.persentase} ● ${datum.total}',
+    insideLabelStyleAccessorFn: (datum, index) => const charts.TextStyleSpec(
+      color: charts.MaterialPalette.white,
+      fontWeight: 'bold',
+    ),
+    outsideLabelStyleAccessorFn: (datum, index) => const charts.TextStyleSpec(
+      color: charts.MaterialPalette.black,
+      fontWeight: 'bold',
+    ),
+  ),
+  charts.Series<PendidikanDosen, String>(
+    id: 'Akreditasi',
+    domainFn: (datum, index) => datum.pendidikanDosen,
+    measureFn: (datum, index) =>
+        double.parse(datum.persentase.replaceAll('', '')),
+    data: akreditasis,
+    labelAccessorFn: (datum, index) => '',
+  )
+];
 
 class CardBarChart extends StatelessWidget {
   final String title;
-  final String barTitle;
+  final String pendDosen;
   final String percent;
-  final String value;
+  final String totalValue;
+
   const CardBarChart({
     required this.title,
-    required this.barTitle,
+    required this.pendDosen,
     required this.percent,
-    required this.value,
+    required this.totalValue,
     super.key,
   });
 
@@ -30,106 +122,9 @@ class CardBarChart extends StatelessWidget {
                 color: kGrey900,
               ),
             ),
-            kGap20,
-            Row(
-              children: [
-                Expanded(
-                  flex: (37 / 74 * 100).round(),
-                  child: Container(
-                      height: 24,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(4),
-                        ),
-                        color: kBlue,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 10),
-                        child: Row(
-                          children: [
-                            Text(
-                              '${barTitle}: ',
-                              style: Styles.kPublicRegularBodyTwo.copyWith(
-                                color: kWhite,
-                              ),
-                            ),
-                            Text(
-                              percent,
-                              style: Styles.kPublicBoldBodyTwo.copyWith(
-                                color: kWhite,
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsetsDirectional.symmetric(
-                                horizontal: 4,
-                              ),
-                              width: 3,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: kGrey50,
-                              ),
-                            ),
-                            Text(
-                              value,
-                              style: Styles.kPublicBoldBodyTwo.copyWith(
-                                color: kWhite,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                ),
-                Expanded(
-                  flex: (37 / 80 * 100).round(),
-                  child: Container(
-                    height: 24,
-                    color: kBlue.withOpacity(16 / 100),
-                  ),
-                ),
-              ],
-            ),
-            kGap12,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '0',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '15',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '30',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '45',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '60',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '75',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-                Text(
-                  '90',
-                  style: Styles.kPublicRegularBodyThree
-                      .copyWith(color: kLightGrey500),
-                ),
-              ],
+            SizedBox(
+              height: 300,
+              child: HorizontalBarLabelChart(dataAkreditasi),
             )
           ],
         ),

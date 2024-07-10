@@ -14,8 +14,12 @@ import '../models/mutu/persebaran_akreditasi_internasional.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
+import '../models/sdm/sdm_jabatan_fung_dosen_model.dart';
+import '../models/sdm/sdm_jabatan_fung_tendik_model.dart';
 import '../models/sdm/sdm_jumlah_dosen_model.dart';
 import '../models/sdm/sdm_jumlah_tendik_model.dart';
+import '../models/sdm/sdm_pendidikan_dosen_model.dart';
+import '../models/sdm/sdm_pendidikan_tendik_model.dart';
 
 abstract interface class DataSource {
   // Akademik - Mahasiswa Asing
@@ -39,20 +43,29 @@ abstract interface class DataSource {
   Future<StudentBody> getStudentBody();
   Future<AkademikStudentStatus> getStudentStatus();
 
-
   // SDM - Jumlah Dosen
   Future<SdmJumlahDosen> getJumlahDosen();
-  //SDM - Gender Dosen
-  Future<SdmGenderDosen> getGenderDosen();
   //SDM - Jumlah Tendik
   Future<SdmJumlahTendik> getJumlahTendik();
+  //SDM - Gender Dosen
+  Future<SdmGenderDosen> getGenderDosen();
   //SDM - Gender Tendik
   Future<SdmGenderTendik> getGenderTendik();
-  
+  //SDM - Jabatan Fungsional Dosen
+  Future<List<DataJabatanFungsionalDosen>> getJabatanFungsionalDosen();
+  //SDM - Jabatan Fungsional Tendik
+  Future<List<DataJabatanFungsionalTendik>> getJabatanFungsionalTendik();
+  //SDM - SDM Pendidikan Dosen
+  Future<List<DataPendidikanDosen>> getPendidikanDosen();
+  //SDM - SDM Pendidikan Tendik
+  Future<List<DataPendidikanTendik>> getPendidikanTendik();
+
   // Mutu - Akreditasi
   Future<String> getTotalProdi();
   Future<List<PersebaranAkreditasi>> getPersebaranAkreditasi();
+
   /// Future<List<T>> getAkreditasiInternasional() -> Not Yet Aired
   Future<List<SertifikasiInternasional>> getSertifikasiInternasional();
-  Future<List<PersebaranAkreditasiInternasional>> getPersebaranAkreditasInternasional();
+  Future<List<PersebaranAkreditasiInternasional>>
+      getPersebaranAkreditasInternasional();
 }

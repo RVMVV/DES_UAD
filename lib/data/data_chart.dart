@@ -26,3 +26,19 @@ class DetailRanking {
 
   DetailRanking(this.scope, this.rank);
 }
+
+class PendidikanDosen {
+  final String pendidikanDosen;
+  final String persentase;
+  final String total;
+
+  PendidikanDosen(this.pendidikanDosen, this.persentase, this.total);
+}
+
+class JabatanFungsionalDosen {
+  final String jabfungDosen;
+  final String persentase;
+  final String total;
+
+  JabatanFungsionalDosen(this.jabfungDosen, this.persentase, this.total);
+}
