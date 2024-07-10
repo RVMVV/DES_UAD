@@ -42,10 +42,14 @@ final Map<String, dynamic> endpoint = {
     'sdm_dosen': {
       'ratio_jumlah': 'sdm_jumlah_dosen',
       'gender': 'sdm_dosen_gender',
+      'fungsional': 'sdm_dosen_fungsional',
+      'pendidikan': 'sdm_dosen_pendidikan',
     },
     'sdm_tendik': {
       'ratio_jumlah': 'sdm_jumlah_tendik',
       'gender': 'sdm_tendik_gender',
+      'fungsional': 'sdm_tendik_fungsional',
+      'pendidikan': 'sdm_tendik_pendidikan',
     }
   },
 };

@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:des_uad/cubit/home_cubit.dart';
-import 'package:des_uad/cubit/sdm_cubit.dart';
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constant_finals.dart';
+import '../../../cubit/sdm_cubit.dart';
+import '../../../data/models/sdm/sdm_jabatan_fung_dosen_model.dart';
+import '../../../data/models/sdm/sdm_pendidikan_dosen_model.dart';
+import '../../widgets/base_container.dart';
+import '../../widgets/big_card_title.dart';
 import '../../widgets/card_ratio.dart';
 import '../widgets/card_bar_chart.dart';
 import '../widgets/card_persebaran.dart';
@@ -29,7 +32,7 @@ class SDMDosen extends StatelessWidget {
               bloc: cubit..getJumlahDosen(),
               buildWhen: (previous, current) => current is SdmJumlah,
               builder: (context, state) {
-                print(state);
+                // print(state);
                 if (state is SdmJumlahDosenLoaded) {
                   return CardRatio(
                     title: 'Dosen',
@@ -51,7 +54,7 @@ class SDMDosen extends StatelessWidget {
               bloc: cubit..getGenderDosen(),
               buildWhen: (previous, current) => current is SdmGender,
               builder: (context, state) {
-                print(state);
+                // print(state);
                 if (state is SdmGenderDosenLoaded) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,37 +97,131 @@ class SDMDosen extends StatelessWidget {
               },
             ),
             kGap16,
-            CardBarChart(
-              title: 'Jabatan Fungsional Dosen',
-              barTitle: 'Guru Besar',
-              percent: '50%',
-              value: '37',
+            BaseContainer.styledBigCard(
+              children: [
+                const BigCardTitle(title: 'Jabatan Fungsional Dosen'),
+                SizedBox(
+                  height: 300,
+                  child: BlocBuilder<SdmCubit, SdmState>(
+                    bloc: cubit..getJabfungDosen(),
+                    buildWhen: (previous, current) =>
+                        current is SdmJabfungDosen,
+                    builder: (context, state) {
+                      // print(state);
+                      if (state is JabfungDosenLoaded) {
+                        final dataJabfungDosen = [
+                          charts.Series<DataJabatanFungsionalDosen, String>(
+                            id: 'AI',
+                            data: state.data,
+                            domainFn: (datum, index) => datum.jabfungTendik,
+                            measureFn: (datum, index) => double.parse(
+                                datum.persentase.replaceAll('%', '')),
+                            labelAccessorFn: (datum, index) =>
+                                '${datum.jabfungTendik}:   ${datum.persentase} ● ${datum.total}',
+                            insideLabelStyleAccessorFn: (datum, index) =>
+                                const charts.TextStyleSpec(
+                              color: charts.MaterialPalette.white,
+                              fontWeight: 'bold',
+                            ),
+                            outsideLabelStyleAccessorFn: (datum, index) =>
+                                const charts.TextStyleSpec(
+                              color: charts.MaterialPalette.black,
+                              fontWeight: 'bold',
+                            ),
+                          ),
+                          charts.Series<DataJabatanFungsionalDosen, String>(
+                            id: 'AI',
+                            domainFn: (datum, index) => datum.jabfungTendik,
+                            measureFn: (datum, index) =>
+                                100 -
+                                double.parse(
+                                    datum.persentase.replaceAll('%', '')),
+                            data: state.data,
+                            labelAccessorFn: (datum, index) => '',
+                            colorFn: (datum, index) => const charts.Color(
+                                r: 52, g: 144, b: 252, a: 32),
+                          )
+                        ];
+                        return HorizontalBarLabelChart(dataJabfungDosen);
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ),
+              ],
             ),
             kGap16,
             Persebaran(
               title: 'Persebaran Dosen',
             ),
             kGap16,
-            CardBarChart(
-              title: 'Pendidikan Dosen',
-              barTitle: 'S1',
-              percent: '50%',
-              value: '37',
+            BaseContainer.styledBigCard(
+              children: [
+                const BigCardTitle(title: 'Pendidikan Dosen'),
+                SizedBox(
+                  height: 300,
+                  child: BlocBuilder<SdmCubit, SdmState>(
+                    bloc: cubit..getPendidikanDosen(),
+                    buildWhen: (previous, current) =>
+                        current is SdmPendidikanDosen,
+                    builder: (context, state) {
+                      // print(state);
+                      if (state is PendidikanDosenLoaded) {
+                        final dataPendidikanDosen = [
+                          charts.Series<DataPendidikanDosen, String>(
+                            id: 'AI',
+                            data: state.data,
+                            domainFn: (datum, index) => datum.pendDosen,
+                            measureFn: (datum, index) => double.parse(
+                                datum.persentase.replaceAll('%', '')),
+                            labelAccessorFn: (datum, index) =>
+                                '${datum.pendDosen}:   ${datum.persentase} ● ${datum.total}',
+                            insideLabelStyleAccessorFn: (datum, index) =>
+                                const charts.TextStyleSpec(
+                              color: charts.MaterialPalette.white,
+                              fontWeight: 'bold',
+                            ),
+                            outsideLabelStyleAccessorFn: (datum, index) =>
+                                const charts.TextStyleSpec(
+                              color: charts.MaterialPalette.black,
+                              fontWeight: 'bold',
+                            ),
+                          ),
+                          charts.Series<DataPendidikanDosen, String>(
+                            id: 'AI',
+                            domainFn: (datum, index) => datum.pendDosen,
+                            measureFn: (datum, index) =>
+                                100 -
+                                double.parse(
+                                    datum.persentase.replaceAll('%', '')),
+                            data: state.data,
+                            labelAccessorFn: (datum, index) => '',
+                            colorFn: (datum, index) => const charts.Color(
+                                r: 52, g: 144, b: 252, a: 32),
+                          )
+                        ];
+                        return HorizontalBarLabelChart(dataPendidikanDosen);
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ),
+              ],
             ),
             kGap16,
-            CardBarChart(
-              title: 'Usia Dosen',
-              barTitle: '21 - 30',
-              percent: '50%',
-              value: '37',
-            ),
-            kGap16,
-            CardBarChart(
-              title: 'Sertifikasi',
-              barTitle: 'Bersertifikasi',
-              percent: '50%',
-              value: '33',
-            ),
+
+            // kGap16,
+            // CardBarChart(
+            //   title: 'Pendidikan Dosen',
+            // ),
+            // kGap16,
+            // CardBarChart(
+            //   title: 'Usia Dosen',
+            // ),
+            // kGap16,
+            // CardBarChart(
+            //   title: 'Sertifikasi',
+            // ),
             kGap70,
           ],
         ),

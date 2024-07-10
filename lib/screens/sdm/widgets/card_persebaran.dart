@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constant_finals.dart';
+import '../../../data/data_chart.dart';
 import '../../widgets/base_container.dart';
 
 class Persebaran extends StatefulWidget {
@@ -28,6 +29,14 @@ class _PersebaranState extends State<Persebaran> {
     'FKIP',
   ];
 
+  final akreditasis = [
+    AkreditasiInternasional('Informatika', 50, '37'),
+    AkreditasiInternasional('Teknik Elektro', 20, '33'),
+    AkreditasiInternasional('Teknik Industri', 15, '33'),
+    AkreditasiInternasional('Teknik Kimia', 10, '33'),
+    AkreditasiInternasional('Teknik Pangan', 5, '33'),
+  ];
+
   void toggleSelection(bool isDosen) {
     setState(() {
       isFakultasSelected = isDosen;
@@ -45,7 +54,8 @@ class _PersebaranState extends State<Persebaran> {
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
               child: Text(
                 'Pilih Fakultas',
-                style: Styles.kPublicSemiBoldHeadingFour.copyWith(color: kGrey900),
+                style:
+                    Styles.kPublicSemiBoldHeadingFour.copyWith(color: kGrey900),
               ),
             ),
             Divider(
@@ -150,9 +160,7 @@ class _PersebaranState extends State<Persebaran> {
                         child: Container(
                           height: 32,
                           decoration: BoxDecoration(
-                            color: isFakultasSelected
-                                ? kLightGrey100
-                                : kWhite, 
+                            color: isFakultasSelected ? kLightGrey100 : kWhite,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Center(
@@ -199,7 +207,7 @@ class _PersebaranState extends State<Persebaran> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,7 +1,4 @@
 import 'dart:convert';
-
-import 'package:des_uad/data/models/sdm/sdm_gender_tendik_model.dart';
-import 'package:des_uad/data/models/sdm/sdm_jumlah_tendik_model.dart';
 import 'package:http/http.dart';
 
 import '../../core/constant_finals.dart';
@@ -21,7 +18,13 @@ import '../models/mutu/persebaran_akreditasi.dart';
 import '../models/mutu/persebaran_akreditasi_internasional.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
+import '../models/sdm/sdm_gender_tendik_model.dart';
+import '../models/sdm/sdm_jabatan_fung_dosen_model.dart';
+import '../models/sdm/sdm_jabatan_fung_tendik_model.dart';
 import '../models/sdm/sdm_jumlah_dosen_model.dart';
+import '../models/sdm/sdm_jumlah_tendik_model.dart';
+import '../models/sdm/sdm_pendidikan_dosen_model.dart';
+import '../models/sdm/sdm_pendidikan_tendik_model.dart';
 import 'data_sources.dart';
 
 class DataSourceImpl implements DataSource {
@@ -285,7 +288,6 @@ class DataSourceImpl implements DataSource {
       final Response response =
           await get(Uri.parse('$url${endpoint['sdm']['sdm_dosen']['gender']}'));
       if (response.statusCode == 200) {
-        print(response.body);
         return sdmGenderDosenFromJson(response.body);
       } else {
         throw ServerException();
@@ -364,6 +366,79 @@ class DataSourceImpl implements DataSource {
       }
 
       throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataPendidikanDosen>> getPendidikanDosen() async {
+    try {
+      final Response response = await get(
+        Uri.parse('$url${endpoint['sdm']['sdm_dosen']['pendidikan']}'),
+      );
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataPendidikanDosen.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataJabatanFungsionalDosen>> getJabatanFungsionalDosen() async {
+    try {
+      final Response response = await get(
+          Uri.parse('$url${endpoint['sdm']['sdm_dosen']['fungsional']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataJabatanFungsionalDosen.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataJabatanFungsionalTendik>> getJabatanFungsionalTendik() async {
+    try {
+      final Response response = await get(
+          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['fungsional']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data
+            .map((e) => DataJabatanFungsionalTendik.fromJson(e))
+            .toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataPendidikanTendik>> getPendidikanTendik() async {
+    try {
+      final Response response = await get(
+          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['pendidikan']}'));
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataPendidikanTendik.fromJson(e)).toList();
+      }else{
+        throw ServerException();
+      }
     } catch (e) {
       throw ServerException();
     }
