@@ -36,6 +36,7 @@ final Map<String, dynamic> endpoint = {
       // 'akreditasi':
       'sertifikasi': 'akreditasi_persebaran_tersertifikasi_prodi',
       'internasional': 'akreditasi_persebaran_internasional',
+      'akre_prodi': 'akreditasi_persebaran_tersertifikasi_prodi',
     }
   },
   'sdm': {

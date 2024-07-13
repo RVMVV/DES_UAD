@@ -11,8 +11,10 @@ import '../models/home/akademik_student_status_model.dart';
 import '../models/home/student_body_model.dart';
 import '../models/mutu/persebaran_akreditasi.dart';
 import '../models/mutu/persebaran_akreditasi_internasional.dart';
+import '../models/mutu/prodi_akreditasi.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
 import '../models/mutu/sertifikasi_prodi_model.dart';
+import '../models/prestasi/prestasi_mahasiswa_model.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
 import '../models/sdm/sdm_jabatan_fung_dosen_model.dart';
@@ -64,7 +66,8 @@ abstract interface class DataSource {
   //SDM - Persebaran Prodi Dosen
   Future<List<DataPersebaranProdiDosen>> getPersebaranProdiDosen();
   //SDM - Persebaran Fakultas Dosen
-  Future<List<DataPersebaranProdiDosen>> getPersebaranFakultasDosen(); //   <-- class dalam list nantinya akan diganti, sementara pakai model class dari persebaran prodi
+  Future<List<DataPersebaranProdiDosen>>
+      getPersebaranFakultasDosen(); //   <-- class dalam list nantinya akan diganti, sementara pakai model class dari persebaran prodi
 
   // Mutu - Akreditasi
   Future<String> getTotalProdi();
@@ -77,4 +80,7 @@ abstract interface class DataSource {
   Future<List<SertifikasiInternasional>> getSertifikasiInternasional();
   Future<List<PersebaranAkreditasiInternasional>>
       getPersebaranAkreditasInternasional();
+
+  Future<ProdiAkreditasi> getProdiAkreditasi();
+  Future<PrestasiMahasiswa> getPrestasiMahasiswa();
 }
