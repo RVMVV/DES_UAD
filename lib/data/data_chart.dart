@@ -42,3 +42,11 @@ class JabatanFungsionalDosen {
 
   JabatanFungsionalDosen(this.jabfungDosen, this.persentase, this.total);
 }
+
+class PersebaranProdiDosen {
+  final String prodi;
+  final String persentase;
+  final String total;
+
+  PersebaranProdiDosen(this.prodi, this.persentase, this.total);
+}

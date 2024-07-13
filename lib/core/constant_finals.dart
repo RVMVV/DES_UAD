@@ -44,6 +44,8 @@ final Map<String, dynamic> endpoint = {
       'gender': 'sdm_dosen_gender',
       'fungsional': 'sdm_dosen_fungsional',
       'pendidikan': 'sdm_dosen_pendidikan',
+      'persebaran_prodi': 'sdm_dosen_prodi',
+      'persebaran_fakultas': 'sdm_dosen_fakultas',
     },
     'sdm_tendik': {
       'ratio_jumlah': 'sdm_jumlah_tendik',

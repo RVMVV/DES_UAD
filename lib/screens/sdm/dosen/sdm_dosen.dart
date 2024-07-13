@@ -209,11 +209,6 @@ class SDMDosen extends StatelessWidget {
               ],
             ),
             kGap16,
-
-            // kGap16,
-            // CardBarChart(
-            //   title: 'Pendidikan Dosen',
-            // ),
             // kGap16,
             // CardBarChart(
             //   title: 'Usia Dosen',

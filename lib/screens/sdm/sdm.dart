@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:des_uad/screens/sdm/dosen/sdm_dosen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/constant_finals.dart';
+import '../../cubit/sdm_cubit.dart';
 import 'tendik/sdm_tendik.dart';
 
 class SumberDayaManusia extends StatefulWidget {
@@ -23,6 +25,8 @@ class _SumberDayaManusiaState extends State<SumberDayaManusia> {
 
   @override
   Widget build(BuildContext context) {
+    final SdmCubit cubit = context.read<SdmCubit>();
+
     return Scaffold(
       backgroundColor: kBackground,
       appBar: AppBar(
@@ -100,7 +104,19 @@ class _SumberDayaManusiaState extends State<SumberDayaManusia> {
           ],
         ),
       ),
-      body: isDosenSelected ? SDMDosen() : SDMTendik(),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          cubit..getJumlahDosenTendik();
+          cubit..getGenderDosen();
+          cubit..getGenderTendik();
+          cubit..getJabfungDosen();
+          cubit..getJabfungTendik();
+          cubit..getPendidikanDosen();
+          cubit..getPendidikanTendik();
+        },
+        child: isDosenSelected ? SDMDosen() : SDMTendik(),
+      ),
+      // body: ,
     );
   }
 }

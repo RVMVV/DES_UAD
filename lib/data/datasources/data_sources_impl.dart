@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:des_uad/data/models/mutu/sertifikasi_prodi_model.dart';
+import 'package:des_uad/data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import 'package:http/http.dart';
 
 import '../../core/constant_finals.dart';
@@ -436,7 +438,61 @@ class DataSourceImpl implements DataSource {
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataPendidikanTendik.fromJson(e)).toList();
-      }else{
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataSertifikasiProdi>> getSertifikasiProdi() async {
+    try {
+      final Response response = await get(
+          Uri.parse('$url${endpoint['mutu']['akreditasi']['sertifikasi']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataSertifikasiProdi.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataPersebaranProdiDosen>> getPersebaranProdiDosen() async {
+    try {
+      final Response response = await get(
+          Uri.parse('$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataPersebaranProdiDosen.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<DataPersebaranProdiDosen>> getPersebaranFakultasDosen() async {
+    try {
+      final Response response = await get(Uri.parse(
+          '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => DataPersebaranProdiDosen.fromJson(e)).toList();
+      } else {
         throw ServerException();
       }
     } catch (e) {
