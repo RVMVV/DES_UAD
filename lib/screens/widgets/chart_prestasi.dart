@@ -3,6 +3,10 @@
 import 'package:des_uad/core/constant_finals.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/prestasi_cubit.dart';
+import '../../data/models/prestasi/prestasi_mahasiswa_model.dart';
 
 class PrestasiChart extends StatefulWidget {
   @override
@@ -10,100 +14,124 @@ class PrestasiChart extends StatefulWidget {
 }
 
 class _PrestasiChartState extends State<PrestasiChart> {
+  List listPrestasi = [];
+  List<BarChartGroupData> lw = [];
+
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      BarChartData(
-          alignment: BarChartAlignment.spaceAround,
-          maxY: 10000,
-          barTouchData: BarTouchData(
-            enabled: true,
-            touchTooltipData: BarTouchTooltipData(
-              // direction: TooltipDirection.top,
+    final prestasiCubit = context.read<PrestasiCubit>();
 
-              tooltipRoundedRadius: 8,
-              maxContentWidth: 180,
-              getTooltipColor: (_) => kWhite,
-              getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                String year;
-                switch (group.x.toInt()) {
-                  case 0:
-                    year = '2021';
-                    break;
-                  case 1:
-                    year = '2022';
-                    break;
-                  case 2:
-                    year = '2023';
-                    break;
-                  case 3:
-                    year = '2024';
-                    break;
-                  default:
-                    throw Error();
-                }
-                return BarTooltipItem(
-                  '$year\n',
-                  Styles.kPublicRegularBodyThree.copyWith(color: kLightGrey800),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'Internasional: Juara 3\n',
-                        style: Styles.kPublicRegularBodyThree
-                            .copyWith(color: kLightGrey500)),
-                    TextSpan(
-                        text: 'Nasional: Juara 2\n',
-                        style: Styles.kPublicRegularBodyThree
-                            .copyWith(color: kLightGrey500)),
-                    TextSpan(
-                        text: 'Lokal: Juara 1\n',
-                        style: Styles.kPublicRegularBodyThree
-                            .copyWith(color: kLightGrey500)),
-                  ],
-                );
-              },
-            ),
-          ),
-          titlesData: FlTitlesData(
-            show: true,
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: false,
-              ),
-            ),
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: false,
-              ),
-            ),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: getTitles,
-              ),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 40,
-                interval: 2500,
-                getTitlesWidget: (value, meta) {
-                  return Text(formatLargeNumber(value.toInt()),
-                      style: Styles.kPublicRegularBodyThree
-                          .copyWith(color: kLightGrey800));
-                },
-              ),
-            ),
-          ),
-          borderData: FlBorderData(
-            show: false,
-          ),
-          barGroups: [
-            makeGroupData(0, 6500, 2700),
-            makeGroupData(1, 7800, 4900),
-            makeGroupData(2, 9200, 3100),
-            makeGroupData(3, 3200, 1200),
-          ],
-          gridData: const FlGridData(show: false)),
+    return BlocBuilder<PrestasiCubit, PrestasiState>(
+      bloc: prestasiCubit..getPrestasiMahasiswa(),
+      builder: (context, state) {
+        if (state is PrestasiMahasiswaLoaded) {
+          listPrestasi.clear();
+          lw.clear();
+
+          List<DataPrestasiMhs> listDt = state.data;
+          listDt.asMap().forEach((i, value) {
+            listPrestasi.add([
+              value.tahun,
+              value.mhsBerprestasi,
+              value.score,
+              value.cakupanIntrnsl,
+              value.cakupanNsl,
+              value.cakupanLkl
+            ]);
+
+            lw.addAll([
+              makeGroupData(i, double.parse(value.mhsBerprestasi),
+                  double.parse(value.score))
+            ]);
+          });
+
+          return BarChart(
+            BarChartData(
+                alignment: BarChartAlignment.spaceAround,
+                maxY: 10000,
+                barTouchData: BarTouchData(
+                  enabled: true,
+                  touchTooltipData: BarTouchTooltipData(
+                    // direction: TooltipDirection.top,
+
+                    tooltipRoundedRadius: 8,
+                    maxContentWidth: 180,
+                    getTooltipColor: (_) => kWhite,
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      String year = listPrestasi[group.x.toInt()][0];
+                      String jmlInternasional =
+                          listPrestasi[group.x.toInt()][3];
+                      String jmlNasional = listPrestasi[group.x.toInt()][4];
+                      String jmlLokal = listPrestasi[group.x.toInt()][5];
+                      String jmlSkor = listPrestasi[group.x.toInt()][2];
+
+                      return BarTooltipItem(
+                        '$year\n',
+                        Styles.kPublicRegularBodyThree
+                            .copyWith(color: kLightGrey800),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text:
+                                  'Internasional : ' + jmlInternasional + ' \n',
+                              style: Styles.kPublicRegularBodyThree
+                                  .copyWith(color: kLightGrey500)),
+                          TextSpan(
+                              text: 'Nasional: ' + jmlNasional + '\n',
+                              style: Styles.kPublicRegularBodyThree
+                                  .copyWith(color: kLightGrey500)),
+                          TextSpan(
+                              text: 'Lokal: ' + jmlLokal + '\n',
+                              style: Styles.kPublicRegularBodyThree
+                                  .copyWith(color: kLightGrey500)),
+                          TextSpan(
+                              text: 'SKOR: ' + jmlSkor + '\n',
+                              style: Styles.kPublicRegularBodyThree
+                                  .copyWith(color: kLightGrey500)),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                titlesData: FlTitlesData(
+                  show: true,
+                  rightTitles: const AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                  ),
+                  topTitles: const AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: false,
+                    ),
+                  ),
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: getTitles,
+                    ),
+                  ),
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      reservedSize: 40,
+                      interval: 2500,
+                      getTitlesWidget: (value, meta) {
+                        return Text(formatLargeNumber(value.toInt()),
+                            style: Styles.kPublicRegularBodyThree
+                                .copyWith(color: kLightGrey800));
+                      },
+                    ),
+                  ),
+                ),
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                barGroups: lw,
+                gridData: const FlGridData(show: false)),
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 
