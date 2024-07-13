@@ -94,41 +94,41 @@ final dataAkreditasi = [
   )
 ];
 
-class CardBarChart extends StatelessWidget {
-  final String title;
-  final String pendDosen;
-  final String percent;
-  final String totalValue;
+// class CardBarChart extends StatelessWidget {
+//   final String title;
+//   final String pendDosen;
+//   final String percent;
+//   final String totalValue;
 
-  const CardBarChart({
-    required this.title,
-    required this.pendDosen,
-    required this.percent,
-    required this.totalValue,
-    super.key,
-  });
+//   const CardBarChart({
+//     required this.title,
+//     required this.pendDosen,
+//     required this.percent,
+//     required this.totalValue,
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return BaseContainer(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Styles.kPublicSemiBoldBodyOne.copyWith(
-                color: kGrey900,
-              ),
-            ),
-            SizedBox(
-              height: 300,
-              child: HorizontalBarLabelChart(dataAkreditasi),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BaseContainer(
+//       child: Padding(
+//         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               title,
+//               style: Styles.kPublicSemiBoldBodyOne.copyWith(
+//                 color: kGrey900,
+//               ),
+//             ),
+//             SizedBox(
+//               height: 300,
+//               child: HorizontalBarLabelChart(dataAkreditasi),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

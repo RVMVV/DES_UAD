@@ -10,6 +10,7 @@ import '../data/models/sdm/sdm_gender_tendik_model.dart';
 import '../data/models/sdm/sdm_jumlah_dosen_model.dart';
 import '../data/models/sdm/sdm_jumlah_tendik_model.dart';
 import '../data/models/sdm/sdm_pendidikan_tendik_model.dart';
+import '../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 
 part 'sdm_state.dart';
 
@@ -76,4 +77,11 @@ class SdmCubit extends Cubit<SdmState> {
     final List<DataJabatanFungsionalTendik> dataJabfungTendik = await dataSource.getJabatanFungsionalTendik();
     emit(JabfungTendikLoaded(dataJabfungTendik));
   }
+
+  Future<void> getPersebaranProdiDosen() async {
+    final List<DataPersebaranProdiDosen> dataPersebaranProdiDosen = await dataSource.getPersebaranProdiDosen();
+    emit(PersebaranProdiDosenLoaded(dataPersebaranProdiDosen));
+  }
+
+
 }

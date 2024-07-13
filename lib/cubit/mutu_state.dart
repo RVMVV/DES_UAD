@@ -11,6 +11,7 @@ final class ListViewButtonClicked extends MutuState {}
 
 // Seksi Akreditasi
 class Akreditasi extends MutuState {}
+class AkreditasiTersertifikasi extends MutuState {}
 
 // Total Prodi
 class TotalProdiState extends Akreditasi {}
@@ -49,4 +50,10 @@ class PersebaranAkreditasiInternasionalLoaded
   final List<PersebaranAkreditasiInternasional> datas;
 
   PersebaranAkreditasiInternasionalLoaded(this.datas);
+}
+
+
+class AkreditasiPersebaranTersertifikasiProdiLoaded extends AkreditasiTersertifikasi {
+  final List<DataSertifikasiProdi> data;
+  AkreditasiPersebaranTersertifikasiProdiLoaded(this.data);
 }
