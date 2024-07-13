@@ -11,9 +11,10 @@ import '../../../data/models/mutu/persebaran_akreditasi_internasional.dart';
 import '../../widgets/base_container.dart';
 import '../../widgets/big_card_title.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
-import '../../widgets/chart/pie_chart_legend.dart';
 import '../../widgets/chart/pie_chart_with_details.dart';
 import '../../widgets/rounded_icon_container.dart';
+import 'bottom_modal_akreditasi_prodi.dart';
+import 'pie_chart_akreditasi_prodi.dart';
 
 class AkreditasiSection extends StatelessWidget {
   const AkreditasiSection({
@@ -120,7 +121,7 @@ class AkreditasiSection extends StatelessWidget {
                   return ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => PieChartLegend(
+                    itemBuilder: (context, index) => PieChartAkreditasiProdi(
                       color: colors[index],
                       title: state.datas[index].akreditasi,
                       percent: state.datas[index].persentase,
@@ -140,85 +141,107 @@ class AkreditasiSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: BaseContainer(
-                height: 130,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const RoundedIconContainer(
-                            side: 32,
-                            color: kGrey100,
-                            iconColor: kGrey900,
-                            asset: icMedal),
-                        kGap8,
-                        Text(
-                          'Akreditasi \nInternasional',
-                          style: Styles.kPublicMediumBodyThree
-                              .copyWith(color: kGrey600),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '46%',
-                          style: Styles.kPublicSemiBoldHeadingTwo
-                              .copyWith(color: kGrey900),
-                        ),
-                        SvgPicture.asset(
-                          icRightArrow,
-                          width: 24,
-                        ),
-                      ],
-                    ),
-                  ],
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return BottomModalAkreditasiProdi(
+                            akre: 'Akreditasi Internasional');
+                      });
+                },
+                child: BaseContainer(
+                  height: 130,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const RoundedIconContainer(
+                              side: 32,
+                              color: kGrey100,
+                              iconColor: kGrey900,
+                              asset: icMedal),
+                          kGap8,
+                          Text(
+                            'Akreditasi \nInternasional',
+                            style: Styles.kPublicMediumBodyThree
+                                .copyWith(color: kGrey600),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '46%',
+                            style: Styles.kPublicSemiBoldHeadingTwo
+                                .copyWith(color: kGrey900),
+                          ),
+                          SvgPicture.asset(
+                            icRightArrow,
+                            width: 24,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             kGap12,
             Expanded(
-              child: BaseContainer(
-                height: 130,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const RoundedIconContainer(
-                            side: 32,
-                            color: kGrey100,
-                            iconColor: kGrey900,
-                            asset: icMedalStar),
-                        kGap8,
-                        Text(
-                          'Sertifikasi \nInternasional',
-                          style: Styles.kPublicMediumBodyThree
-                              .copyWith(color: kGrey600),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '32%',
-                          style: Styles.kPublicSemiBoldHeadingTwo
-                              .copyWith(color: kGrey900),
-                        ),
-                        SvgPicture.asset(
-                          icRightArrow,
-                          width: 24,
-                        ),
-                      ],
-                    ),
-                  ],
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return BottomModalAkreditasiProdi(
+                            akre: 'Sertifikasi Internasional');
+                      });
+                },
+                child: BaseContainer(
+                  height: 130,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const RoundedIconContainer(
+                              side: 32,
+                              color: kGrey100,
+                              iconColor: kGrey900,
+                              asset: icMedalStar),
+                          kGap8,
+                          Text(
+                            'Sertifikasi \nInternasional',
+                            style: Styles.kPublicMediumBodyThree
+                                .copyWith(color: kGrey600),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '32%',
+                            style: Styles.kPublicSemiBoldHeadingTwo
+                                .copyWith(color: kGrey900),
+                          ),
+                          SvgPicture.asset(
+                            icRightArrow,
+                            width: 24,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
