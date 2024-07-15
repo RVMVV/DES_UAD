@@ -166,7 +166,7 @@ class _PersebaranState extends State<Persebaran> {
                       height: 300,
                       child: BlocBuilder<SdmCubit, SdmState>(
                         buildWhen: (previous, current) =>
-                            current is SdmPersebaranFakultas,
+                            current is SdmProdiDosen,
                         builder: (context, state) {
                           print(state);
                           if (state is PersebaranProdiDosenLoaded) {
@@ -223,7 +223,7 @@ class _PersebaranState extends State<Persebaran> {
                     height: 300,
                     child: BlocBuilder<SdmPreCubit, SdmPreState>(
                       buildWhen: (previous, current) =>
-                          current is SdmFakultasDosen,
+                          current is SdmPersebaranFakultas,
                       builder: (context, state) {
                         print(state);
                         if (state is PersebaranFakultasDosenLoaded) {

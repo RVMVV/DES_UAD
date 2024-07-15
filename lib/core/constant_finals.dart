@@ -35,6 +35,7 @@ final Map<String, dynamic> endpoint = {
       'prodi': 'akreditasi_persebaran',      
       'sertifikasi': 'akreditasi_persebaran_tersertifikasi_prodi',
       'internasional': 'akreditasi_persebaran_internasional',
+      'akre_prodi': 'akreditasi_persebaran_tersertifikasi_prodi',
     }
   },
   'sdm': {
@@ -53,6 +54,7 @@ final Map<String, dynamic> endpoint = {
       'pendidikan': 'sdm_tendik_pendidikan',
     }
   },
+  'prestasi': {'mahasiswa': 'prestasi_tren_tiga_tahun'}
 };
 // Spacing (Gap)
 const Gap kGap4 = Gap(4);

@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import '../data/datasources/data_sources.dart';
 import '../data/models/mutu/persebaran_akreditasi.dart';
 import '../data/models/mutu/persebaran_akreditasi_internasional.dart';
+import '../data/models/mutu/prodi_akreditasi.dart';
 import '../data/models/mutu/sertifikasi_prodi_model.dart';
 
 part 'mutu_state.dart';
@@ -52,7 +53,14 @@ class MutuCubit extends Cubit<MutuState> {
   }
 
   Future<void> getSertifikasiProdi() async {
-    final List<DataSertifikasiProdi> dataSertifikasiProdi = await dataSource.getSertifikasiProdi();
-    emit(AkreditasiPersebaranTersertifikasiProdiLoaded(dataSertifikasiProdi)); 
+    final List<DataSertifikasiProdi> dataSertifikasiProdi =
+        await dataSource.getSertifikasiProdi();
+    emit(AkreditasiPersebaranTersertifikasiProdiLoaded(dataSertifikasiProdi));
+  }
+
+  Future<void> getProdiByAkreditasi() async {
+    emit(AkreditasiProdiLoading());
+    final result = await dataSource.getProdiAkreditasi();
+    emit(AkreditasiProdiLoaded(result));
   }
 }

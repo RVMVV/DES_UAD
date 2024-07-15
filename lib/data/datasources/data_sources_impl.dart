@@ -18,7 +18,9 @@ import '../models/home/akademik_student_status_model.dart';
 import '../models/home/student_body_model.dart';
 import '../models/mutu/persebaran_akreditasi.dart';
 import '../models/mutu/persebaran_akreditasi_internasional.dart';
+import '../models/mutu/prodi_akreditasi.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
+import '../models/prestasi/prestasi_mahasiswa_model.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
 import '../models/sdm/sdm_jabatan_fung_dosen_model.dart';
@@ -499,4 +501,35 @@ class DataSourceImpl implements DataSource {
       throw ServerException();
     }
   }
+
+
+  @override
+  Future<ProdiAkreditasi> getProdiAkreditasi() async {
+    try {
+      final response = await get(
+          Uri.parse('$url${endpoint['mutu']['akreditasi']['akre_prodi']}'));
+      if (response.statusCode == 200) {
+        return prodiAkreditasiFromJson(response.body);
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+
+Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
+    try {
+      final Response response =
+          await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
+      if (response.statusCode == 200) {
+        return prestasiMahasiswaFromJson(response.body);
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+  
 }
