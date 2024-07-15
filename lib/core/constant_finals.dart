@@ -32,8 +32,7 @@ final Map<String, dynamic> endpoint = {
   'mutu': {
     'akreditasi': {
       'total': 'akreditasi_jumlah_prodi',
-      'prodi': 'akreditasi_persebaran',
-      // 'akreditasi':
+      'prodi': 'akreditasi_persebaran',      
       'sertifikasi': 'akreditasi_persebaran_tersertifikasi_prodi',
       'internasional': 'akreditasi_persebaran_internasional',
       'akre_prodi': 'akreditasi_persebaran_tersertifikasi_prodi',
