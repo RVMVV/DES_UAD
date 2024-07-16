@@ -12,6 +12,7 @@ import '../models/akademik/kelulusan/tren_kelulusan.dart';
 import '../models/akademik/mahasiswa_asing/persebaran_negara.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/data_pmb.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
+import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_provinsi.dart';
 import '../models/akademik/perpustakaan/koleksi.dart';
 import '../models/home/akademik_student_status_model.dart';
@@ -110,6 +111,24 @@ class DataSourceImpl implements DataSource {
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranProvinsi.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranProdi.fromJson(e))
             .toList();
       }
       throw ServerException();
@@ -502,7 +521,6 @@ class DataSourceImpl implements DataSource {
     }
   }
 
-
   @override
   Future<ProdiAkreditasi> getProdiAkreditasi() async {
     try {
@@ -517,8 +535,7 @@ class DataSourceImpl implements DataSource {
     }
   }
 
-
-Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
+  Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
@@ -531,5 +548,4 @@ Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
       throw ServerException();
     }
   }
-  
 }

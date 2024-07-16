@@ -5,6 +5,7 @@ import '../models/akademik/kelulusan/tren_kelulusan.dart';
 import '../models/akademik/mahasiswa_asing/persebaran_negara.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/data_pmb.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
+import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_provinsi.dart';
 import '../models/akademik/perpustakaan/koleksi.dart';
 import '../models/home/akademik_student_status_model.dart';
@@ -33,6 +34,8 @@ abstract interface class DataSource {
   Future<DataPMB> getDataPMB();
   Future<List<PersebaranFakultas>> getPersebaranFakultasMahasiswaBaru();
   Future<List<PersebaranProvinsi>> getPersebaranProvinsiMahasiswaBaru();
+  Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru();
+
   // Akademik - Kelulusan
   Future<List<TrenKelulusan>> getTrenKelulusan();
   Future<List<PerbandinganKelulusan>> getPerbandinganKelulusan();

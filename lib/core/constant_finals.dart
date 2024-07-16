@@ -11,6 +11,7 @@ final Map<String, dynamic> endpoint = {
   'pmb': {
     'dataPMB': 'maba_jumlah_mahasiswa',
     'persebaran_fakultas': 'maba_jumlah_mahasiswa_fakultas',
+    'persebaran_prodi': 'maba_jumlah_mahasiswa_prodi',
     'persebaran_provinsi': 'maba_jumlah_mahasiswa_provinsi',
   },
   'kelulusan': {
@@ -32,7 +33,7 @@ final Map<String, dynamic> endpoint = {
   'mutu': {
     'akreditasi': {
       'total': 'akreditasi_jumlah_prodi',
-      'prodi': 'akreditasi_persebaran',      
+      'prodi': 'akreditasi_persebaran',
       'sertifikasi': 'akreditasi_persebaran_tersertifikasi_prodi',
       'internasional': 'akreditasi_persebaran_internasional',
       'akre_prodi': 'akreditasi_persebaran_tersertifikasi_prodi',
