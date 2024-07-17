@@ -7,6 +7,7 @@ import 'core/theme/theme.dart';
 import 'cubit/akademik_cubit.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/mutu_cubit.dart';
+import 'cubit/pmb_cubit.dart';
 import 'cubit/prestasi_cubit.dart';
 import 'cubit/sdm_cubit.dart';
 import 'cubit/sdm_pre_cubit.dart';
@@ -31,12 +32,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeCubit(dataSource)),
         BlocProvider(create: (context) => SdmCubit(dataSource)),
         BlocProvider(create: (context) => SdmPreCubit(dataSource)),
+        BlocProvider(create: (context) => PmbCubit(dataSource: dataSource)),
       ],
       child: MaterialApp(
         theme: theme,
         routes: Routes.routes,
         initialRoute: homeRoute,
-        
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const String url = 'http://d3v.uad.id/ipm/index.php/des/';
 final Map<String, dynamic> endpoint = {
+  'general': {'ref_fakultas': 'ref_fakultas'},
   'mahasiswa_asing': {
     'jumlah': 'mahasiswa_asing',
     'persebaran_negara': 'persebaran_mahasiswa_asing',

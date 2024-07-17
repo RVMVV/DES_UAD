@@ -15,6 +15,7 @@ import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_provinsi.dart';
 import '../models/akademik/perpustakaan/koleksi.dart';
+import '../models/akademik/ref_fakultas_model.dart';
 import '../models/home/akademik_student_status_model.dart';
 import '../models/home/student_body_model.dart';
 import '../models/mutu/persebaran_akreditasi.dart';
@@ -120,10 +121,11 @@ class DataSourceImpl implements DataSource {
   }
 
   @override
-  Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru() async {
+  Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru(
+      String fakKode) async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}'));
+      final response = await get(
+          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -541,6 +543,24 @@ class DataSourceImpl implements DataSource {
           await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
       if (response.statusCode == 200) {
         return prestasiMahasiswaFromJson(response.body);
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<RefFak>> refFakultas() async {
+    try {
+      final Response response =
+          await get(Uri.parse('$url${endpoint['general']['ref_fakultas']}'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => RefFak.fromJson(e)).toList();
       } else {
         throw ServerException();
       }

@@ -1,23 +1,22 @@
-// import 'package:bloc/bloc.dart';
-// import 'package:meta/meta.dart';
+import 'package:bloc/bloc.dart';
+import '../data/datasources/data_sources.dart';
+import 'package:meta/meta.dart';
 
-// part 'pmb_state.dart';
+import '../data/models/akademik/ref_fakultas_model.dart';
 
-// enum JenisPMB { persebaran, reguler, nonReguler }
+part 'pmb_state.dart';
 
-// class PMBCubit extends Cubit<PMBState> {
-//   PMBCubit() : super(PMBInitial());
+class PmbCubit extends Cubit<PmbState> {
+  PmbCubit({required this.dataSource}) : super(PmbInitial());
 
-//   List<int> indexJenisPMB = [0, 0, 0];
-//   List<bool> isChecked = [true, true, true, true];
+  final DataSource dataSource;
 
-//   void click(final JenisPMB jenisPMB, final int index) {
-//     indexJenisPMB[jenisPMB.index] = index;
-//     emit(PMBInitial());
-//   }
-
-//   void check(final int index) {
-//     isChecked[index] = !isChecked[index];
-//     emit(PMBInitial());
-//   }
-// }
+  Future<void> getRefFakultas() async {
+    emit(RefFakultasLoading());
+    final result = await dataSource.refFakultas();
+    // print('result');
+    // print(result);
+    emit(RefFakultasLoaded(result));
+    // print('yooow');
+  }
+}

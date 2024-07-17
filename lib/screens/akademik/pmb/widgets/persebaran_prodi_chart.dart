@@ -35,6 +35,7 @@ class _PersebaranProdiChartState extends State<PersebaranProdiChart> {
         bloc: akademikCubit..getPersebaranPMBProdi(fakKode),
         buildWhen: (previous, current) => current is PersebaranPMBState,
         builder: (context, state) {
+          print('page prodi');
           print(fakKode);
           print(state);
           if (state is PersebaranPMBLoaded) {

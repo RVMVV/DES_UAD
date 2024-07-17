@@ -34,8 +34,6 @@ class _PersebaranProvinsiChartState extends State<PersebaranProvinsiChart> {
             bloc: akademikCubit..getPersebaranPMB(JenisPMB.persebaran, 2),
             buildWhen: (previous, current) => current is PersebaranPMBState,
             builder: (context, state) {
-              print('provinsi');
-              print(state);
               if (state is PersebaranPMBLoaded) {
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(

@@ -1,3 +1,4 @@
+import 'package:des_uad/cubit/pmb_cubit.dart';
 import 'package:des_uad/cubit/sdm_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,11 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 import '../../../../core/constant_finals.dart';
-import '../../../../cubit/akademik_cubit.dart';
+import '../../../../cubit/pmb_cubit.dart';
 import '../../../../cubit/mutu_cubit.dart';
 import '../../../../cubit/sdm_pre_cubit.dart';
 import '../../../../data/data_chart.dart';
-import '../../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../../../../data/models/persebaran_berdasarkan.dart';
 import '../../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../../widgets/base_container.dart';
@@ -33,10 +33,11 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   bool isFakultasSelected = false;
   bool isProdiSelected = false;
   bool isProvinsiSelected = false;
+  bool showProdi = true;
 
   int selectedTab = 0;
-  String selectedFakultas =
-      'Teknologi Industri'; // Menambahkan variabel pilihan
+  String selectedFakultas = 'Teknologi Industri';
+  String selectedFakKode = 'fti'; // Menambahkan variabel pilihan
 
   @override
   void initState() {
@@ -182,7 +183,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      showFakultasSelection();
+                      showFakultasPersebaran();
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -208,9 +209,9 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                       ),
                     ),
                   ),
-                  if (selectedFakultas != '')
+                  if (showProdi)
                     PersebaranProdiChart(
-                      fakKode: selectedFakultas,
+                      fakKode: selectedFakKode,
                     )
                 ],
               ),
@@ -230,14 +231,17 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
     );
   }
 
-  void showFakultasSelection() {
+  void showFakultasPersebaran() {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return BlocBuilder<MutuCubit, MutuState>(
-          buildWhen: (previous, current) => current is AkreditasiTersertifikasi,
+        final pmbCubit = context.read<PmbCubit>();
+        return BlocBuilder<PmbCubit, PmbState>(
+          bloc: pmbCubit..getRefFakultas(),
           builder: (context, state) {
-            if (state is AkreditasiPersebaranTersertifikasiProdiLoaded) {
+            print(state);
+            print('-----');
+            if (state is RefFakultasLoaded) {
               return Column(
                 children: [
                   Padding(
@@ -256,18 +260,26 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                     child: ListView.separated(
                       itemCount: state.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        String data = state.data[index].prodi;
+                        String data = state.data[index].fakultas;
+                        String idFak = state.data[index].fakKode;
+
                         return ListTile(
                           leading: data == selectedFakultas
                               ? const Icon(Icons.check, color: kBlue)
                               : null,
                           onTap: () {
                             setState(() {
+                              showProdi = false;
                               selectedFakultas = data;
+                              selectedFakKode = idFak;
                             });
 
-                            print('prodi selected');
-                            print(selectedFakultas);
+                            Future.delayed(const Duration(milliseconds: 500),
+                                () {
+                              setState(() {
+                                showProdi = true;
+                              });
+                            });
 
                             Navigator.pop(context);
                           },
@@ -299,4 +311,79 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
       backgroundColor: kWhite,
     );
   }
+
+  // void showFakultasPersebaran_() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return BlocBuilder<MutuCubit, MutuState>(
+  //         buildWhen: (previous, current) => current is AkreditasiTersertifikasi,
+  //         builder: (context, state) {
+  //           if (state is AkreditasiPersebaranTersertifikasiProdiLoaded) {
+  //             return Column(
+  //               children: [
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(
+  //                       vertical: 32, horizontal: 16),
+  //                   child: Text(
+  //                     'Pilih Fakultas',
+  //                     style: Styles.kPublicSemiBoldHeadingFour
+  //                         .copyWith(color: kGrey900),
+  //                   ),
+  //                 ),
+  //                 Divider(
+  //                   color: kLightGrey300.withOpacity(30 / 100),
+  //                 ),
+  //                 Expanded(
+  //                   child: ListView.separated(
+  //                     itemCount: state.data.length,
+  //                     itemBuilder: (BuildContext context, int index) {
+  //                       String data = state.data[index].prodi;
+  //                       return ListTile(
+  //                         leading: data == selectedFakultas
+  //                             ? const Icon(Icons.check, color: kBlue)
+  //                             : null,
+  //                         onTap: () {
+  //                           setState(() {
+  //                             showProdi = false;
+  //                             selectedFakultas = data;
+  //                           });
+
+  //                           Future.delayed(const Duration(milliseconds: 500),
+  //                               () {
+  //                             setState(() {
+  //                               showProdi = true;
+  //                             });
+  //                           });
+
+  //                           Navigator.pop(context);
+  //                         },
+  //                         title: Text(
+  //                           data,
+  //                           style: Styles.kInterMediumBodyOne.copyWith(
+  //                             color: kGrey900,
+  //                           ),
+  //                         ),
+  //                       );
+  //                     },
+  //                     separatorBuilder: (BuildContext context, int index) {
+  //                       return Padding(
+  //                         padding: const EdgeInsets.symmetric(horizontal: 30),
+  //                         child: Divider(
+  //                           color: kLightGrey300.withOpacity(30 / 100),
+  //                         ),
+  //                       );
+  //                     },
+  //                   ),
+  //                 ),
+  //               ],
+  //             );
+  //           }
+  //           return const SizedBox();
+  //         },
+  //       );
+  //     },
+  //     backgroundColor: kWhite,
+  //   );
+  // }
 }
