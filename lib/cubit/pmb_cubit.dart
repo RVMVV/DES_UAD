@@ -14,9 +14,6 @@ class PmbCubit extends Cubit<PmbState> {
   Future<void> getRefFakultas() async {
     emit(RefFakultasLoading());
     final result = await dataSource.refFakultas();
-    // print('result');
-    // print(result);
     emit(RefFakultasLoaded(result));
-    // print('yooow');
   }
 }

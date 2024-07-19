@@ -10,32 +10,29 @@ import '../../../../cubit/pmb_cubit.dart';
 import '../../../../cubit/mutu_cubit.dart';
 import '../../../../cubit/sdm_pre_cubit.dart';
 import '../../../../data/data_chart.dart';
-import '../../../../data/models/persebaran_berdasarkan.dart';
-import '../../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../../widgets/base_container.dart';
 import '../../../widgets/chart/horizontal_bar_chart.dart';
-import 'persebaran_fakultas_chart.dart';
-import 'persebaran_prodi_chart.dart';
-import 'persebaran_provinsi_chart.dart';
+import 'pmb_non_reg_fakultas_chart.dart';
+import 'pmb_non_reg_prodi_chart.dart';
+import 'pmb_reg_fakultas_chart.dart';
+import 'pmb_reg_prodi_chart.dart';
 
-class PersebaranUnitPmb extends StatefulWidget {
+class PmbJalurNonReg extends StatefulWidget {
   final String title;
-  const PersebaranUnitPmb({
+  const PmbJalurNonReg({
     required this.title,
     super.key,
   });
 
   @override
-  State<PersebaranUnitPmb> createState() => _PersebaranState();
+  State<PmbJalurNonReg> createState() => _PmbJalurNonRegState();
 }
 
-class _PersebaranState extends State<PersebaranUnitPmb> {
-  bool isFakultasSelected = false;
-  bool isProdiSelected = false;
-  bool isProvinsiSelected = false;
-  bool showProdi = true;
+class _PmbJalurNonRegState extends State<PmbJalurNonReg> {
+  bool isFakultasSelectedNonReg = false;
+  bool isProdiSelectedNonReg = false;
+  bool showProdiNonReg = true;
 
-  int selectedTab = 0;
   String selectedFakultas = 'Teknologi Industri';
   String selectedFakKode = 'fti'; // Menambahkan variabel pilihan
 
@@ -43,30 +40,17 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   void initState() {
     super.initState();
     toggleSelection(0);
-    final MutuCubit cubit = context.read<MutuCubit>();
-    final SdmCubit sdmCubit = context.read<SdmCubit>();
-    final SdmPreCubit sdmPreCubit = context.read<SdmPreCubit>();
-    cubit.getSertifikasiProdi();
-    sdmCubit.getPersebaranProdiDosen();
-    sdmPreCubit.getPersebaranFakultasDosen();
-    selectedTab = 0;
   }
 
   void toggleSelection(int tab) {
-    // print(tab);
+    print(tab);
     setState(() {
       if (tab == 1) {
-        isFakultasSelected = false;
-        isProdiSelected = true;
-        isProvinsiSelected = false;
-      } else if (tab == 2) {
-        isFakultasSelected = false;
-        isProdiSelected = false;
-        isProvinsiSelected = true;
+        isFakultasSelectedNonReg = false;
+        isProdiSelectedNonReg = true;
       } else if (tab == 0) {
-        isFakultasSelected = true;
-        isProdiSelected = false;
-        isProvinsiSelected = false;
+        isFakultasSelectedNonReg = true;
+        isProdiSelectedNonReg = false;
       }
     });
   }
@@ -108,7 +92,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                             child: Container(
                               height: 32,
                               decoration: BoxDecoration(
-                                color: isFakultasSelected
+                                color: isFakultasSelectedNonReg
                                     ? kWhite
                                     : kLightGrey100, // Mengubah warna berdasarkan status
                                 borderRadius: BorderRadius.circular(20),
@@ -132,35 +116,14 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                             child: Container(
                               height: 32,
                               decoration: BoxDecoration(
-                                color: isProdiSelected ? kWhite : kLightGrey100,
+                                color: isProdiSelectedNonReg
+                                    ? kWhite
+                                    : kLightGrey100,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Center(
                                 child: Text(
                                   'Prodi',
-                                  style:
-                                      Styles.kPublicSemiBoldBodyThree.copyWith(
-                                    color: kGrey900,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        kGap8,
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => toggleSelection(2), // ubah status
-                            child: Container(
-                              height: 32,
-                              decoration: BoxDecoration(
-                                color:
-                                    isProvinsiSelected ? kWhite : kLightGrey100,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Provinsi',
                                   style:
                                       Styles.kPublicSemiBoldBodyThree.copyWith(
                                     color: kGrey900,
@@ -178,7 +141,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
             ),
             kGap20,
             Visibility(
-              visible: (isProdiSelected) ? true : false,
+              visible: (isProdiSelectedNonReg) ? true : false,
               child: Column(
                 children: [
                   GestureDetector(
@@ -209,20 +172,16 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                       ),
                     ),
                   ),
-                  if (showProdi)
-                    PersebaranProdiChart(
+                  if (showProdiNonReg)
+                    PmbNonRegProdiChart(
                       fakKode: selectedFakKode,
                     )
                 ],
               ),
             ),
             Visibility(
-              visible: (isFakultasSelected == true) ? true : false,
-              child: PersebaranFakultasChart(),
-            ),
-            Visibility(
-              visible: (isProvinsiSelected == true) ? true : false,
-              child: PersebaranProvinsiChart(),
+              visible: (isFakultasSelectedNonReg == true) ? true : false,
+              child: PmbNonRegFakultasChart(),
             ),
             kGap20,
           ],
@@ -267,7 +226,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                               : null,
                           onTap: () {
                             setState(() {
-                              showProdi = false;
+                              showProdiNonReg = false;
                               selectedFakultas = data;
                               selectedFakKode = idFak;
                             });
@@ -275,7 +234,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                             Future.delayed(const Duration(milliseconds: 500),
                                 () {
                               setState(() {
-                                showProdi = true;
+                                showProdiNonReg = true;
                               });
                             });
 

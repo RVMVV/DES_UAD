@@ -22,6 +22,8 @@ import '../widgets/body_sub_menu_akademik.dart';
 import '../widgets/bottom_modal_content.dart';
 import 'widgets/item_data_pmb.dart';
 import 'widgets/persebaran_unit_pmb.dart';
+import 'widgets/pmb_non_reg.dart';
+import 'widgets/pmb_reg.dart';
 
 class PenerimaanMahasiswaBaruPage extends StatelessWidget {
   const PenerimaanMahasiswaBaruPage({super.key});
@@ -35,7 +37,7 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'PMB',
         ),
-        height: 2550,
+        height: 3000,
         children: [
           const CardTotalRegistration(),
           kGap16,
@@ -165,267 +167,12 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
           kGap16,
           // Horizontal Bar Chart Persebaran Mahasiswa
           PersebaranUnitPmb(title: 'PMB Berdasarkan Persebaran'),
-
-          // BaseContainer.styledBigCard(
-          //   children: [
-          //     const BigCardTitle(
-          //       title: 'PMB Berdasarkan Persebaran',
-          //     ),
-          //     kGap28,
-          //     BlocBuilder<AkademikCubit, AkademikState>(
-          //       builder: (context, state) {
-          //         return BaseContainer.activeButtonContainer(
-          //           child: Row(
-          //             children: [
-          //               Expanded(
-          //                 child: InkWell(
-          //                   onTap: () => akademikCubit.getPersebaranPMB(
-          //                       JenisPMB.persebaran, 0),
-          //                   // akademikCubit.clickActiveButtonPMB(
-          //                   //     JenisPMB.persebaran, 0),
-          //                   child: ActiveButton(
-          //                     title: 'Fakultas',
-          //                     isActive: akademikCubit.isActivated(
-          //                         JenisPMB.persebaran, 0),
-          //                   ),
-          //                 ),
-          //               ),
-          //               kGap4,
-          //               Expanded(
-          //                 child: InkWell(
-          //                   onTap: () => akademikCubit.clickActiveButtonPMB(
-          //                       JenisPMB.persebaran, 1),
-          //                   child: ActiveButton(
-          //                     title: 'Prodi',
-          //                     isActive: akademikCubit.isActivated(
-          //                         JenisPMB.persebaran, 1),
-          //                   ),
-          //                 ),
-          //               ),
-          //               kGap4,
-          //               Expanded(
-          //                 child: InkWell(
-          //                   onTap: () => akademikCubit.getPersebaranPMB(
-          //                       JenisPMB.persebaran, 2),
-          //                   child: ActiveButton(
-          //                     title: 'Provinsi',
-          //                     isActive: akademikCubit.isActivated(
-          //                         JenisPMB.persebaran, 2),
-          //                   ),
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //     SizedBox(
-          //       height: 300,
-          //       child: BlocBuilder<AkademikCubit, AkademikState>(
-          //         bloc: akademikCubit..getPersebaranPMB(JenisPMB.persebaran, 0),
-          //         buildWhen: (previous, current) =>
-          //             current is PersebaranPMBState,
-          //         builder: (context, state) {
-          //           if (state is PersebaranPMBLoaded) {
-          //             List<charts.Series<PersebaranBerdasarkan, String>>
-          //                 dataChart = [];
-          //             switch (akademikCubit
-          //                 .indexJenisPMB[JenisPMB.persebaran.index]) {
-          //               case 0:
-          //                 dataChart = [
-          //                   charts.Series<PersebaranBerdasarkan, String>(
-          //                     id: 'PersebaranBerdasarkan',
-          //                     data: state.datas,
-          //                     domainFn: (datum, index) =>
-          //                         (datum as PersebaranFakultas).fakultas,
-          //                     measureFn: (datum, index) => datum.getPercent,
-          //                     labelAccessorFn: (datum, index) =>
-          //                         '${(datum as PersebaranFakultas).fakultas} ${datum.getPercent}% ● ${datum.total}',
-          //                     insideLabelStyleAccessorFn: (datum, index) =>
-          //                         const charts.TextStyleSpec(
-          //                       color: charts.MaterialPalette.white,
-          //                       fontWeight: 'bold',
-          //                     ),
-          //                     outsideLabelStyleAccessorFn: (datum, index) =>
-          //                         const charts.TextStyleSpec(
-          //                       color: charts.MaterialPalette.black,
-          //                       fontWeight: 'bold',
-          //                     ),
-          //                   ),
-          //                   charts.Series<PersebaranBerdasarkan, String>(
-          //                     id: 'PersebaranBerdasarkan',
-          //                     domainFn: (datum, index) =>
-          //                         (datum as PersebaranFakultas).fakultas,
-          //                     measureFn: (datum, index) =>
-          //                         100 - datum.getPercent,
-          //                     data: state.datas,
-          //                     labelAccessorFn: (datum, index) => '',
-          //                     colorFn: (datum, index) => const charts.Color(
-          //                         r: 52, g: 144, b: 252, a: 32),
-          //                   )
-          //                 ];
-          //                 break;
-          //               case 2:
-          //                 dataChart = [
-          //                   charts.Series<PersebaranBerdasarkan, String>(
-          //                     id: 'PersebaranBerdasarkan',
-          //                     data: state.datas,
-          //                     domainFn: (datum, index) =>
-          //                         (datum as PersebaranProvinsi).provinsi,
-          //                     measureFn: (datum, index) => datum.getPercent,
-          //                     labelAccessorFn: (datum, index) =>
-          //                         '${(datum as PersebaranProvinsi).provinsi} ${datum.getPercent}% ● ${datum.total}',
-          //                     insideLabelStyleAccessorFn: (datum, index) =>
-          //                         const charts.TextStyleSpec(
-          //                       color: charts.MaterialPalette.white,
-          //                       fontWeight: 'bold',
-          //                     ),
-          //                     outsideLabelStyleAccessorFn: (datum, index) =>
-          //                         const charts.TextStyleSpec(
-          //                       color: charts.MaterialPalette.black,
-          //                       fontWeight: 'bold',
-          //                     ),
-          //                   ),
-          //                   charts.Series<PersebaranBerdasarkan, String>(
-          //                     id: 'PersebaranBerdasarkan',
-          //                     domainFn: (datum, index) =>
-          //                         (datum as PersebaranProvinsi).provinsi,
-          //                     measureFn: (datum, index) =>
-          //                         100 - datum.getPercent,
-          //                     data: state.datas,
-          //                     labelAccessorFn: (datum, index) => '',
-          //                     colorFn: (datum, index) => const charts.Color(
-          //                         r: 52, g: 144, b: 252, a: 32),
-          //                   )
-          //                 ];
-          //                 break;
-          //               default:
-          //             }
-
-          //             return HorizontalBarLabelChart(dataChart);
-          //           }
-          //           return const Center(child: CircularProgressIndicator());
-          //         },
-          //       ),
-          //     ),
-          //   ],
-          // ),
           kGap16,
-          // Horizontal Bar Chart Jalur Reguler
-          BaseContainer.styledBigCard(
-            children: [
-              const BigCardTitle(
-                title: 'PMB Jalur Reguler',
-              ),
-              kGap28,
-              BaseContainer.activeButtonContainer(
-                child: BlocBuilder<AkademikCubit, AkademikState>(
-                  builder: (context, state) {
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => akademikCubit.clickActiveButtonPMB(
-                                JenisPMB.reguler, 0),
-                            child: ActiveButton(
-                              title: 'Fakultas',
-                              isActive: akademikCubit.isActivated(
-                                  JenisPMB.reguler, 0),
-                            ),
-                          ),
-                        ),
-                        kGap4,
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => akademikCubit.clickActiveButtonPMB(
-                                JenisPMB.reguler, 1),
-                            child: ActiveButton(
-                              title: 'Prodi',
-                              isActive: akademikCubit.isActivated(
-                                  JenisPMB.reguler, 1),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              kGap20,
-              DropdownMenuBox(
-                onTap: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => const BottomModal(
-                    title: 'Pilih Fakultas',
-                    child: BottomModalContent(),
-                  ),
-                ),
-                title: 'Pilih Fakultas',
-              ),
-              SizedBox(
-                height: 300,
-                child: HorizontalBarLabelChart(dataAkreditasi),
-              ),
-            ],
-          ),
+          PmbJalurReg(title: 'PMB Jalur Reguler'),
+
           kGap16,
           // Horizontal Bar Chart Non Reguler
-          BlocBuilder<AkademikCubit, AkademikState>(
-            builder: (context, state) {
-              return BaseContainer.styledBigCard(
-                children: [
-                  const BigCardTitle(
-                    title: 'PMB Jalur Non Reguler',
-                  ),
-                  kGap28,
-                  BaseContainer.activeButtonContainer(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => akademikCubit.clickActiveButtonPMB(
-                                JenisPMB.nonReguler, 0),
-                            child: ActiveButton(
-                              title: 'Fakultas',
-                              isActive: akademikCubit.isActivated(
-                                  JenisPMB.nonReguler, 0),
-                            ),
-                          ),
-                        ),
-                        kGap4,
-                        Expanded(
-                          child: InkWell(
-                            onTap: () => akademikCubit.clickActiveButtonPMB(
-                                JenisPMB.nonReguler, 1),
-                            child: ActiveButton(
-                              title: 'Prodi',
-                              isActive: akademikCubit.isActivated(
-                                  JenisPMB.nonReguler, 1),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  kGap20,
-                  DropdownMenuBox(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => const BottomModal(
-                        title: 'Pilih Fakultas',
-                        child: BottomModalContent(),
-                      ),
-                    ),
-                    title: 'Pilih Fakultas',
-                  ),
-                  SizedBox(
-                    height: 300,
-                    child: HorizontalBarLabelChart(dataAkreditasi),
-                  ),
-                ],
-              );
-            },
-          ),
+          PmbJalurNonReg(title: 'PMB Jalur Non Reguler'),
         ],
       ),
     );

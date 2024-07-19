@@ -145,4 +145,28 @@ class AkademikCubit extends Cubit<AkademikState> {
     final result = await dataSource.getEksemplar();
     emit(EksamplarLoaded(result));
   }
+
+  Future<void> getPmbRegulerFakultas() async {
+    emit(PmbJalurRegLoading());
+    final result = await dataSource.getPmbRegulerFakultas();
+    emit(PmbJalurRegLoaded(result));
+  }
+
+  Future<void> getPmbRegulerProdi(String fakultas) async {
+    emit(PmbJalurRegLoading());
+    final result = await dataSource.getPmbRegulerProdi(fakultas);
+    emit(PmbJalurRegLoaded(result));
+  }
+
+  Future<void> getPmbNonRegulerFakultas() async {
+    emit(PmbJalurNonRegLoading());
+    final result = await dataSource.getPmbNonRegulerFakultas();
+    emit(PmbJalurNonRegLoaded(result));
+  }
+
+  Future<void> getPmbNonRegulerProdi(String fakultas) async {
+    emit(PmbJalurNonRegLoading());
+    final result = await dataSource.getPmbNonRegulerProdi(fakultas);
+    emit(PmbJalurNonRegLoaded(result));
+  }
 }

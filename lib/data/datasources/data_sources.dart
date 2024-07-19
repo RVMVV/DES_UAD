@@ -41,6 +41,12 @@ abstract interface class DataSource {
   Future<List<PersebaranProvinsi>> getPersebaranProvinsiMahasiswaBaru();
   Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru(String fak);
 
+  Future<List<PersebaranFakultas>> getPmbRegulerFakultas();
+  Future<List<PersebaranProdi>> getPmbRegulerProdi(String fak);
+
+  Future<List<PersebaranFakultas>> getPmbNonRegulerFakultas();
+  Future<List<PersebaranProdi>> getPmbNonRegulerProdi(String fak);
+
   // Akademik - Kelulusan
   Future<List<TrenKelulusan>> getTrenKelulusan();
   Future<List<PerbandinganKelulusan>> getPerbandinganKelulusan();

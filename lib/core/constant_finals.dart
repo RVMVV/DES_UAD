@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const String url = 'http://d3v.uad.id/ipm/index.php/des/';
+const String url = 'https://museum.uad.ac.id/index.php/auth/des/';
 final Map<String, dynamic> endpoint = {
   'general': {'ref_fakultas': 'ref_fakultas'},
   'mahasiswa_asing': {

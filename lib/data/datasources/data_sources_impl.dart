@@ -140,6 +140,78 @@ class DataSourceImpl implements DataSource {
   }
 
   @override
+  Future<List<PersebaranFakultas>> getPmbRegulerFakultas() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranFakultas.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranProdi>> getPmbRegulerProdi(String fakKode) async {
+    try {
+      final response = await get(
+          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranProdi.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranFakultas>> getPmbNonRegulerFakultas() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranFakultas.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranProdi>> getPmbNonRegulerProdi(String fakKode) async {
+    try {
+      final response = await get(
+          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranProdi.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
   Future<List<TrenKelulusan>> getTrenKelulusan() async {
     try {
       final response =
@@ -541,6 +613,7 @@ class DataSourceImpl implements DataSource {
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
+      print(response);
       if (response.statusCode == 200) {
         return prestasiMahasiswaFromJson(response.body);
       } else {

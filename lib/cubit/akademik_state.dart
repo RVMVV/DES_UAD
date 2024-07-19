@@ -131,3 +131,23 @@ class EksamplarLoaded extends EksamplarState {
 
   EksamplarLoaded(this.data);
 }
+
+// Jalur Reg
+class PmbJalurRegState extends PMB {}
+
+class PmbJalurRegLoading extends PmbJalurRegState {}
+
+class PmbJalurRegLoaded extends PmbJalurRegState {
+  final List<PersebaranBerdasarkan> datas;
+  PmbJalurRegLoaded(this.datas);
+}
+
+// Jalur Non Reg
+class PmbJalurNonRegState extends PMB {}
+
+class PmbJalurNonRegLoading extends PmbJalurNonRegState {}
+
+class PmbJalurNonRegLoaded extends PmbJalurNonRegState {
+  final List<PersebaranBerdasarkan> datas;
+  PmbJalurNonRegLoaded(this.datas);
+}

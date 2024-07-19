@@ -14,15 +14,15 @@ import '../../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../../widgets/base_container.dart';
 import '../../../widgets/chart/horizontal_bar_chart.dart';
 
-class PersebaranFakultasChart extends StatefulWidget {
-  const PersebaranFakultasChart({super.key});
+class JalurRegulerFakultasChart extends StatefulWidget {
+  const JalurRegulerFakultasChart({super.key});
 
   @override
-  State<PersebaranFakultasChart> createState() =>
-      _PersebaranFakultasChartState();
+  State<JalurRegulerFakultasChart> createState() =>
+      _JalurRegulerFakultasChartState();
 }
 
-class _PersebaranFakultasChartState extends State<PersebaranFakultasChart> {
+class _JalurRegulerFakultasChartState extends State<JalurRegulerFakultasChart> {
   @override
   Widget build(BuildContext context) {
     final akademikCubit = context.read<AkademikCubit>();
@@ -34,8 +34,6 @@ class _PersebaranFakultasChartState extends State<PersebaranFakultasChart> {
             bloc: akademikCubit..getPersebaranPMB(JenisPMB.persebaran, 0),
             buildWhen: (previous, current) => current is PersebaranPMBState,
             builder: (context, state) {
-              print('pfak');
-              print(state);
               if (state is PersebaranPMBLoaded) {
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
