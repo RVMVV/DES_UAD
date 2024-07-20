@@ -22,6 +22,7 @@ import '../models/mutu/persebaran_akreditasi.dart';
 import '../models/mutu/persebaran_akreditasi_internasional.dart';
 import '../models/mutu/prodi_akreditasi.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
+import '../models/persebaran_berdasarkan.dart';
 import '../models/prestasi/prestasi_mahasiswa_model.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
@@ -630,17 +631,17 @@ class DataSourceImpl implements DataSource {
     }
   }
 
-  @override
-  Future<List<DataPersebaranProdiDosen>> getPersebaranFakultasDosen() async {
+  Future<List<PersebaranFakultas>> getPersebaranFakultasDosen() async {
     try {
       final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
+      final decoded = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
-        // print(response.body);
-        final decoded = jsonDecode(response.body);
-        final List<dynamic> data = decoded['data'];
-        return data.map((e) => DataPersebaranProdiDosen.fromJson(e)).toList();
-      } else {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranFakultas.fromJson(e))
+            .toList();
+      }else{
         throw ServerException();
       }
     } catch (e) {

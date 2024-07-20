@@ -1,3 +1,5 @@
+import 'package:community_charts_flutter/community_charts_flutter.dart';
+import 'package:d_chart/commons/enums.dart';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 
