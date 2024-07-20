@@ -43,8 +43,11 @@ class ComboChart extends StatelessWidget {
     ];
 
     return DChartComboO(
-      groupList: ordinalGroup,
-      animate: true,
-    );
+        barLabelDecorator: BarLabelDecorator(),
+        groupList: ordinalGroup,
+        animate: true,
+        barLabelValue: (group, OrdinalData, index) {
+          return '${OrdinalData.measure} %';
+        });
   }
 }
