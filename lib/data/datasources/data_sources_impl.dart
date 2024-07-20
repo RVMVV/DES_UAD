@@ -35,6 +35,23 @@ import 'data_sources.dart';
 
 class DataSourceImpl implements DataSource {
   @override
+  Future<String> getJumlahMahasiswaLokal() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return decoded['data']['total_mhs'];
+      }
+
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
   Future<String> getJumlahMahasiswaAsing() async {
     try {
       final response =
@@ -159,6 +176,42 @@ class DataSourceImpl implements DataSource {
 
   @override
   Future<List<PersebaranProdi>> getPmbRegulerProdi(String fakKode) async {
+    try {
+      final response = await get(
+          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranProdi.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranFakultas>> getMhsLokalFakultas() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List)
+            .map((e) => PersebaranFakultas.fromJson(e))
+            .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<PersebaranProdi>> getMhsLokalProdi(String fakKode) async {
     try {
       final response = await get(
           Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));

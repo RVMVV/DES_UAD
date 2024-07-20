@@ -9,6 +9,10 @@ final Map<String, dynamic> endpoint = {
     'jumlah': 'mahasiswa_asing',
     'persebaran_negara': 'persebaran_mahasiswa_asing',
   },
+  'mahasiswa_lokal': {
+    'jumlah': 'mahasiswa_asing',
+    'persebaran_negara': 'persebaran_mahasiswa_asing',
+  },
   'pmb': {
     'dataPMB': 'maba_jumlah_mahasiswa',
     'persebaran_fakultas': 'maba_jumlah_mahasiswa_fakultas',

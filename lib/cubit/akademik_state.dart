@@ -8,6 +8,16 @@ final class AkademikInitial extends AkademikState {}
 // Mahasiswa Asing
 class MahasiswaAsing extends AkademikState {}
 
+class JumlahMahasiswaLokal extends MahasiswaAsing {}
+
+class JumlahMahasiswaLokalLoading extends JumlahMahasiswaLokal {}
+
+class JumlahMahasiswaLokalLoaded extends JumlahMahasiswaLokal {
+  final String jumlah;
+
+  JumlahMahasiswaLokalLoaded(this.jumlah);
+}
+
 class JumlahMahasiswaAsing extends MahasiswaAsing {}
 
 class JumlahMahasiswaAsingLoading extends JumlahMahasiswaAsing {}
@@ -150,4 +160,14 @@ class PmbJalurNonRegLoading extends PmbJalurNonRegState {}
 class PmbJalurNonRegLoaded extends PmbJalurNonRegState {
   final List<PersebaranBerdasarkan> datas;
   PmbJalurNonRegLoaded(this.datas);
+}
+
+// Mahasiswa Lokal
+class MhsLokalState extends PMB {}
+
+class MhsLokalLoading extends MhsLokalState {}
+
+class MhsLokalLoaded extends MhsLokalState {
+  final List<PersebaranBerdasarkan> datas;
+  MhsLokalLoaded(this.datas);
 }

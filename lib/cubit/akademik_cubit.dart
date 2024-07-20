@@ -47,6 +47,13 @@ class AkademikCubit extends Cubit<AkademikState> {
     emit(AkademikInitial());
   }
 
+  // Mahasiswa Lokal
+  Future<void> getJumlahMahasiswaLokal() async {
+    emit(JumlahMahasiswaLokalLoading());
+    final result = await dataSource.getJumlahMahasiswaLokal();
+    emit(JumlahMahasiswaLokalLoaded(result));
+  }
+
   // Mahasiswa Asing
   Future<void> getJumlahMahasiswaAsing() async {
     emit(JumlahMahasiswaAsingLoading());
@@ -168,5 +175,17 @@ class AkademikCubit extends Cubit<AkademikState> {
     emit(PmbJalurNonRegLoading());
     final result = await dataSource.getPmbNonRegulerProdi(fakultas);
     emit(PmbJalurNonRegLoaded(result));
+  }
+
+  Future<void> getMhsLokalFakultas() async {
+    emit(MhsLokalLoading());
+    final result = await dataSource.getMhsLokalFakultas();
+    emit(MhsLokalLoaded(result));
+  }
+
+  Future<void> getMhsLokalProdi(String fakultas) async {
+    emit(MhsLokalLoading());
+    final result = await dataSource.getMhsLokalProdi(fakultas);
+    emit(MhsLokalLoaded(result));
   }
 }

@@ -169,7 +169,6 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
           PersebaranUnitPmb(title: 'PMB Berdasarkan Persebaran'),
           kGap16,
           PmbJalurReg(title: 'PMB Jalur Reguler'),
-
           kGap16,
           // Horizontal Bar Chart Non Reguler
           PmbJalurNonReg(title: 'PMB Jalur Non Reguler'),
