@@ -5,43 +5,39 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/prestasi_cubit.dart';
-import '../../data/models/prestasi/prestasi_mahasiswa_model.dart';
+import '../../../cubit/akademik_cubit.dart';
+import '../../../data/models/akademik/kelulusan/perbandingan_kelulusan.dart';
 
-class PrestasiChart extends StatefulWidget {
+class KelulusanPerbandinganChart extends StatefulWidget {
   @override
-  _PrestasiChartState createState() => _PrestasiChartState();
+  _KelulusanPerbandinganChartState createState() =>
+      _KelulusanPerbandinganChartState();
 }
 
-class _PrestasiChartState extends State<PrestasiChart> {
-  List listPrestasi = [];
+class _KelulusanPerbandinganChartState
+    extends State<KelulusanPerbandinganChart> {
+  List listAkademik = [];
   List<BarChartGroupData> lw = [];
 
   @override
   Widget build(BuildContext context) {
-    final prestasiCubit = context.read<PrestasiCubit>();
+    final akademikCubit = context.read<AkademikCubit>();
 
-    return BlocBuilder<PrestasiCubit, PrestasiState>(
-      bloc: prestasiCubit..getPrestasiMahasiswa(),
+    return BlocBuilder<AkademikCubit, AkademikState>(
+      bloc: akademikCubit..getPerbandinganKelulusan(),
+      buildWhen: (previous, current) => current is PerbandinganKelulusanState,
       builder: (context, state) {
-        if (state is PrestasiMahasiswaLoaded) {
-          listPrestasi.clear();
+        if (state is PerbandinganKelulusanLoaded) {
+          listAkademik.clear();
           lw.clear();
 
-          List<DataPrestasiMhs> listDt = state.data;
+          List<PerbandinganKelulusan> listDt = state.datas;
           listDt.asMap().forEach((i, value) {
-            listPrestasi.add([
-              value.tahun,
-              value.mhsBerprestasi,
-              value.score,
-              value.cakupanIntrnsl,
-              value.cakupanNsl,
-              value.cakupanLkl
-            ]);
+            listAkademik.add([value.tahun, value.totalMhs, value.mhsLulus]);
 
             lw.addAll([
-              makeGroupData(i, double.parse(value.mhsBerprestasi),
-                  double.parse(value.score))
+              makeGroupData(i, double.parse(value.totalMhs.toString()),
+                  double.parse(value.mhsLulus.toString()))
             ]);
           });
 
@@ -52,18 +48,13 @@ class _PrestasiChartState extends State<PrestasiChart> {
                 barTouchData: BarTouchData(
                   enabled: true,
                   touchTooltipData: BarTouchTooltipData(
-                    // direction: TooltipDirection.top,
-
                     tooltipRoundedRadius: 8,
                     maxContentWidth: 180,
                     getTooltipColor: (_) => kWhite,
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                      String year = listPrestasi[group.x.toInt()][0];
-                      String jmlInternasional =
-                          listPrestasi[group.x.toInt()][3];
-                      String jmlNasional = listPrestasi[group.x.toInt()][4];
-                      String jmlLokal = listPrestasi[group.x.toInt()][5];
-                      String jmlSkor = listPrestasi[group.x.toInt()][2];
+                      String year = listAkademik[group.x.toInt()][0];
+                      String totalM = listAkademik[group.x.toInt()][1];
+                      String totalL = listAkademik[group.x.toInt()][2];
 
                       return BarTooltipItem(
                         '$year\n',
@@ -71,20 +62,11 @@ class _PrestasiChartState extends State<PrestasiChart> {
                             .copyWith(color: kLightGrey800),
                         children: <TextSpan>[
                           TextSpan(
-                              text:
-                                  'Internasional : ' + jmlInternasional + ' \n',
+                              text: 'Jumlah Mahasiswa : ' + totalM + ' \n',
                               style: Styles.kPublicRegularBodyThree
                                   .copyWith(color: kLightGrey500)),
                           TextSpan(
-                              text: 'Nasional: ' + jmlNasional + '\n',
-                              style: Styles.kPublicRegularBodyThree
-                                  .copyWith(color: kLightGrey500)),
-                          TextSpan(
-                              text: 'Lokal: ' + jmlLokal + '\n',
-                              style: Styles.kPublicRegularBodyThree
-                                  .copyWith(color: kLightGrey500)),
-                          TextSpan(
-                              text: 'SKOR: ' + jmlSkor + '\n',
+                              text: 'Mahasiswa Lulus : ' + totalL + ' \n',
                               style: Styles.kPublicRegularBodyThree
                                   .copyWith(color: kLightGrey500)),
                         ],
@@ -158,12 +140,10 @@ class _PrestasiChartState extends State<PrestasiChart> {
 
   Widget getTitles(double value, TitleMeta meta) {
     final style = Styles.kPublicRegularBodyThree.copyWith(color: klightGrey450);
-
     int index = value.toInt();
-
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: Text(listPrestasi[index][0], style: style),
+      child: Text(listAkademik[index][0], style: style),
     );
   }
 
