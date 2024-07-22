@@ -92,39 +92,6 @@ class KelulusanPage extends StatelessWidget {
                 height: 240,
                 child: KelulusanPerbandinganChart(),
               ),
-              // SizedBox(
-              //   height: 300,
-              //   child: BlocBuilder<AkademikCubit, AkademikState>(
-              //     bloc: akademikCubit..getPerbandinganKelulusan(),
-              //     buildWhen: (previous, current) =>
-              //         current is PerbandinganKelulusanState,
-              //     builder: (context, state) {
-              //       if (state is PerbandinganKelulusanLoaded) {
-              //         final datas = [
-              //           charts.Series<PerbandinganKelulusan, String>(
-              //             id: 'PK',
-              //             domainFn: (datum, index) => datum.tahun,
-              //             measureFn: (datum, index) => datum.totalMahasiswa,
-              //             data: state.datas,
-              //             colorFn: (datum, index) =>
-              //                 const charts.Color(r: 32, g: 128, b: 249),
-              //           ),
-              //           charts.Series<PerbandinganKelulusan, String>(
-              //             id: 'PK',
-              //             domainFn: (datum, index) => datum.tahun,
-              //             measureFn: (datum, index) => datum.mahasiswaLulus,
-              //             data: state.datas,
-              //             colorFn: (datum, index) =>
-              //                 const charts.Color(r: 0, g: 169, b: 145),
-              //           ),
-              //         ];
-              //         return GroupedBarChart(seriesList: datas);
-              //       }
-
-              //       return const Center(child: CircularProgressIndicator());
-              //     },
-              //   ),
-              // ),
               kGap24,
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
