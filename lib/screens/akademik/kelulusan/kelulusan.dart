@@ -14,6 +14,7 @@ import '../../widgets/chart/grouped_bar_chart.dart';
 import '../../widgets/rounded_icon_container.dart';
 import '../widgets/app_bar_sub_menu_akademik.dart';
 import '../widgets/body_sub_menu_akademik.dart';
+import 'kelulusan_perbandingan_chart.dart';
 
 class KelulusanPage extends StatelessWidget {
   const KelulusanPage({super.key});
@@ -79,44 +80,17 @@ class KelulusanPage extends StatelessWidget {
           ),
           kGap16,
           // Grouped Bar Chart
+
           BaseContainer.styledBigCard(
             children: [
               const BigCardTitle(
                 title: 'Perbandingan Kelulusan Dengan Total Mahasiswa',
               ),
               kGap24,
-              SizedBox(
-                height: 300,
-                child: BlocBuilder<AkademikCubit, AkademikState>(
-                  bloc: akademikCubit..getPerbandinganKelulusan(),
-                  buildWhen: (previous, current) =>
-                      current is PerbandinganKelulusanState,
-                  builder: (context, state) {
-                    if (state is PerbandinganKelulusanLoaded) {
-                      final datas = [
-                        charts.Series<PerbandinganKelulusan, String>(
-                          id: 'PK',
-                          domainFn: (datum, index) => datum.tahun,
-                          measureFn: (datum, index) => datum.totalMahasiswa,
-                          data: state.datas,
-                          colorFn: (datum, index) =>
-                              const charts.Color(r: 32, g: 128, b: 249),
-                        ),
-                        charts.Series<PerbandinganKelulusan, String>(
-                          id: 'PK',
-                          domainFn: (datum, index) => datum.tahun,
-                          measureFn: (datum, index) => datum.mahasiswaLulus,
-                          data: state.datas,
-                          colorFn: (datum, index) =>
-                              const charts.Color(r: 0, g: 169, b: 145),
-                        ),
-                      ];
-                      return GroupedBarChart(seriesList: datas);
-                    }
-
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 24),
+                height: 240,
+                child: KelulusanPerbandinganChart(),
               ),
               kGap24,
               const Row(

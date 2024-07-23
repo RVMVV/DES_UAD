@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:des_uad/data/models/mutu/sertifikasi_prodi_model.dart';
-import 'package:des_uad/data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import 'package:http/http.dart';
 
 import '../../core/constant_finals.dart';
@@ -22,7 +20,7 @@ import '../models/mutu/persebaran_akreditasi.dart';
 import '../models/mutu/persebaran_akreditasi_internasional.dart';
 import '../models/mutu/prodi_akreditasi.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
-import '../models/persebaran_berdasarkan.dart';
+import '../models/mutu/sertifikasi_prodi_model.dart';
 import '../models/prestasi/prestasi_mahasiswa_model.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
@@ -32,6 +30,7 @@ import '../models/sdm/sdm_jumlah_dosen_model.dart';
 import '../models/sdm/sdm_jumlah_tendik_model.dart';
 import '../models/sdm/sdm_pendidikan_dosen_model.dart';
 import '../models/sdm/sdm_pendidikan_tendik_model.dart';
+import '../models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import 'data_sources.dart';
 
 class DataSourceImpl implements DataSource {
@@ -631,20 +630,26 @@ class DataSourceImpl implements DataSource {
     }
   }
 
+  @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasDosen() async {
     try {
       final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
       final decoded = jsonDecode(response.body);
 
+      // Tambahkan log untuk melihat status dan body dari response
+      print('Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranFakultas.fromJson(e))
             .toList();
-      }else{
+      } else {
         throw ServerException();
       }
     } catch (e) {
+      print('Error: $e'); // Tambahkan log untuk melihat error
       throw ServerException();
     }
   }
@@ -663,6 +668,7 @@ class DataSourceImpl implements DataSource {
     }
   }
 
+  @override
   Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
     try {
       final Response response =

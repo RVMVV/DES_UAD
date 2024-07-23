@@ -114,16 +114,16 @@ class _PersebaranState extends State<Persebaran> {
             ),
             kGap20,
             Visibility(
+              visible: isFakultasSelected,
+              child: const SdmPersebaranDosenFakultas(),
+            ),
+            Visibility(
               visible: !isFakultasSelected,
               child: GestureDetector(
                 onTap: () => showFakultasSelection(),
                 child:
                     SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas),
               ),
-            ),
-            Visibility(
-              visible: isFakultasSelected,
-              child: const SdmPersebaranDosenFakultas(),
             ),
             kGap20,
           ],

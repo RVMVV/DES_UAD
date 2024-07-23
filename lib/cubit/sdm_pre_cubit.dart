@@ -14,7 +14,7 @@ class SdmPreCubit extends Cubit<SdmPreState> {
   final DataSource dataSource;
 
     Future<void> getPersebaranFakultasDosen() async {
-    final dataPersebaranFakultasDosen = await dataSource.getPersebaranFakultasDosen();
-    emit(PersebaranFakultasDosenLoaded(dataPersebaranFakultasDosen));
+    final result = await dataSource.getPersebaranFakultasDosen();
+    emit(PersebaranFakultasDosenLoaded(result));
   }
 }

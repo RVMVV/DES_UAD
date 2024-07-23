@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 
-import '../../../cubit/akademik_cubit.dart';
 import '../../../cubit/sdm_pre_cubit.dart';
 import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../../../data/models/persebaran_berdasarkan.dart';
@@ -17,16 +16,18 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final akademikCubit = context.read<AkademikCubit>();
+    final SdmPreCubit cubit = context.read<SdmPreCubit>();
     return Column(
       children: [
         SizedBox(
           height: 300,
-          child: BlocBuilder<AkademikCubit, AkademikState>(
-            bloc: akademikCubit..getPmbRegulerFakultas(),
-            buildWhen: (previous, current) => current is PmbJalurRegState,
+          child: BlocBuilder<SdmPreCubit, SdmPreState>(
+            bloc: cubit..getPersebaranFakultasDosen(),
+            buildWhen: (previous, current) => current is SdmPersebaranFakultas,
             builder: (context, state) {
-              if (state is PmbJalurRegLoaded) {
+              print('getPersebaranFakultasDosen');
+              print(state);
+              if (state is PersebaranFakultasDosenLoaded) {
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan',
