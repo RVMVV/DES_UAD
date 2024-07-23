@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
 
 import '../../../core/constant_finals.dart';
 import '../../../cubit/sdm_cubit.dart';
@@ -18,7 +19,6 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final SdmCubit cubit = context.read<SdmCubit>();
 
     return Column(
@@ -50,8 +50,7 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
           height: 300,
           child: BlocBuilder<SdmCubit, SdmState>(
             bloc: cubit..getPersebaranProdiDosen(),
-            buildWhen: (previous, current) =>
-                current is SdmProdiDosen,
+            buildWhen: (previous, current) => current is SdmProdiDosen,
             builder: (context, state) {
               print(state);
               if (state is PersebaranProdiDosenLoaded) {
@@ -60,8 +59,8 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
                     id: 'AI',
                     data: state.data,
                     domainFn: (datum, index) => datum.prodi,
-                    measureFn: (datum, index) => double.parse(
-                        datum.persentase.replaceAll('%', '')),
+                    measureFn: (datum, index) =>
+                        double.parse(datum.persentase.replaceAll('%', '')),
                     labelAccessorFn: (datum, index) =>
                         '${datum.prodi}:   ${datum.persentase} ● ${datum.total}',
                     insideLabelStyleAccessorFn: (datum, index) =>
@@ -80,19 +79,16 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
                     domainFn: (datum, index) => datum.prodi,
                     measureFn: (datum, index) =>
                         100 -
-                        double.parse(
-                            datum.persentase.replaceAll('%', '')),
+                        double.parse(datum.persentase.replaceAll('%', '')),
                     data: state.data,
                     labelAccessorFn: (datum, index) => '',
-                    colorFn: (datum, index) => const charts.Color(
-                        r: 52, g: 144, b: 252, a: 32),
+                    colorFn: (datum, index) =>
+                        const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
-                return HorizontalBarLabelChart(
-                    dataPersebaranProdiDosen);
+                return HorizontalBarLabelChart(dataPersebaranProdiDosen);
               }
-              return const Center(
-                  child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             },
           ),
         ),

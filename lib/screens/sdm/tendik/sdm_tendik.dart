@@ -155,7 +155,7 @@ class SDMTendik extends StatelessWidget {
             kGap16,
             BaseContainer.styledBigCard(
               children: [
-                const BigCardTitle(title: 'Jabatan Fungsional Tendik'),
+                const BigCardTitle(title: 'Pendidikan Tendik'),
                 SizedBox(
                   height: 300,
                   child: BlocBuilder<SdmCubit, SdmState>(

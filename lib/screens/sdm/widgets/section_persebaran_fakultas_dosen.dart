@@ -6,7 +6,6 @@ import 'package:community_charts_flutter/community_charts_flutter.dart'
 import '../../../cubit/sdm_pre_cubit.dart';
 import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../../../data/models/persebaran_berdasarkan.dart';
-import '../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
 class SdmPersebaranDosenFakultas extends StatelessWidget {
@@ -25,15 +24,16 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
             bloc: cubit..getPersebaranFakultasDosen(),
             buildWhen: (previous, current) => current is SdmPersebaranFakultas,
             builder: (context, state) {
-              print('getPersebaranFakultasDosen');
-              print(state);
               if (state is PersebaranFakultasDosenLoaded) {
+                for (var i = 0; i < state.datas.length; i++) {
+                  print((state.datas[i] as PersebaranFakultas).fakultas);
+                }
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
-                    id: 'PersebaranBerdasarkan',
+                    id: 'PersebaranBerdasarkan1',
                     data: state.datas,
                     domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas,
+                        (datum as PersebaranFakultas).fakultas + '${index}' ,
                     measureFn: (datum, index) => datum.getPercent,
                     labelAccessorFn: (datum, index) =>
                         '${(datum as PersebaranFakultas).fakultas} ${datum.getPercent}% ● ${datum.total}',
@@ -49,9 +49,9 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
                     ),
                   ),
                   charts.Series<PersebaranBerdasarkan, String>(
-                    id: 'PersebaranBerdasarkan',
+                    id: 'PersebaranBerdasarkan2',
                     domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas,
+                        (datum as PersebaranFakultas).fakultas  + '${index}' ,
                     measureFn: (datum, index) => 100 - datum.getPercent,
                     data: state.datas,
                     labelAccessorFn: (datum, index) => '',

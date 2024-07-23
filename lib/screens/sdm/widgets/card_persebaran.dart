@@ -140,7 +140,6 @@ class _PersebaranState extends State<Persebaran> {
   }
 
   void showFakultasSelection() {
-    final pmbCubit = context.read<PmbCubit>();
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {

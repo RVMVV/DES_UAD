@@ -635,21 +635,15 @@ class DataSourceImpl implements DataSource {
     try {
       final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
-      final decoded = jsonDecode(response.body);
-
-      // Tambahkan log untuk melihat status dan body dari response
-      print('Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
       if (response.statusCode == 200) {
-        return (decoded['data'] as List)
-            .map((e) => PersebaranFakultas.fromJson(e))
-            .toList();
+        print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
       } else {
         throw ServerException();
       }
     } catch (e) {
-      print('Error: $e'); // Tambahkan log untuk melihat error
       throw ServerException();
     }
   }
@@ -673,7 +667,6 @@ class DataSourceImpl implements DataSource {
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
-      print(response);
       if (response.statusCode == 200) {
         return prestasiMahasiswaFromJson(response.body);
       } else {

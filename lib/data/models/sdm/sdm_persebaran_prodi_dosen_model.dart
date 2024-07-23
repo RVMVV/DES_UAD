@@ -7,7 +7,6 @@ import 'dart:convert';
 
 SdmPersebaranProdiDosenModel sdmPersebaranProdiDosenModelFromJson(String str) => SdmPersebaranProdiDosenModel.fromJson(json.decode(str));
 
-String sdmPersebaranProdiDosenModelToJson(SdmPersebaranProdiDosenModel data) => json.encode(data.toJson());
 
 class SdmPersebaranProdiDosenModel {
     bool status;
@@ -29,12 +28,6 @@ class SdmPersebaranProdiDosenModel {
         message: json["message"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-        "code": code,
-        "message": message,
-    };
 }
 
 class DataPersebaranProdiDosen {
@@ -57,10 +50,4 @@ class DataPersebaranProdiDosen {
         total: json["total"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "fakultas": fakultas,
-        "prodi": prodi,
-        "persentase": persentase,
-        "total": total,
-    };
 }
