@@ -1,18 +1,11 @@
-import 'package:des_uad/cubit/sdm_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
+
 import '../../../core/constant_finals.dart';
-import '../../../cubit/mutu_cubit.dart';
-import '../../../cubit/sdm_pre_cubit.dart';
-import '../../../data/data_chart.dart';
-import '../../../data/models/sdm/sdm_pendidikan_dosen_model.dart';
-import '../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
+import '../../../cubit/pmb_cubit.dart';
 import '../../widgets/base_container.dart';
-import '../../widgets/big_card_title.dart';
-import '../../widgets/chart/horizontal_bar_chart.dart';
+import 'section_persebaran_fakultas_dosen.dart';
+import 'section_persebaran_prodi_dosen.dart';
 
 class Persebaran extends StatefulWidget {
   final String title;
@@ -27,22 +20,13 @@ class Persebaran extends StatefulWidget {
 
 class _PersebaranState extends State<Persebaran> {
   bool isFakultasSelected = true; // Menambahkan variabel status
-  String selectedFakultas =
-      'Teknologi Industri'; // Menambahkan variabel pilihan
-
-  final akreditasis = [
-    AkreditasiInternasional('Informatika', 50, '37'),
-    AkreditasiInternasional('Teknik Elektro', 20, '33'),
-    AkreditasiInternasional('Teknik Industri', 15, '33'),
-    AkreditasiInternasional('Teknik Kimia', 10, '33'),
-    AkreditasiInternasional('Teknik Pangan', 5, '33'),
-  ];
+  String selectedFakultas = 'Teknologi Industri'; // variabel dasar
 
   @override
   void initState() {
     super.initState();
-    final MutuCubit cubit = context.read<MutuCubit>();
-    cubit.getSertifikasiProdi();
+    final pmbCubit = context.read<PmbCubit>();
+    pmbCubit.getRefFakultas(); // Panggil hanya sekali saat initState
   }
 
   @override
@@ -130,15 +114,16 @@ class _PersebaranState extends State<Persebaran> {
             ),
             kGap20,
             Visibility(
+              visible: isFakultasSelected,
+              child: const SdmPersebaranDosenFakultas(),
+            ),
+            Visibility(
               visible: !isFakultasSelected,
               child: GestureDetector(
                 onTap: () => showFakultasSelection(),
-                child: SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas),
+                child:
+                    SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas),
               ),
-            ),
-            Visibility(
-              visible: isFakultasSelected,
-              child: SdmPersebaranDosenFakultas(),
             ),
             kGap20,
           ],
@@ -150,7 +135,7 @@ class _PersebaranState extends State<Persebaran> {
   void toggleSelection(bool isDosen) {
     setState(() {
       isFakultasSelected = isDosen;
-      // print(isDosen);
+      // Tidak perlu memanggil cubit lagi di sini
     });
   }
 
@@ -158,10 +143,9 @@ class _PersebaranState extends State<Persebaran> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return BlocBuilder<MutuCubit, MutuState>(
-          buildWhen: (previous, current) => current is AkreditasiTersertifikasi,
+        return BlocBuilder<PmbCubit, PmbState>(
           builder: (context, state) {
-            if (state is AkreditasiPersebaranTersertifikasiProdiLoaded) {
+            if (state is RefFakultasLoaded) {
               return Column(
                 children: [
                   Padding(
@@ -180,7 +164,7 @@ class _PersebaranState extends State<Persebaran> {
                     child: ListView.separated(
                       itemCount: state.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        String data = state.data[index].prodi;
+                        String data = state.data[index].fakultas;
                         return ListTile(
                           leading: data == selectedFakultas
                               ? const Icon(Icons.check, color: kBlue)
@@ -217,163 +201,6 @@ class _PersebaranState extends State<Persebaran> {
         );
       },
       backgroundColor: kWhite,
-    );
-  }
-}
-
-class SdmPersebaranDosenFakultas extends StatelessWidget {
-  const SdmPersebaranDosenFakultas({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final SdmPreCubit cubit = context.read<SdmPreCubit>();
-    return Column(
-      children: [
-        SizedBox(
-          height: 300,
-          child: BlocBuilder<SdmPreCubit, SdmPreState>(
-            bloc: cubit..getPersebaranFakultasDosen(),
-            buildWhen: (previous, current) =>
-                current is SdmPersebaranFakultas,
-            builder: (context, state) {
-              print(state);
-              if (state is PersebaranFakultasDosenLoaded) {
-                final dataPersebaranFakultasDosen = [
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    data: state.data,
-                    domainFn: (datum, index) => datum.fakultas,
-                    measureFn: (datum, index) => double.parse(
-                        datum.persentase.replaceAll('%', '')),
-                    labelAccessorFn: (datum, index) =>
-                        '${datum.fakultas}:   ${datum.persentase} ● ${datum.total}',
-                    insideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
-                      color: charts.MaterialPalette.white,
-                      fontWeight: 'bold',
-                    ),
-                    outsideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
-                      color: charts.MaterialPalette.black,
-                      fontWeight: 'bold',
-                    ),
-                  ),
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    domainFn: (datum, index) => datum.fakultas,
-                    measureFn: (datum, index) =>
-                        100 -
-                        double.parse(
-                            datum.persentase.replaceAll('%', '')),
-                    data: state.data,
-                    labelAccessorFn: (datum, index) => '',
-                    colorFn: (datum, index) => const charts.Color(
-                        r: 52, g: 144, b: 252, a: 32),
-                  )
-                ];
-                return HorizontalBarLabelChart(
-                    dataPersebaranFakultasDosen);
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SdmPersebaranProdiDosen extends StatelessWidget {
-  const SdmPersebaranProdiDosen({
-    super.key,
-    required this.selectedFakultas,
-  });
-
-  final String selectedFakultas;
-
-  @override
-  Widget build(BuildContext context) {
-
-    final SdmCubit cubit = context.read<SdmCubit>();
-
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: kGrey100)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  selectedFakultas, //contain selected fakultas
-                  style: Styles.kPublicRegularBodyTwo.copyWith(
-                    color: kGrey900,
-                  ),
-                ),
-                SvgPicture.asset(icArrowBottom),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 300,
-          child: BlocBuilder<SdmCubit, SdmState>(
-            bloc: cubit..getPersebaranProdiDosen(),
-            buildWhen: (previous, current) =>
-                current is SdmProdiDosen,
-            builder: (context, state) {
-              print(state);
-              if (state is PersebaranProdiDosenLoaded) {
-                final dataPersebaranProdiDosen = [
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    data: state.data,
-                    domainFn: (datum, index) => datum.prodi,
-                    measureFn: (datum, index) => double.parse(
-                        datum.persentase.replaceAll('%', '')),
-                    labelAccessorFn: (datum, index) =>
-                        '${datum.prodi}:   ${datum.persentase} ● ${datum.total}',
-                    insideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
-                      color: charts.MaterialPalette.white,
-                      fontWeight: 'bold',
-                    ),
-                    outsideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
-                      color: charts.MaterialPalette.black,
-                      fontWeight: 'bold',
-                    ),
-                  ),
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    domainFn: (datum, index) => datum.prodi,
-                    measureFn: (datum, index) =>
-                        100 -
-                        double.parse(
-                            datum.persentase.replaceAll('%', '')),
-                    data: state.data,
-                    labelAccessorFn: (datum, index) => '',
-                    colorFn: (datum, index) => const charts.Color(
-                        r: 52, g: 144, b: 252, a: 32),
-                  )
-                ];
-                return HorizontalBarLabelChart(
-                    dataPersebaranProdiDosen);
-              }
-              return const Center(
-                  child: CircularProgressIndicator());
-            },
-          ),
-        ),
-      ],
     );
   }
 }

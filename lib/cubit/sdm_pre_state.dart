@@ -7,7 +7,7 @@ final class SdmPreInitial extends SdmPreState {}
 
 final class SdmPersebaranFakultas extends SdmPreState {}
 final class PersebaranFakultasDosenLoaded extends SdmPersebaranFakultas {
-  final List<DataPersebaranProdiDosen> data; // <--- nantinya akan diganti sesuai dengan class model yang sesuai
+  final List<PersebaranBerdasarkan> datas; // <--- nantinya akan diganti sesuai dengan class model yang sesuai
   //untuk saat ini memakai dari persebaranprodi, nanti diganti pakai persebaranfakultas model.
-  PersebaranFakultasDosenLoaded(this.data);
+  PersebaranFakultasDosenLoaded(this.datas);
 }

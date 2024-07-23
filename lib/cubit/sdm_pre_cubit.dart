@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:des_uad/data/datasources/data_sources.dart';
+import 'package:des_uad/data/models/persebaran_berdasarkan.dart';
+import 'package:des_uad/screens/sdm/widgets/card_persebaran.dart';
 import 'package:meta/meta.dart';
 
 import '../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
@@ -12,7 +14,7 @@ class SdmPreCubit extends Cubit<SdmPreState> {
   final DataSource dataSource;
 
     Future<void> getPersebaranFakultasDosen() async {
-    final List<DataPersebaranProdiDosen> dataPersebaranFakultasDosen = await dataSource.getPersebaranFakultasDosen();
-    emit(PersebaranFakultasDosenLoaded(dataPersebaranFakultasDosen));
+    final result = await dataSource.getPersebaranFakultasDosen();
+    emit(PersebaranFakultasDosenLoaded(result));
   }
 }

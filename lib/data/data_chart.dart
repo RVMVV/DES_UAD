@@ -50,3 +50,12 @@ class PersebaranProdiDosen {
 
   PersebaranProdiDosen(this.prodi, this.persentase, this.total);
 }
+
+class PersebaranFakultasDosen {
+  final String fakultas;
+  final String persentase;
+  final String total;
+
+  PersebaranFakultasDosen(this.fakultas, this.persentase, this.total);
+}
+
