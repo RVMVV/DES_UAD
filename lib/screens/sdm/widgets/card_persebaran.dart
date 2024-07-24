@@ -19,14 +19,15 @@ class Persebaran extends StatefulWidget {
 }
 
 class _PersebaranState extends State<Persebaran> {
-  bool isFakultasSelected = true; // Menambahkan variabel status
-  String selectedFakultas = 'Teknologi Industri'; // variabel dasar
+  bool isFakultasSelected = true;
+  String selectedFakultas = 'Teknologi Industri'; //placeholder
+  String fakultasKode = '';
 
   @override
   void initState() {
     super.initState();
     final pmbCubit = context.read<PmbCubit>();
-    pmbCubit.getRefFakultas(); // Panggil hanya sekali saat initState
+    pmbCubit.getRefFakultas();
   }
 
   @override
@@ -122,7 +123,7 @@ class _PersebaranState extends State<Persebaran> {
               child: GestureDetector(
                 onTap: () => showFakultasSelection(),
                 child:
-                    SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas),
+                    SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas, fakKode: fakultasKode,),
               ),
             ),
             kGap20,
@@ -135,7 +136,6 @@ class _PersebaranState extends State<Persebaran> {
   void toggleSelection(bool isDosen) {
     setState(() {
       isFakultasSelected = isDosen;
-      // Tidak perlu memanggil cubit lagi di sini
     });
   }
 
@@ -165,6 +165,7 @@ class _PersebaranState extends State<Persebaran> {
                       itemCount: state.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         String data = state.data[index].fakultas;
+                        String fkKode = state.data[index].fakKode;
                         return ListTile(
                           leading: data == selectedFakultas
                               ? const Icon(Icons.check, color: kBlue)
@@ -172,6 +173,7 @@ class _PersebaranState extends State<Persebaran> {
                           onTap: () {
                             setState(() {
                               selectedFakultas = data;
+                              fakultasKode = fkKode; //will pass this value to somewhere
                             });
                             Navigator.pop(context);
                           },

@@ -5,6 +5,7 @@ import 'package:des_uad/data/models/sdm/sdm_pendidikan_dosen_model.dart';
 import 'package:meta/meta.dart';
 
 import '../data/datasources/data_sources.dart';
+import '../data/models/persebaran_berdasarkan.dart';
 import '../data/models/sdm/sdm_gender_dosen_model.dart';
 import '../data/models/sdm/sdm_gender_tendik_model.dart';
 import '../data/models/sdm/sdm_jumlah_dosen_model.dart';
@@ -83,5 +84,8 @@ class SdmCubit extends Cubit<SdmState> {
     emit(PersebaranProdiDosenLoaded(dataPersebaranProdiDosen));
   }
 
-
+  Future<void> getPersebaranDosenProdiBerdasarkanFakultas(String fakKode) async {
+    final result = await dataSource.getPersebaranDosenProdiBerdasarkanFakultas(fakKode);
+    emit(PersebaranDosenProdiFakultasLoaded(result));
+  }
 }
