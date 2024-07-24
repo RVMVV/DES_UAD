@@ -1,43 +1,28 @@
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/constant_finals.dart';
+import '../../../cubit/sdm_cubit.dart';
 import '../../../data/data_chart.dart';
+import '../../widgets/base_container.dart';
+import 'dosen_jabfung_list.dart';
 
-class HorizontalBarLabelChart extends StatelessWidget {
+class DosenJabfungChart extends StatefulWidget {
   final List<charts.Series<dynamic, String>> seriesList;
 
   final bool animate;
+  const DosenJabfungChart(this.seriesList, {Key? key, this.animate = true});
 
-  const HorizontalBarLabelChart(this.seriesList,
-      {Key? key, this.animate = true});
-
-  factory HorizontalBarLabelChart.withSampleData() {
-    return HorizontalBarLabelChart(
+  factory DosenJabfungChart.withSampleData() {
+    return DosenJabfungChart(
       _createSampleData(),
       animate: false,
     );
   }
-
   @override
-  Widget build(BuildContext context) {
-    return charts.BarChart(
-      seriesList,
-      animate: animate,
-      barGroupingType: charts.BarGroupingType.stacked,
-      vertical: false,
-      barRendererDecorator: charts.BarLabelDecorator<String>(),
-      // Hide domain axis.
-      domainAxis:
-          const charts.OrdinalAxisSpec(renderSpec: charts.NoneRenderSpec()),
-      selectionModels: [
-        new charts.SelectionModelConfig(
-          type: charts.SelectionModelType.info,
-          //  changedListener: _onSelectionChanged,
-        )
-      ],
-    );
-  }
+  State<DosenJabfungChart> createState() => _DosenJabfungChartState();
 
   static List<charts.Series<OrdinalSales, String>> _createSampleData() {
     final data = [
@@ -60,13 +45,50 @@ class HorizontalBarLabelChart extends StatelessWidget {
   }
 }
 
+class _DosenJabfungChartState extends State<DosenJabfungChart> {
+  _onSelectionChanged(charts.SelectionModel model) {
+    final selectedDatum = model.selectedDatum;
+    if (selectedDatum.isNotEmpty) {
+      _openDetailPage(selectedDatum.first.datum.jabfungKode,
+          selectedDatum.first.datum.jabfungTendik);
+    }
+  }
+
+  void _openDetailPage(String jabfungKode, String jabfungNama) {
+    SdmCubit cubit = context.read<SdmCubit>();
+    cubit..getJabfungDosen();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => JabfungDosen(
+                  jabfungkode: jabfungKode,
+                  jabfungNama: jabfungNama,
+                )));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return charts.BarChart(
+      widget.seriesList,
+      animate: widget.animate,
+      barGroupingType: charts.BarGroupingType.stacked,
+      vertical: false,
+      barRendererDecorator: charts.BarLabelDecorator<String>(),
+      domainAxis:
+          const charts.OrdinalAxisSpec(renderSpec: charts.NoneRenderSpec()),
+      selectionModels: [
+        new charts.SelectionModelConfig(
+          type: charts.SelectionModelType.info,
+          changedListener: _onSelectionChanged,
+        )
+      ],
+    );
+  }
+}
+
 //data temporary
 final akreditasis = [
   PendidikanDosen('S1', '32%', '53'),
-  // PendidikanDosen('S2', '32%', '53'),
-  // PendidikanDosen('S3', '32%', '53'),
-  // PendidikanDosen('Profesi', '32%', '53'),
-  // PendidikanDosen('Speasialis 1 ', '32%', '53'),
 ];
 
 final dataAkreditasi = [
@@ -97,42 +119,3 @@ final dataAkreditasi = [
     labelAccessorFn: (datum, index) => '',
   )
 ];
-
-// class CardBarChart extends StatelessWidget {
-//   final String title;
-//   final String pendDosen;
-//   final String percent;
-//   final String totalValue;
-
-//   const CardBarChart({
-//     required this.title,
-//     required this.pendDosen,
-//     required this.percent,
-//     required this.totalValue,
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BaseContainer(
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               title,
-//               style: Styles.kPublicSemiBoldBodyOne.copyWith(
-//                 color: kGrey900,
-//               ),
-//             ),
-//             SizedBox(
-//               height: 300,
-//               child: HorizontalBarLabelChart(dataAkreditasi),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

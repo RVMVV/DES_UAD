@@ -122,8 +122,10 @@ class _PersebaranState extends State<Persebaran> {
               visible: !isFakultasSelected,
               child: GestureDetector(
                 onTap: () => showFakultasSelection(),
-                child:
-                    SdmPersebaranProdiDosen(selectedFakultas: selectedFakultas, fakKode: fakultasKode,),
+                child: SdmPersebaranProdiDosen(
+                  selectedFakultas: selectedFakultas,
+                  fakKode: fakultasKode,
+                ),
               ),
             ),
             kGap20,
@@ -143,63 +145,66 @@ class _PersebaranState extends State<Persebaran> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return BlocBuilder<PmbCubit, PmbState>(
-          builder: (context, state) {
-            if (state is RefFakultasLoaded) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 32, horizontal: 16),
-                    child: Text(
-                      'Pilih Fakultas',
-                      style: Styles.kPublicSemiBoldHeadingFour
-                          .copyWith(color: kGrey900),
+        return Center(
+          child: BlocBuilder<PmbCubit, PmbState>(
+            builder: (context, state) {
+              if (state is RefFakultasLoaded) {
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 32, horizontal: 16),
+                      child: Text(
+                        'Pilih Fakultas',
+                        style: Styles.kPublicSemiBoldHeadingFour
+                            .copyWith(color: kGrey900),
+                      ),
                     ),
-                  ),
-                  Divider(
-                    color: kLightGrey300.withOpacity(30 / 100),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: state.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String data = state.data[index].fakultas;
-                        String fkKode = state.data[index].fakKode;
-                        return ListTile(
-                          leading: data == selectedFakultas
-                              ? const Icon(Icons.check, color: kBlue)
-                              : null,
-                          onTap: () {
-                            setState(() {
-                              selectedFakultas = data;
-                              fakultasKode = fkKode; //will pass this value to somewhere
-                            });
-                            Navigator.pop(context);
-                          },
-                          title: Text(
-                            data,
-                            style: Styles.kInterMediumBodyOne.copyWith(
-                              color: kGrey900,
+                    Divider(
+                      color: kLightGrey300.withOpacity(30 / 100),
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: state.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          String data = state.data[index].fakultas;
+                          String fkKode = state.data[index].fakKode;
+                          return ListTile(
+                            leading: data == selectedFakultas
+                                ? const Icon(Icons.check, color: kBlue)
+                                : null,
+                            onTap: () {
+                              setState(() {
+                                selectedFakultas = data;
+                                fakultasKode = fkKode;
+                              });
+                              Navigator.pop(context);
+                            },
+                            title: Text(
+                              data,
+                              style: Styles.kInterMediumBodyOne.copyWith(
+                                color: kGrey900,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Divider(
-                            color: kLightGrey300.withOpacity(30 / 100),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Divider(
+                              color: kLightGrey300.withOpacity(30 / 100),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }
-            return const SizedBox();
-          },
+                  ],
+                );
+              }
+              return const SizedBox();
+            },
+          ),
         );
       },
       backgroundColor: kWhite,

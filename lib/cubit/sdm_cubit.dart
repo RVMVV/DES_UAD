@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../data/datasources/data_sources.dart';
 import '../data/models/persebaran_berdasarkan.dart';
+import '../data/models/sdm/sdm_dosen_jabfung_model.dart';
 import '../data/models/sdm/sdm_gender_dosen_model.dart';
 import '../data/models/sdm/sdm_gender_tendik_model.dart';
 import '../data/models/sdm/sdm_jumlah_dosen_model.dart';
@@ -75,17 +76,27 @@ class SdmCubit extends Cubit<SdmState> {
   }
 
   Future<void> getJabfungTendik() async {
-    final List<DataJabatanFungsionalTendik> dataJabfungTendik = await dataSource.getJabatanFungsionalTendik();
+    final List<DataJabatanFungsionalTendik> dataJabfungTendik =
+        await dataSource.getJabatanFungsionalTendik();
     emit(JabfungTendikLoaded(dataJabfungTendik));
   }
 
   Future<void> getPersebaranProdiDosen() async {
-    final List<DataPersebaranProdiDosen> dataPersebaranProdiDosen = await dataSource.getPersebaranProdiDosen();
+    final List<DataPersebaranProdiDosen> dataPersebaranProdiDosen =
+        await dataSource.getPersebaranProdiDosen();
     emit(PersebaranProdiDosenLoaded(dataPersebaranProdiDosen));
   }
 
-  Future<void> getPersebaranDosenProdiBerdasarkanFakultas(String fakKode) async {
-    final result = await dataSource.getPersebaranDosenProdiBerdasarkanFakultas(fakKode);
+  Future<void> getPersebaranDosenProdiBerdasarkanFakultas(
+      String fakKode) async {
+    final result =
+        await dataSource.getPersebaranDosenProdiBerdasarkanFakultas(fakKode);
     emit(PersebaranDosenProdiFakultasLoaded(result));
+  }
+
+  Future<void> getDosenJabfung(String jabfung) async {
+    emit(DosenJabfungLoading());
+    final result = await dataSource.getDosenJabfung(jabfung);
+    emit(DosenJabfungLoaded(result));
   }
 }

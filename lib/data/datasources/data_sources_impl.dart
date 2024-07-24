@@ -22,6 +22,7 @@ import '../models/mutu/prodi_akreditasi.dart';
 import '../models/mutu/sertifikasi_internasional.dart';
 import '../models/mutu/sertifikasi_prodi_model.dart';
 import '../models/prestasi/prestasi_mahasiswa_model.dart';
+import '../models/sdm/sdm_dosen_jabfung_model.dart';
 import '../models/sdm/sdm_gender_dosen_model.dart';
 import '../models/sdm/sdm_gender_tendik_model.dart';
 import '../models/sdm/sdm_jabatan_fung_dosen_model.dart';
@@ -694,11 +695,13 @@ class DataSourceImpl implements DataSource {
       throw ServerException();
     }
   }
-  
+
   @override
-  Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(String fakKode) async {
+  Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(
+      String fakKode) async {
     try {
-      final Response response = await get(Uri.parse('$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
+      final Response response = await get(Uri.parse(
+          '$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
       if (response.statusCode == 200) {
         // print(response.body);
         final decoded = jsonDecode(response.body);
@@ -712,4 +715,18 @@ class DataSourceImpl implements DataSource {
     }
   }
 
+  @override
+  Future<DosenJabfung> getDosenJabfung(String jabf) async {
+    try {
+      final response = await get(Uri.parse(
+          '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
+      if (response.statusCode == 200) {
+        print(response.body);
+        return dosenJabfungFromJson(response.body);
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
 }
