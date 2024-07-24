@@ -1,6 +1,6 @@
 # des_uad
 
-A new Flutter project.
+DES - Digital Executive System, is a system that is being developed to meet the needs of the rector of Ahmad Dahlan University in monitoring the movement of information.
 
 ## Getting Started
 
