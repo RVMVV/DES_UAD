@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
-import '../../../core/constant_finals.dart';
+
 import '../../../cubit/akademik_cubit.dart';
-import '../../../cubit/mutu_cubit.dart';
-import '../../../cubit/sdm_pre_cubit.dart';
-import '../../../data/data_chart.dart';
 import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../../../data/models/persebaran_berdasarkan.dart';
-import '../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
 class MhsLokalProdiChart extends StatefulWidget {

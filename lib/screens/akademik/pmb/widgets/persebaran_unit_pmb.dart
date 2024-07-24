@@ -3,17 +3,11 @@ import 'package:des_uad/cubit/sdm_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
+
 import '../../../../core/constant_finals.dart';
-import '../../../../cubit/pmb_cubit.dart';
 import '../../../../cubit/mutu_cubit.dart';
 import '../../../../cubit/sdm_pre_cubit.dart';
-import '../../../../data/data_chart.dart';
-import '../../../../data/models/persebaran_berdasarkan.dart';
-import '../../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../../widgets/base_container.dart';
-import '../../../widgets/chart/horizontal_bar_chart.dart';
 import 'persebaran_fakultas_chart.dart';
 import 'persebaran_prodi_chart.dart';
 import 'persebaran_provinsi_chart.dart';
