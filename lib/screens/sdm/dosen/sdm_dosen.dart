@@ -14,6 +14,7 @@ import '../../widgets/card_ratio.dart';
 import '../widgets/card_bar_chart.dart';
 import '../widgets/card_persebaran.dart';
 import '../widgets/card_total_gender.dart';
+import '../widgets/dosen_jabfung_chart.dart';
 
 class SDMDosen extends StatelessWidget {
   const SDMDosen({
@@ -142,7 +143,8 @@ class SDMDosen extends StatelessWidget {
                                 r: 52, g: 144, b: 252, a: 32),
                           )
                         ];
-                        return HorizontalBarLabelChart(dataJabfungDosen);
+                        // return HorizontalBarLabelChart(dataJabfungDosen);
+                        return DosenJabfungChart(dataJabfungDosen);
                       }
                       return const Center(child: CircularProgressIndicator());
                     },

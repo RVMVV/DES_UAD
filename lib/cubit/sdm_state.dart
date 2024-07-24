@@ -23,7 +23,7 @@ final class SdmProdiDosen extends SdmState {}
 
 final class SdmFakultasDosen extends SdmState {}
 
-final class SdmPersebaranDosen extends SdmState{}
+final class SdmPersebaranDosen extends SdmState {}
 
 final class SdmJumlahDosenLoaded extends SdmJumlah {
   final DataJumlahDosen data;
@@ -83,9 +83,14 @@ final class PersebaranProdiDosenLoaded extends SdmProdiDosen {
   PersebaranProdiDosenLoaded(this.data);
 }
 
-final class PersebaranDosenProdiFakultasLoaded extends SdmPersebaranDosen{
+final class PersebaranDosenProdiFakultasLoaded extends SdmPersebaranDosen {
   final List<PersebaranBerdasarkan> datas;
   PersebaranDosenProdiFakultasLoaded(this.datas);
 }
 
+final class DosenJabfungLoading extends SdmState {}
 
+final class DosenJabfungLoaded extends SdmState {
+  final DosenJabfung datas;
+  DosenJabfungLoaded(this.datas);
+}
