@@ -1,15 +1,9 @@
-import 'package:des_uad/cubit/pmb_cubit.dart';
-import 'package:des_uad/cubit/sdm_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
+
 import '../../../../core/constant_finals.dart';
-import '../../../../cubit/pmb_cubit.dart';
-import '../../../../cubit/mutu_cubit.dart';
-import '../../../../cubit/sdm_pre_cubit.dart';
-import '../../../../data/data_chart.dart';
+import '../../../cubit/pmb_cubit.dart';
 import '../../widgets/base_container.dart';
 import 'mahasiswa_lokal_fakultas_chart.dart';
 import 'mahasiswa_lokal_prodi_chart.dart';

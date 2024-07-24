@@ -1,17 +1,13 @@
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constant_finals.dart';
 import '../../../cubit/akademik_cubit.dart';
-import '../../../data/models/akademik/keberhasilan_studi/perbandingan_keberhasilan_studi.dart';
 import '../../widgets/base_container.dart';
 import '../../widgets/big_card_title.dart';
 import '../../widgets/chart/chart_legend.dart';
 import '../../widgets/chart/combo_chart.dart';
-import '../../widgets/chart/grouped_bar_chart.dart';
 import '../../widgets/chart/pie_chart_with_details.dart';
 import '../widgets/app_bar_sub_menu_akademik.dart';
 import '../widgets/body_sub_menu_akademik.dart';

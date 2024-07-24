@@ -3,17 +3,11 @@ import 'package:des_uad/cubit/sdm_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
+
 import '../../../../core/constant_finals.dart';
-import '../../../../cubit/pmb_cubit.dart';
 import '../../../../cubit/mutu_cubit.dart';
 import '../../../../cubit/sdm_pre_cubit.dart';
-import '../../../../data/data_chart.dart';
-import '../../../../data/models/persebaran_berdasarkan.dart';
-import '../../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import '../../../widgets/base_container.dart';
-import '../../../widgets/chart/horizontal_bar_chart.dart';
 import 'persebaran_fakultas_chart.dart';
 import 'persebaran_prodi_chart.dart';
 import 'persebaran_provinsi_chart.dart';
@@ -234,76 +228,69 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   void showFakultasPersebaran() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        final pmbCubit = context.read<PmbCubit>();
-        return BlocBuilder<PmbCubit, PmbState>(
-          bloc: pmbCubit..getRefFakultas(),
-          builder: (context, state) {
-            if (state is RefFakultasLoaded) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 32, horizontal: 16),
-                    child: Text(
-                      'Pilih Fakultas',
-                      style: Styles.kPublicSemiBoldHeadingFour
-                          .copyWith(color: kGrey900),
+        return Container(
+          // width: MediaQuery.of(context).size.width * 0.8,
+          width: double.infinity,
+          child: BlocBuilder<PmbCubit, PmbState>(
+            builder: (context, state) {
+              if (state is RefFakultasLoaded) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 32, horizontal: 16),
+                      child: Text(
+                        'Pilih Fakultas',
+                        style: Styles.kPublicSemiBoldHeadingFour
+                            .copyWith(color: kGrey900),
+                      ),
                     ),
-                  ),
-                  Divider(
-                    color: kLightGrey300.withOpacity(30 / 100),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: state.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String data = state.data[index].fakultas;
-                        String idFak = state.data[index].fakKode;
-
-                        return ListTile(
-                          leading: data == selectedFakultas
-                              ? const Icon(Icons.check, color: kBlue)
-                              : null,
-                          onTap: () {
-                            setState(() {
-                              showProdi = false;
-                              selectedFakultas = data;
-                              selectedFakKode = idFak;
-                            });
-
-                            Future.delayed(const Duration(milliseconds: 500),
-                                () {
+                    Divider(
+                      color: kLightGrey300.withOpacity(30 / 100),
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: state.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          String data = state.data[index].fakultas;
+                          String fkKode = state.data[index].fakKode;
+                          return ListTile(
+                            leading: data == selectedFakultas
+                                ? const Icon(Icons.check, color: kBlue)
+                                : null,
+                            onTap: () {
                               setState(() {
-                                showProdi = true;
+                                selectedFakultas = data;
+                                selectedFakKode = fkKode;
                               });
-                            });
-
-                            Navigator.pop(context);
-                          },
-                          title: Text(
-                            data,
-                            style: Styles.kInterMediumBodyOne.copyWith(
-                              color: kGrey900,
+                              Navigator.pop(context);
+                            },
+                            title: Text(
+                              data,
+                              style: Styles.kInterMediumBodyOne.copyWith(
+                                color: kGrey900,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Divider(
-                            color: kLightGrey300.withOpacity(30 / 100),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Divider(
+                              color: kLightGrey300.withOpacity(30 / 100),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }
-            return const SizedBox();
-          },
+                  ],
+                );
+              }
+              return const SizedBox();
+            },
+          ),
         );
       },
       backgroundColor: kWhite,

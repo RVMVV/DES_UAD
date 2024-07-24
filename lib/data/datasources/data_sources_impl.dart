@@ -721,6 +721,7 @@ class DataSourceImpl implements DataSource {
       final response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
       if (response.statusCode == 200) {
+        print(response.body);
         return dosenJabfungFromJson(response.body);
       }
       throw ServerException();

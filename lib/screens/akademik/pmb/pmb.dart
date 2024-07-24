@@ -1,25 +1,15 @@
-import 'package:community_charts_flutter/community_charts_flutter.dart'
-    as charts;
-import 'package:des_uad/data/models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
-import 'package:des_uad/data/models/akademik/penerimaan_mahasiswa_baru/persebaran_provinsi.dart';
-import 'package:des_uad/data/models/persebaran_berdasarkan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constant_finals.dart';
 import '../../../cubit/akademik_cubit.dart';
-import '../../widgets/active_button.dart';
 import '../../widgets/base_container.dart';
 import '../../widgets/big_card_title.dart';
-import '../../widgets/bottom_modal.dart';
 import '../../widgets/card_total_registration.dart';
-import '../../widgets/chart/horizontal_bar_chart.dart';
 import '../../widgets/chart/line_chart.dart';
 import '../../widgets/chart/line_chart_checkbox.dart';
-import '../../widgets/dropdown_menu_box.dart';
 import '../widgets/app_bar_sub_menu_akademik.dart';
 import '../widgets/body_sub_menu_akademik.dart';
-import '../widgets/bottom_modal_content.dart';
 import 'widgets/item_data_pmb.dart';
 import 'widgets/persebaran_unit_pmb.dart';
 import 'widgets/pmb_non_reg.dart';
