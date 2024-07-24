@@ -55,8 +55,6 @@ class _DosenJabfungChartState extends State<DosenJabfungChart> {
   }
 
   void _openDetailPage(String jabfungKode, String jabfungNama) {
-    SdmCubit cubit = context.read<SdmCubit>();
-    cubit..getJabfungDosen();
     Navigator.push(
         context,
         MaterialPageRoute(

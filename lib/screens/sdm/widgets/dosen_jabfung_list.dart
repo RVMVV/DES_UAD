@@ -38,8 +38,6 @@ class _JabfungDosenState extends State<JabfungDosen> {
       ),
       body: Container(
         color: Colors.white,
-        height: MediaQuery.sizeOf(context).height,
-        width: MediaQuery.sizeOf(context).width,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: BlocBuilder<SdmCubit, SdmState>(
@@ -48,7 +46,9 @@ class _JabfungDosenState extends State<JabfungDosen> {
               if (state is DosenJabfungLoaded) {
                 List<Dosen> dosens = state.datas.data;
                 return Container(
-                  height: MediaQuery.of(context).copyWith().size.height * 0.6,
+                  height: MediaQuery.sizeOf(context).height,
+                  width: MediaQuery.sizeOf(context).width,
+                  color: Colors.white,
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: 5,
@@ -64,7 +64,11 @@ class _JabfungDosenState extends State<JabfungDosen> {
                       }),
                 );
               }
-              return Container(height: 20, width: 20);
+              return Container(
+                height: MediaQuery.sizeOf(context).height,
+                width: MediaQuery.sizeOf(context).width,
+                child: Center(child: CircularProgressIndicator()),
+              );
             },
           ),
         ),
