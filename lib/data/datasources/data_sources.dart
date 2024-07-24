@@ -1,5 +1,3 @@
-import 'package:des_uad/data/models/persebaran_berdasarkan.dart';
-
 import '../models/akademik/keberhasilan_studi/perbandingan_keberhasilan_studi.dart';
 import '../models/akademik/keberhasilan_studi/studi_mahasiswa.dart';
 import '../models/akademik/kelulusan/perbandingan_kelulusan.dart';
@@ -86,7 +84,9 @@ abstract interface class DataSource {
   //SDM - Persebaran Prodi Dosen
   Future<List<DataPersebaranProdiDosen>> getPersebaranProdiDosen();
   //SDM - Persebaran Fakultas Dosen
-  Future<List<PersebaranFakultas>> getPersebaranFakultasDosen(); 
+  Future<List<PersebaranFakultas>> getPersebaranFakultasDosen();
+  //SDM - Persebaran Dosen Prodi Berdasarkan Fakultas
+  Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(String fak);
 
   // Mutu - Akreditasi
   Future<String> getTotalProdi();

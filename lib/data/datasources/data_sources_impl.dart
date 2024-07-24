@@ -694,4 +694,22 @@ class DataSourceImpl implements DataSource {
       throw ServerException();
     }
   }
+  
+  @override
+  Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(String fakKode) async {
+    try {
+      final Response response = await get(Uri.parse('$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
+      if (response.statusCode == 200) {
+        // print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => PersebaranProdi.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
 }

@@ -6,17 +6,19 @@ import 'package:community_charts_flutter/community_charts_flutter.dart'
 
 import '../../../core/constant_finals.dart';
 import '../../../cubit/sdm_cubit.dart';
-import '../../../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
+import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
+import '../../../data/models/persebaran_berdasarkan.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
 class SdmPersebaranProdiDosen extends StatelessWidget {
   const SdmPersebaranProdiDosen({
     super.key,
     required this.selectedFakultas,
+    required this.fakKode,
   });
 
   final String selectedFakultas;
-
+  final String fakKode;
   @override
   Widget build(BuildContext context) {
     final SdmCubit cubit = context.read<SdmCubit>();
@@ -49,20 +51,19 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
         SizedBox(
           height: 300,
           child: BlocBuilder<SdmCubit, SdmState>(
-            bloc: cubit..getPersebaranProdiDosen(),
-            buildWhen: (previous, current) => current is SdmProdiDosen,
+            bloc: cubit..getPersebaranDosenProdiBerdasarkanFakultas(fakKode),
+            buildWhen: (previous, current) => current is SdmPersebaranDosen,
             builder: (context, state) {
-              print(state);
-              if (state is PersebaranProdiDosenLoaded) {
+              if (state is PersebaranDosenProdiFakultasLoaded) {
                 final dataPersebaranProdiDosen = [
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    data: state.data,
-                    domainFn: (datum, index) => datum.prodi,
-                    measureFn: (datum, index) =>
-                        double.parse(datum.persentase.replaceAll('%', '')),
+                  charts.Series<PersebaranBerdasarkan, String>(
+                    id: 'PersebaranBerdasarkanProdi',
+                    data: state.datas,
+                    domainFn: (datum, index) =>
+                        (datum as PersebaranProdi).prodi,
+                    measureFn: (datum, index) => datum.getPercent,
                     labelAccessorFn: (datum, index) =>
-                        '${datum.prodi}:   ${datum.persentase} ● ${datum.total}',
+                        '${(datum as PersebaranProdi).prodi} ${datum.getPercent}% ● ${datum.total}',
                     insideLabelStyleAccessorFn: (datum, index) =>
                         const charts.TextStyleSpec(
                       color: charts.MaterialPalette.white,
@@ -74,13 +75,12 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
                       fontWeight: 'bold',
                     ),
                   ),
-                  charts.Series<DataPersebaranProdiDosen, String>(
-                    id: 'AI',
-                    domainFn: (datum, index) => datum.prodi,
-                    measureFn: (datum, index) =>
-                        100 -
-                        double.parse(datum.persentase.replaceAll('%', '')),
-                    data: state.data,
+                  charts.Series<PersebaranBerdasarkan, String>(
+                    id: 'PersebaranBerdasarkan',
+                    domainFn: (datum, index) =>
+                        (datum as PersebaranProdi).prodi,
+                    measureFn: (datum, index) => 100 - datum.getPercent,
+                    data: state.datas,
                     labelAccessorFn: (datum, index) => '',
                     colorFn: (datum, index) =>
                         const charts.Color(r: 52, g: 144, b: 252, a: 32),

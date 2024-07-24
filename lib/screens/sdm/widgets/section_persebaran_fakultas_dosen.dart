@@ -25,15 +25,12 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
             buildWhen: (previous, current) => current is SdmPersebaranFakultas,
             builder: (context, state) {
               if (state is PersebaranFakultasDosenLoaded) {
-                for (var i = 0; i < state.datas.length; i++) {
-                  print((state.datas[i] as PersebaranFakultas).fakultas);
-                }
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan1',
                     data: state.datas,
                     domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas + '${index}' ,
+                        (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => datum.getPercent,
                     labelAccessorFn: (datum, index) =>
                         '${(datum as PersebaranFakultas).fakultas} ${datum.getPercent}% ● ${datum.total}',
@@ -51,7 +48,7 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan2',
                     domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas  + '${index}' ,
+                        (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => 100 - datum.getPercent,
                     data: state.datas,
                     labelAccessorFn: (datum, index) => '',
