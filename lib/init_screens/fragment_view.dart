@@ -64,7 +64,7 @@ class _FragmentPageState extends State<FragmentPage> {
       ),
       NavigationDestination(
         icon: SvgPicture.asset(icMedalOutline),
-        label: 'Ranking',
+        label: 'Prestasi',
         selectedIcon: SvgPicture.asset(
           icMedalOutline,
           colorFilter: const ColorFilter.mode(kBlue, BlendMode.srcIn),

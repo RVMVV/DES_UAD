@@ -27,11 +27,14 @@ class _JabfungDosenState extends State<JabfungDosen> {
     final sdmCubits = context.read<SdmCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(jabfungNama,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold)),
+        title: Text(
+          jabfungNama,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: false,
         titleSpacing: 15.0,
         backgroundColor: Colors.white,
@@ -57,17 +60,20 @@ class _JabfungDosenState extends State<JabfungDosen> {
                         var dtDosen = dosens[index];
                         int no = index + 1;
                         return DosenJabfungItem(
-                            no: no.toString(),
-                            prodi: dtDosen.prodi,
-                            fakultas: dtDosen.fakultas,
-                            dosen: dtDosen.dosen);
+                          no: no.toString(),
+                          prodi: dtDosen.prodi,
+                          fakultas: dtDosen.fakultas,
+                          dosen: dtDosen.dosen,
+                        );
                       }),
                 );
               }
               return Container(
                 height: MediaQuery.sizeOf(context).height,
                 width: MediaQuery.sizeOf(context).width,
-                child: Center(child: CircularProgressIndicator()),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
             },
           ),

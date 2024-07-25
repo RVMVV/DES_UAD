@@ -546,7 +546,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(
           Uri.parse('$url${endpoint['sdm']['sdm_dosen']['fungsional']}'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataJabatanFungsionalDosen.fromJson(e)).toList();
@@ -564,7 +563,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(
           Uri.parse('$url${endpoint['sdm']['sdm_tendik']['fungsional']}'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data
@@ -601,7 +599,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(
           Uri.parse('$url${endpoint['mutu']['akreditasi']['sertifikasi']}'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataSertifikasiProdi.fromJson(e)).toList();
@@ -619,7 +616,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(
           Uri.parse('$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataPersebaranProdiDosen.fromJson(e)).toList();
@@ -637,7 +633,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
       if (response.statusCode == 200) {
-        print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
@@ -684,7 +679,6 @@ class DataSourceImpl implements DataSource {
       final Response response =
           await get(Uri.parse('$url${endpoint['general']['ref_fakultas']}'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => RefFak.fromJson(e)).toList();
@@ -703,7 +697,6 @@ class DataSourceImpl implements DataSource {
       final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
       if (response.statusCode == 200) {
-        // print(response.body);
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranProdi.fromJson(e)).toList();

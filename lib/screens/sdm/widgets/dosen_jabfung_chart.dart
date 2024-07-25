@@ -1,12 +1,8 @@
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/constant_finals.dart';
-import '../../../cubit/sdm_cubit.dart';
 import '../../../data/data_chart.dart';
-import '../../widgets/base_container.dart';
 import 'dosen_jabfung_list.dart';
 
 class DosenJabfungChart extends StatefulWidget {
@@ -49,19 +45,25 @@ class _DosenJabfungChartState extends State<DosenJabfungChart> {
   _onSelectionChanged(charts.SelectionModel model) {
     final selectedDatum = model.selectedDatum;
     if (selectedDatum.isNotEmpty) {
-      _openDetailPage(selectedDatum.first.datum.jabfungKode,
-          selectedDatum.first.datum.jabfungTendik);
+      _openDetailPage(
+        selectedDatum.first.datum.jabfungKode,
+        selectedDatum.first.datum.jabfungTendik,
+      );
+      print('Jabfung Kode : ${selectedDatum.first.datum.jabfungKode}');
+      print('Jabfung Nama : ${selectedDatum.first.datum.jabfungTendik}');
     }
   }
 
   void _openDetailPage(String jabfungKode, String jabfungNama) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => JabfungDosen(
-                  jabfungkode: jabfungKode,
-                  jabfungNama: jabfungNama,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => JabfungDosen(
+          jabfungkode: jabfungKode,
+          jabfungNama: jabfungNama,
+        ),
+      ),
+    );
   }
 
   @override
