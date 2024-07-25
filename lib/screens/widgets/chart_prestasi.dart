@@ -24,6 +24,7 @@ class _PrestasiChartState extends State<PrestasiChart> {
     return BlocBuilder<PrestasiCubit, PrestasiState>(
       bloc: prestasiCubit..getPrestasiMahasiswa(),
       builder: (context, state) {
+        print(state);
         if (state is PrestasiMahasiswaLoaded) {
           listPrestasi.clear();
           lw.clear();

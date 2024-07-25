@@ -32,7 +32,9 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
             children: [
               Text(
                 widget.no + '. ' + widget.dosen,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               InkWell(
                 onTap: () {
@@ -41,12 +43,12 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
                   });
                 },
                 child: isShow
-                    ? Icon(
+                    ? const Icon(
                         Icons.keyboard_arrow_up,
                         color: Colors.black,
                         size: 30.0,
                       )
-                    : Icon(
+                    : const Icon(
                         Icons.keyboard_arrow_down,
                         color: Colors.black,
                         size: 30.0,
@@ -78,7 +80,9 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
                         ),
                         Text(
                           widget.fakultas,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -102,7 +106,9 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
                         ),
                         Text(
                           widget.prodi,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
