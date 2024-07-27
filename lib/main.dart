@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: theme,
         routes: Routes.routes,
-        initialRoute: homeRoute,
+        initialRoute: splashRoute,
       ),
     );
   }
