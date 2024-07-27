@@ -3,8 +3,6 @@ import 'package:des_uad/core/constant_finals.dart';
 import 'package:des_uad/init_screens/fragment_view.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/home/home.dart';
-
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
