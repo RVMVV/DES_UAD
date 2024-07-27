@@ -1,3 +1,4 @@
+import 'package:des_uad/splash.dart';
 import 'package:flutter/material.dart';
 
 import '../init_screens/fragment_view.dart';
@@ -15,6 +16,7 @@ import 'constant_finals.dart';
 
 class Routes {
   static Map<String, Widget Function(BuildContext context)> routes = {
+    splashRoute: (context) => const Splash(),
     homeRoute: (context) => const FragmentPage(),
     akademikRoute: (context) => const AkademikPage(),
     pmbRoute: (context) => const PenerimaanMahasiswaBaruPage(),

@@ -76,6 +76,7 @@ const Gap kGap80 = Gap(80);
 const Gap kGap70 = Gap(70);
 
 // Route
+const String splashRoute = 'splash/';
 const String homeRoute = 'home/';
 const String akademikRoute = 'akademik/';
 const String pmbRoute = '${akademikRoute}pmb/';
@@ -93,6 +94,7 @@ const String imgLoc = 'assets/images/';
 const String imgScopus = '${imgLoc}scopus.png';
 const String imgGaruda = '${imgLoc}garuda.png';
 const String imgScholar = '${imgLoc}scholar.png';
+const String imgUadLogo = '${imgLoc}uad_logo.png';
 
 // Icon
 const String icLoc = 'assets/svgs/';
