@@ -14,6 +14,7 @@ import 'widgets/item_data_pmb.dart';
 import 'widgets/persebaran_unit_pmb.dart';
 import 'widgets/pmb_non_reg.dart';
 import 'widgets/pmb_reg.dart';
+import 'widgets/pmb_tren_maba_chart.dart';
 
 class PenerimaanMahasiswaBaruPage extends StatelessWidget {
   const PenerimaanMahasiswaBaruPage({super.key});
@@ -127,31 +128,47 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
               BigCardTitle(
                 title: 'Tren Mahasiswa Baru',
               ),
-              LineChartCustomized(),
-              Row(
-                children: [
-                  LineChartCheckBox(
-                    activeColor: kLightPurple,
-                    year: '2021',
-                    index: 0,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kPurple,
-                    year: '2022',
-                    index: 1,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kBlue,
-                    year: '2023',
-                    index: 2,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kGreen,
-                    year: '2024',
-                    index: 3,
-                  ),
-                ],
-              ),
+              kGap16,
+              PmbTrenMabaChart(),
+              // Container(
+              //   child: ,
+              // )
+              // Container(
+              //   child: WebView(
+              //     initialUrl:
+              //         'https://museum.uad.ac.id/index.php/auth/Auth/testtt/' +
+              //             setting.keyApi,
+              //     javascriptMode: JavascriptMode.unrestricted,
+              //     onWebResourceError: (WebResourceError error) {
+              //       Text('');
+              //     },
+              //   ),
+              // )
+              // LineChartCustomized(),
+              // Row(
+              //   children: [
+              //     LineChartCheckBox(
+              //       activeColor: kLightPurple,
+              //       year: '2021',
+              //       index: 0,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kPurple,
+              //       year: '2022',
+              //       index: 1,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kBlue,
+              //       year: '2023',
+              //       index: 2,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kGreen,
+              //       year: '2024',
+              //       index: 3,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
           kGap16,

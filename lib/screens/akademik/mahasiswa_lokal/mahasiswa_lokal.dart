@@ -11,6 +11,7 @@ import '../../widgets/rounded_icon_container.dart';
 import '../widgets/app_bar_sub_menu_akademik.dart';
 import '../widgets/body_sub_menu_akademik.dart';
 import 'mahasiswa_lokal_chart.dart';
+import 'mahasiswa_lokal_webv.dart';
 
 class MahasiswaLokalPage extends StatelessWidget {
   const MahasiswaLokalPage({super.key});
@@ -69,31 +70,35 @@ class MahasiswaLokalPage extends StatelessWidget {
               BigCardTitle(
                 title: 'Tren Mahasiswa Lokal',
               ),
-              LineChartCustomized(),
-              Row(
-                children: [
-                  LineChartCheckBox(
-                    activeColor: kLightPurple,
-                    year: '2021',
-                    index: 0,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kPurple,
-                    year: '2022',
-                    index: 1,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kBlue,
-                    year: '2023',
-                    index: 2,
-                  ),
-                  LineChartCheckBox(
-                    activeColor: kGreen,
-                    year: '2024',
-                    index: 3,
-                  ),
-                ],
-              ),
+
+              kGap16,
+              MahasiswaLokalWebv()
+
+              // LineChartCustomized(),
+              // Row(
+              //   children: [
+              //     LineChartCheckBox(
+              //       activeColor: kLightPurple,
+              //       year: '2021',
+              //       index: 0,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kPurple,
+              //       year: '2022',
+              //       index: 1,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kBlue,
+              //       year: '2023',
+              //       index: 2,
+              //     ),
+              //     LineChartCheckBox(
+              //       activeColor: kGreen,
+              //       year: '2024',
+              //       index: 3,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
           kGap16,
