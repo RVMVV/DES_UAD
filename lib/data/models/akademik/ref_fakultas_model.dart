@@ -47,7 +47,7 @@ class RefFak {
   });
 
   factory RefFak.fromJson(Map<String, dynamic> json) => RefFak(
-        fakultas: json["fakultas"],
+        fakultas: json["nama"],
         fakKode: json["fak_kode"],
       );
 
