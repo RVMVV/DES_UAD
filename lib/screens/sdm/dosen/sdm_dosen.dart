@@ -12,7 +12,7 @@ import '../../widgets/base_container.dart';
 import '../../widgets/big_card_title.dart';
 import '../../widgets/card_ratio.dart';
 import '../widgets/card_bar_chart.dart';
-import '../widgets/card_persebaran.dart';
+import '../widgets/card_persebaran_dosen.dart';
 import '../widgets/card_total_gender.dart';
 import '../widgets/dosen_jabfung_chart.dart';
 
@@ -153,7 +153,7 @@ class SDMDosen extends StatelessWidget {
               ],
             ),
             kGap16,
-            Persebaran(
+            PersebaranDosen(
               title: 'Persebaran Dosen',
             ),
             kGap16,

@@ -27,6 +27,7 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'PMB',
         ),
+        // height: MediaQuery.sizeOf(context).height,
         children: [
           const CardTotalRegistration(),
           kGap16,
