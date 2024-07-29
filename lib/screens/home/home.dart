@@ -44,9 +44,12 @@ class HomeScreen extends StatelessWidget {
                       .copyWith(color: kGrey900),
                 ),
                 kGap20,
-                const CardTotalRegistration(),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, pmbRoute),
+                  child: const CardTotalRegistration(),
+                ),
                 kGap16,
-                CardStudentBody(),
+                const CardStudentBody(),
                 kGap16,
                 BlocBuilder<SdmCubit, SdmState>(
                   bloc: sdmCubit..getJumlahDosenTendik(),
