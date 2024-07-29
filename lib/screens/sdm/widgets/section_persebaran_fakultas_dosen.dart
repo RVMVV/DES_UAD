@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
@@ -16,7 +14,7 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
   });
 
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final SdmPreCubit cubit = context.read<SdmPreCubit>();
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -59,9 +57,8 @@ Widget build(BuildContext context) {
                         const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
-
                 return SizedBox(
-                  height: state.datas.length * 50.0, // Sesuaikan tinggi per item
+                  height: state.datas.length * 60.0,
                   child: HorizontalBarLabelChart(dataChart),
                 );
               }
