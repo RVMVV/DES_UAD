@@ -17,9 +17,10 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
   Widget build(BuildContext context) {
     final SdmPreCubit cubit = context.read<SdmPreCubit>();
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 300,
+        Flexible(
+          fit: FlexFit.loose,
           child: BlocBuilder<SdmPreCubit, SdmPreState>(
             bloc: cubit..getPersebaranFakultasDosen(),
             buildWhen: (previous, current) => current is SdmPersebaranFakultas,
@@ -56,13 +57,15 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
                         const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
-
-                return HorizontalBarLabelChart(dataChart);
+                return SizedBox(
+                  height: state.datas.length * 60.0,
+                  child: HorizontalBarLabelChart(dataChart),
+                );
               }
               return const Center(child: CircularProgressIndicator());
             },
           ),
-        )
+        ),
       ],
     );
   }

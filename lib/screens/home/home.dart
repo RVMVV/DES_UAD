@@ -12,19 +12,37 @@ import '../widgets/card_ratio.dart';
 import '../widgets/card_student_body.dart';
 import '../widgets/card_total_registration.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late SdmCubit sdmCubit;
+  late HomeCubit homeCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    sdmCubit = context.read<SdmCubit>();
+    homeCubit = context.read<HomeCubit>();
+    _loadData();
+  }
+
+  void _loadData() {
+    homeCubit.getStudentBody();
+    sdmCubit.getJumlahDosenTendik();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final SdmCubit sdmCubit = context.read<SdmCubit>();
-    final HomeCubit homeCubit = context.read<HomeCubit>();
     return Scaffold(
       backgroundColor: kBackground,
       body: RefreshIndicator(
         onRefresh: () async {
-          homeCubit.getStudentBody();
-          sdmCubit.getJumlahDosenTendik();
+          _loadData();
         },
         child: SingleChildScrollView(
           child: Padding(
@@ -44,12 +62,18 @@ class HomeScreen extends StatelessWidget {
                       .copyWith(color: kGrey900),
                 ),
                 kGap20,
-                const CardTotalRegistration(),
+                InkWell(
+                  onTap: () => Navigator.pushNamed(context, pmbRoute).then((_) {
+                    // Load data again when returning to HomeScreen
+                    _loadData();
+                  }),
+                  child: const CardTotalRegistration(),
+                ),
                 kGap16,
-                CardStudentBody(),
+                const CardStudentBody(),
                 kGap16,
                 BlocBuilder<SdmCubit, SdmState>(
-                  bloc: sdmCubit..getJumlahDosenTendik(),
+                  bloc: sdmCubit,
                   builder: (context, state) {
                     if (state is SdmJumlahDosenTendik) {
                       return Column(
@@ -59,6 +83,7 @@ class HomeScreen extends StatelessWidget {
                             total: state.dataDosen.data.totalDosen,
                             ratio: state.dataDosen.data.rasioDosen,
                             svgIcon: icProfileTwoUser,
+                            seeAll: 'Lihat Semua',
                           ),
                           kGap16,
                           CardRatio(
@@ -66,6 +91,7 @@ class HomeScreen extends StatelessWidget {
                             total: state.dataTendik.data.totalTendik,
                             ratio: state.dataTendik.data.rasioTendik,
                             svgIcon: icBriefcase,
+                            seeAll: 'Lihat Semua',
                           ),
                         ],
                       );
@@ -78,8 +104,6 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-
-                //return kalo datanya gaada
                 kGap16,
                 const CardAkreditasiProdi(),
                 kGap16,
