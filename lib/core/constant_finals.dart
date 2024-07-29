@@ -59,6 +59,8 @@ final Map<String, dynamic> endpoint = {
       'gender': 'sdm_tendik_gender',
       'fungsional': 'sdm_tendik_fungsional',
       'pendidikan': 'sdm_tendik_pendidikan',
+      'persebaran_fakultas' : 'sdm_tendik_fakultas',
+      'persebaran_prodi' : 'sdm_tendik_prodi',
     }
   },
   'prestasi': {'mahasiswa': 'prestasi_tren_tiga_tahun'}

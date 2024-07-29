@@ -60,7 +60,6 @@ class CardStudentBody extends StatelessWidget {
           bloc: homeCubit..getStudentStatus(),
           buildWhen: (previous, current) => current is StudentStatusState,
           builder: (context, state) {
-            print(state);
             if (state is AkademikStudentStatusLoading) {
               return const Center();
             }
