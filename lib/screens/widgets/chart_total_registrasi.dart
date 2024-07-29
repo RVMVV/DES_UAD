@@ -151,7 +151,6 @@ class _ChartTotalRegistrasiState extends State<ChartTotalRegistrasi> {
                   showTitles: true,
                   interval: 1,
                   getTitlesWidget: (value, meta) {
-                    print(trens[value.toInt()].jam);
                     String a = trens[value.toInt()].jam;
                     return bottomTitleWidgets(
                       a,
