@@ -20,6 +20,7 @@ class PrestasiPage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
+            centerTitle: false,
             title: Text(
               'Prestasi',
               style:
