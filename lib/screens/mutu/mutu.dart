@@ -17,44 +17,51 @@ class MutuPage extends StatelessWidget {
 
     return Scaffold(
       body: NestedScrollView(
+        // headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        //   SliverAppBar(
+        //     title: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         const Text('Mutu'),
+        //         kGap20,
+        //         BaseContainer.activeButtonContainer(
+        //           child: BlocBuilder<MutuCubit, MutuState>(
+        //             builder: (context, state) => Row(
+        //               children: [
+        //                 Expanded(
+        //                   child: InkWell(
+        //                     onTap: mutuCubit.clickAppBarButton,
+        //                     child: ActiveButton(
+        //                       title: 'Akreditasi',
+        //                       isActive: mutuCubit.isAkreditasi,
+        //                     ),
+        //                   ),
+        //                 ),
+        //                 kGap8,
+        //                 Expanded(
+        //                   child: InkWell(
+        //                     onTap: () =>
+        //                         mutuCubit.clickAppBarButton(isActive: false),
+        //                     child: ActiveButton(
+        //                       title: 'Ranking',
+        //                       isActive: !mutuCubit.isAkreditasi,
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //     toolbarHeight: 120,
+        //   ),
+        // ],
+
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Mutu'),
-                kGap20,
-                BaseContainer.activeButtonContainer(
-                  child: BlocBuilder<MutuCubit, MutuState>(
-                    builder: (context, state) => Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: mutuCubit.clickAppBarButton,
-                            child: ActiveButton(
-                              title: 'Akreditasi',
-                              isActive: mutuCubit.isAkreditasi,
-                            ),
-                          ),
-                        ),
-                        kGap8,
-                        Expanded(
-                          child: InkWell(
-                            onTap: () =>
-                                mutuCubit.clickAppBarButton(isActive: false),
-                            child: ActiveButton(
-                              title: 'Ranking',
-                              isActive: !mutuCubit.isAkreditasi,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            toolbarHeight: 120,
+          const SliverAppBar(
+            centerTitle: false,
+            title: Text('Mutu'),
           ),
         ],
         body: Padding(

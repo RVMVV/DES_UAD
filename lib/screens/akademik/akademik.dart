@@ -13,6 +13,7 @@ class AkademikPage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           const SliverAppBar(
+            centerTitle: false,
             title: Text('Akademik'),
           ),
         ],
@@ -81,27 +82,27 @@ class AkademikPage extends StatelessWidget {
                     title: 'Perpustakaan',
                     route: perpustakaanRoute,
                   ),
-                  ItemAkademikMenu(
-                    asset: icSearchStatus,
-                    iconColor: Color(0xFF3490FC),
-                    side: 40,
-                    title: 'Publikasi',
-                    route: publikasiRoute,
-                  ),
-                  ItemAkademikMenu(
-                    asset: icClipboard,
-                    iconColor: Color(0xFF00A991),
-                    side: 40,
-                    title: 'Jurnal UAD',
-                    route: jurnalRoute,
-                  ),
-                  ItemAkademikMenu(
-                    asset: icNote,
-                    iconColor: Color(0xFFFFB444),
-                    side: 40,
-                    title: 'AIK',
-                    route: aikRoute,
-                  ),
+                  // ItemAkademikMenu(
+                  //   asset: icSearchStatus,
+                  //   iconColor: Color(0xFF3490FC),
+                  //   side: 40,
+                  //   title: 'Publikasi',
+                  //   route: publikasiRoute,
+                  // ),
+                  // ItemAkademikMenu(
+                  //   asset: icClipboard,
+                  //   iconColor: Color(0xFF00A991),
+                  //   side: 40,
+                  //   title: 'Jurnal UAD',
+                  //   route: jurnalRoute,
+                  // ),
+                  // ItemAkademikMenu(
+                  //   asset: icNote,
+                  //   iconColor: Color(0xFFFFB444),
+                  //   side: 40,
+                  //   title: 'AIK',
+                  //   route: aikRoute,
+                  // ),
                 ],
               ),
             ],

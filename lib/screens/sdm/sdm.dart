@@ -38,7 +38,7 @@ class _SumberDayaManusiaState extends State<SumberDayaManusia> {
           children: [
             Text(
               'Sumber Daya Manusia',
-              style: Styles.kPublicSemiBoldHeadingTwo.copyWith(color: kGrey900),
+              // style: Styles.kPublicSemiBoldHeadingTwo.copyWith(color: kGrey900),
             ),
             kGap16,
             Container(

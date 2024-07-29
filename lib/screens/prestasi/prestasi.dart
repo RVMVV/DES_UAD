@@ -54,49 +54,49 @@ class PrestasiPage extends StatelessWidget {
                 ],
               ),
               kGap24,
-              BaseContainer.styledBigCard(
-                children: [
-                  const BigCardTitle(title: 'Cakupan Prestasi'),
-                  kGap28,
-                  BaseContainer.activeButtonContainer(
-                    child: BlocBuilder<PrestasiCubit, PrestasiState>(
-                      builder: (context, state) {
-                        return Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () =>
-                                    prestasiCubit.clickCakupanPrestasiButton(),
-                                child: ActiveButton(
-                                  title: 'Nasional',
-                                  isActive: prestasiCubit.isNasional,
-                                ),
-                              ),
-                            ),
-                            kGap8,
-                            Expanded(
-                              child: InkWell(
-                                onTap: () =>
-                                    prestasiCubit.clickCakupanPrestasiButton(
-                                        isActive: false),
-                                child: ActiveButton(
-                                  title: 'Internasional',
-                                  isActive: !prestasiCubit.isNasional,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 300,
-                    child: HorizontalBarLabelChart(dataAkreditasi),
-                  ),
-                ],
-              ),
-              kGap80,
+              // BaseContainer.styledBigCard(
+              //   children: [
+              //     const BigCardTitle(title: 'Cakupan Prestasi'),
+              //     kGap28,
+              //     BaseContainer.activeButtonContainer(
+              //       child: BlocBuilder<PrestasiCubit, PrestasiState>(
+              //         builder: (context, state) {
+              //           return Row(
+              //             children: [
+              //               Expanded(
+              //                 child: InkWell(
+              //                   onTap: () =>
+              //                       prestasiCubit.clickCakupanPrestasiButton(),
+              //                   child: ActiveButton(
+              //                     title: 'Nasional',
+              //                     isActive: prestasiCubit.isNasional,
+              //                   ),
+              //                 ),
+              //               ),
+              //               kGap8,
+              //               Expanded(
+              //                 child: InkWell(
+              //                   onTap: () =>
+              //                       prestasiCubit.clickCakupanPrestasiButton(
+              //                           isActive: false),
+              //                   child: ActiveButton(
+              //                     title: 'Internasional',
+              //                     isActive: !prestasiCubit.isNasional,
+              //                   ),
+              //                 ),
+              //               ),
+              //             ],
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //     SizedBox(
+              //       height: 300,
+              //       child: HorizontalBarLabelChart(dataAkreditasi),
+              //     ),
+              //   ],
+              // ),
+              // kGap80,
             ],
           ),
         ),

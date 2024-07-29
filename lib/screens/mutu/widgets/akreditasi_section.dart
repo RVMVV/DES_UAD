@@ -72,11 +72,11 @@ class AkreditasiSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const BigCardTitle(title: 'Akreditasi Prodi'),
-                RoundedIconContainer(
-                    side: 32,
-                    color: kBlue.withOpacity(.12),
-                    iconColor: kBlue,
-                    asset: icNoteTwo),
+                // RoundedIconContainer(
+                //     side: 32,
+                //     color: kBlue.withOpacity(.12),
+                //     iconColor: kBlue,
+                //     asset: icNoteTwo),
               ],
             ),
             SizedBox(
@@ -138,116 +138,116 @@ class AkreditasiSection extends StatelessWidget {
         ),
         kGap16,
         // Small Card
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (context) {
-                        return BottomModalAkreditasiProdi(
-                            akre: 'Akreditasi Internasional');
-                      });
-                },
-                child: BaseContainer(
-                  height: 130,
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const RoundedIconContainer(
-                              side: 32,
-                              color: kGrey100,
-                              iconColor: kGrey900,
-                              asset: icMedal),
-                          kGap8,
-                          Text(
-                            'Akreditasi \nInternasional',
-                            style: Styles.kPublicMediumBodyThree
-                                .copyWith(color: kGrey600),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '46%',
-                            style: Styles.kPublicSemiBoldHeadingTwo
-                                .copyWith(color: kGrey900),
-                          ),
-                          SvgPicture.asset(
-                            icRightArrow,
-                            width: 24,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            kGap12,
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (context) {
-                        return BottomModalAkreditasiProdi(
-                            akre: 'Sertifikasi Internasional');
-                      });
-                },
-                child: BaseContainer(
-                  height: 130,
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const RoundedIconContainer(
-                              side: 32,
-                              color: kGrey100,
-                              iconColor: kGrey900,
-                              asset: icMedalStar),
-                          kGap8,
-                          Text(
-                            'Sertifikasi \nInternasional',
-                            style: Styles.kPublicMediumBodyThree
-                                .copyWith(color: kGrey600),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '32%',
-                            style: Styles.kPublicSemiBoldHeadingTwo
-                                .copyWith(color: kGrey900),
-                          ),
-                          SvgPicture.asset(
-                            icRightArrow,
-                            width: 24,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        kGap12,
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: GestureDetector(
+        //         onTap: () {
+        //           showModalBottomSheet(
+        //               context: context,
+        //               isScrollControlled: true,
+        //               builder: (context) {
+        //                 return BottomModalAkreditasiProdi(
+        //                     akre: 'Akreditasi Internasional');
+        //               });
+        //         },
+        //         child: BaseContainer(
+        //           height: 130,
+        //           padding: const EdgeInsets.all(10),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //             children: [
+        //               Row(
+        //                 children: [
+        //                   const RoundedIconContainer(
+        //                       side: 32,
+        //                       color: kGrey100,
+        //                       iconColor: kGrey900,
+        //                       asset: icMedal),
+        //                   kGap8,
+        //                   Text(
+        //                     'Akreditasi \nInternasional',
+        //                     style: Styles.kPublicMediumBodyThree
+        //                         .copyWith(color: kGrey600),
+        //                   ),
+        //                 ],
+        //               ),
+        //               Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                 children: [
+        //                   Text(
+        //                     '46%',
+        //                     style: Styles.kPublicSemiBoldHeadingTwo
+        //                         .copyWith(color: kGrey900),
+        //                   ),
+        //                   SvgPicture.asset(
+        //                     icRightArrow,
+        //                     width: 24,
+        //                   ),
+        //                 ],
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //     kGap12,
+        //     Expanded(
+        //       child: GestureDetector(
+        //         onTap: () {
+        //           showModalBottomSheet(
+        //               context: context,
+        //               isScrollControlled: true,
+        //               builder: (context) {
+        //                 return BottomModalAkreditasiProdi(
+        //                     akre: 'Sertifikasi Internasional');
+        //               });
+        //         },
+        //         child: BaseContainer(
+        //           height: 130,
+        //           padding: const EdgeInsets.all(10),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //             children: [
+        //               Row(
+        //                 children: [
+        //                   const RoundedIconContainer(
+        //                       side: 32,
+        //                       color: kGrey100,
+        //                       iconColor: kGrey900,
+        //                       asset: icMedalStar),
+        //                   kGap8,
+        //                   Text(
+        //                     'Sertifikasi \nInternasional',
+        //                     style: Styles.kPublicMediumBodyThree
+        //                         .copyWith(color: kGrey600),
+        //                   ),
+        //                 ],
+        //               ),
+        //               Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                 children: [
+        //                   Text(
+        //                     '32%',
+        //                     style: Styles.kPublicSemiBoldHeadingTwo
+        //                         .copyWith(color: kGrey900),
+        //                   ),
+        //                   SvgPicture.asset(
+        //                     icRightArrow,
+        //                     width: 24,
+        //                   ),
+        //                 ],
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // kGap12,
         // Horizontal Bar Chart
         BaseContainer.styledBigCard(
           children: [

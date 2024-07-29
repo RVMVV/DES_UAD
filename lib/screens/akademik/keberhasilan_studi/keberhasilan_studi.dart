@@ -109,21 +109,21 @@ class KeberhasilanStudiPage extends StatelessWidget {
           ),
           kGap16,
           // Tren
-          BaseContainer.styledBigCard(
-            children: const [
-              BigCardTitle(
-                title: 'Tren Keberhasilan Studi',
-              ),
-              kGap24,
-              SizedBox(
-                height: 300,
-                child: ComboChart(
-                  datas: [],
-                ),
-              ),
-            ],
-          ),
-          kGap16,
+          // BaseContainer.styledBigCard(
+          //   children: const [
+          //     BigCardTitle(
+          //       title: 'Tren Keberhasilan Studi',
+          //     ),
+          //     kGap24,
+          //     SizedBox(
+          //       height: 300,
+          //       child: ComboChart(
+          //         datas: [],
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // kGap16,
           // Perbandingan
           BaseContainer.styledBigCard(
             children: [
