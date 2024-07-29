@@ -59,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                             total: state.dataDosen.data.totalDosen,
                             ratio: state.dataDosen.data.rasioDosen,
                             svgIcon: icProfileTwoUser,
+                            seeAll: 'Lihat Semua',
                           ),
                           kGap16,
                           CardRatio(
@@ -66,6 +67,7 @@ class HomeScreen extends StatelessWidget {
                             total: state.dataTendik.data.totalTendik,
                             ratio: state.dataTendik.data.rasioTendik,
                             svgIcon: icBriefcase,
+                            seeAll: 'Lihat Semua',
                           ),
                         ],
                       );

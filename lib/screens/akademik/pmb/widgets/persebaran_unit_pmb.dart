@@ -228,10 +228,9 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   void showFakultasPersebaran() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
+      isScrollControlled: false,
       builder: (BuildContext context) {
-        return Container(
-          // width: MediaQuery.of(context).size.width * 0.8,
+        return SizedBox(
           width: double.infinity,
           child: BlocBuilder<PmbCubit, PmbState>(
             builder: (context, state) {

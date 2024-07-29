@@ -27,7 +27,6 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'PMB',
         ),
-        height: 3000,
         children: [
           const CardTotalRegistration(),
           kGap16,
@@ -158,10 +157,10 @@ class PenerimaanMahasiswaBaruPage extends StatelessWidget {
           // Horizontal Bar Chart Persebaran Mahasiswa
           PersebaranUnitPmb(title: 'PMB Berdasarkan Persebaran'),
           kGap16,
-          PmbJalurReg(title: 'PMB Jalur Reguler'),
+          const PmbJalurReg(title: 'PMB Jalur Reguler'),
           kGap16,
           // Horizontal Bar Chart Non Reguler
-          PmbJalurNonReg(title: 'PMB Jalur Non Reguler'),
+          const PmbJalurNonReg(title: 'PMB Jalur Non Reguler'),
         ],
       ),
     );

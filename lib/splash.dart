@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
     return AnimatedSplashScreen(
       nextScreen: const FragmentPage(),
       splashTransition: SplashTransition.fadeTransition,
-      splashIconSize: 200,
+      splashIconSize: 70,
       splash: Center(
         child: Image.asset(
           imgUadLogo,

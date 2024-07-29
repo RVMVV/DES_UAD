@@ -9,12 +9,14 @@ class CardRatio extends StatelessWidget {
   final String total;
   final String ratio;
   final String svgIcon;
+  final String seeAll;
   const CardRatio({
     super.key,
     required this.title,
     required this.total,
     required this.ratio,
     required this.svgIcon,
+    this.seeAll = '',
   });
 
   @override
@@ -52,7 +54,7 @@ class CardRatio extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  'Lihat semua',
+                  seeAll,
                   style: Styles.kPublicRegularBodyThree.copyWith(
                     color: kBlue,
                   ),

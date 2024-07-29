@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
@@ -14,12 +16,13 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     final SdmPreCubit cubit = context.read<SdmPreCubit>();
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 300,
+        Flexible(
+          fit: FlexFit.loose,
           child: BlocBuilder<SdmPreCubit, SdmPreState>(
             bloc: cubit..getPersebaranFakultasDosen(),
             buildWhen: (previous, current) => current is SdmPersebaranFakultas,
@@ -57,12 +60,15 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
                   )
                 ];
 
-                return HorizontalBarLabelChart(dataChart);
+                return SizedBox(
+                  height: state.datas.length * 50.0, // Sesuaikan tinggi per item
+                  child: HorizontalBarLabelChart(dataChart),
+                );
               }
               return const Center(child: CircularProgressIndicator());
             },
           ),
-        )
+        ),
       ],
     );
   }

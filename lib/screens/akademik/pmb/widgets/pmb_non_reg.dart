@@ -8,7 +8,6 @@ import '../../../widgets/base_container.dart';
 import 'pmb_non_reg_fakultas_chart.dart';
 import 'pmb_non_reg_prodi_chart.dart';
 
-
 class PmbJalurNonReg extends StatefulWidget {
   final String title;
   const PmbJalurNonReg({
