@@ -106,7 +106,6 @@ class SDMTendik extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         current is SdmJabfungTendik,
                     builder: (context, state) {
-                      // print(state);
                       if (state is JabfungTendikLoaded) {
                         final dataJabfungDosen = [
                           charts.Series<DataJabatanFungsionalTendik, String>(

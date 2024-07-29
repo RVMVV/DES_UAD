@@ -49,8 +49,6 @@ class _DosenJabfungChartState extends State<DosenJabfungChart> {
         selectedDatum.first.datum.jabfungKode,
         selectedDatum.first.datum.jabfungTendik,
       );
-      print('Jabfung Kode : ${selectedDatum.first.datum.jabfungKode}');
-      print('Jabfung Nama : ${selectedDatum.first.datum.jabfungTendik}');
     }
   }
 

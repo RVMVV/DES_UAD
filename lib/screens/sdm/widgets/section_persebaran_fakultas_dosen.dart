@@ -23,7 +23,7 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
           fit: FlexFit.loose,
           child: BlocBuilder<SdmPreCubit, SdmPreState>(
             bloc: cubit..getPersebaranFakultasDosen(),
-            buildWhen: (previous, current) => current is SdmPersebaranFakultas,
+            buildWhen: (previous, current) => current is PersebaranFakultasDosen,
             builder: (context, state) {
               if (state is PersebaranFakultasDosenLoaded) {
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [

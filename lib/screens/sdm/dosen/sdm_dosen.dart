@@ -33,7 +33,6 @@ class SDMDosen extends StatelessWidget {
               bloc: cubit..getJumlahDosen(),
               buildWhen: (previous, current) => current is SdmJumlah,
               builder: (context, state) {
-                // print(state);
                 if (state is SdmJumlahDosenLoaded) {
                   return CardRatio(
                     title: 'Dosen',
@@ -54,8 +53,7 @@ class SDMDosen extends StatelessWidget {
             BlocBuilder<SdmCubit, SdmState>(
               bloc: cubit..getGenderDosen(),
               buildWhen: (previous, current) => current is SdmGender,
-              builder: (context, state) {
-                // print(state);
+              builder: (context, state) {                
                 if (state is SdmGenderDosenLoaded) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +106,6 @@ class SDMDosen extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         current is SdmJabfungDosen,
                     builder: (context, state) {
-                      // print(state);
                       if (state is JabfungDosenLoaded) {
                         final dataJabfungDosen = [
                           charts.Series<DataJabatanFungsionalDosen, String>(
@@ -166,8 +163,7 @@ class SDMDosen extends StatelessWidget {
                     bloc: cubit..getPendidikanDosen(),
                     buildWhen: (previous, current) =>
                         current is SdmPendidikanDosen,
-                    builder: (context, state) {
-                      // print(state);
+                    builder: (context, state) {                      
                       if (state is PendidikanDosenLoaded) {
                         final dataPendidikanDosen = [
                           charts.Series<DataPendidikanDosen, String>(

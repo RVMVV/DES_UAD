@@ -5,6 +5,7 @@ import '../../../core/constant_finals.dart';
 import '../../../cubit/pmb_cubit.dart';
 import '../../widgets/base_container.dart';
 import 'section_persebaran_fakultas_dosen.dart';
+import 'section_persebaran_fakultas_tendik.dart';
 import 'section_persebaran_prodi_dosen.dart';
 
 class PersebaranTendik extends StatefulWidget {
@@ -116,18 +117,18 @@ class _PersebaranState extends State<PersebaranTendik> {
             kGap20,
             Visibility(
               visible: isFakultasSelected,
-              child: const SdmPersebaranDosenFakultas(), // -> ganti ke SdmPersebaranTendikFakultas
+              child: const SdmPersebaranTendikFakultas(), // -> ganti ke SdmPersebaranTendikFakultas
             ),
-            Visibility(
-              visible: !isFakultasSelected,
-              child: GestureDetector(
-                onTap: () => showFakultasSelection(),
-                child: SdmPersebaranProdiDosen(         // -> ganti ke SdmPersebaranTendikProdi
-                  selectedFakultas: selectedFakultas,
-                  fakKode: fakultasKode,
-                ),
-              ),
-            ),
+            // Visibility(
+            //   visible: !isFakultasSelected,
+            //   child: GestureDetector(
+            //     onTap: () => showFakultasSelection(),
+            //     child: SdmPersebaranProdiDosen(         // -> ganti ke SdmPersebaranTendikProdi
+            //       selectedFakultas: selectedFakultas,
+            //       fakKode: fakultasKode,
+            //     ),
+            //   ),
+            // ),
             kGap20,
           ],
         ),
