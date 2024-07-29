@@ -18,6 +18,7 @@ final Map<String, dynamic> endpoint = {
     'persebaran_fakultas': 'maba_jumlah_mahasiswa_fakultas',
     'persebaran_prodi': 'maba_jumlah_mahasiswa_prodi',
     'persebaran_provinsi': 'maba_jumlah_mahasiswa_provinsi',
+    'tren_pmb_harian': 'tren_pmb_harian',
   },
   'kelulusan': {
     'tren': 'akademik_statistik_kelulusan',

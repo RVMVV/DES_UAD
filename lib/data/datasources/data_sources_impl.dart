@@ -12,6 +12,7 @@ import '../models/akademik/penerimaan_mahasiswa_baru/data_pmb.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_prodi.dart';
 import '../models/akademik/penerimaan_mahasiswa_baru/persebaran_provinsi.dart';
+import '../models/akademik/penerimaan_mahasiswa_baru/tren_pmb.dart';
 import '../models/akademik/perpustakaan/koleksi.dart';
 import '../models/akademik/ref_fakultas_model.dart';
 import '../models/home/akademik_student_status_model.dart';
@@ -222,6 +223,21 @@ class DataSourceImpl implements DataSource {
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
             .toList();
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  Future<List<Waktu>> getTrenPmb() async {
+    try {
+      final response =
+          await get(Uri.parse('$url${endpoint['pmb']['tren_pmb_harian']}'));
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return (decoded['data'] as List).map((e) => Waktu.fromJson(e)).toList();
       }
       throw ServerException();
     } catch (e) {

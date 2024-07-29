@@ -31,6 +31,7 @@ class CardTotalRegistration extends StatelessWidget {
             buildWhen: (previous, current) => current is DataPMBState,
             builder: (context, state) {
               if (state is DataPMBLoaded) {
+                // print(state.tren);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,20 +50,6 @@ class CardTotalRegistration extends StatelessWidget {
                               style: Styles.kPublicRegularBodyThree
                                   .copyWith(color: kWhite),
                             ),
-                            // Container(
-                            //   margin: const EdgeInsets.symmetric(horizontal: 4),
-                            //   width: 3,
-                            //   height: 3,
-                            //   decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(10),
-                            //     color: kWhite,
-                            //   ),
-                            // ),
-                            // Text(
-                            //   '23 Des',
-                            //   style: Styles.kPublicRegularBodyThree
-                            //       .copyWith(color: kWhite),
-                            // ),
                           ],
                         ),
                       ],
@@ -74,7 +61,7 @@ class CardTotalRegistration extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 13),
-                      child: const ChartTotalRegistrasi(),
+                      child: ChartTotalRegistrasi(trens: state.tren),
                     ),
                   ],
                 );
@@ -94,7 +81,7 @@ class CardTotalRegistration extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'TA 2023/2024',
+                            'TA -',
                             style: Styles.kPublicRegularBodyThree
                                 .copyWith(color: kWhite),
                           ),
@@ -108,7 +95,7 @@ class CardTotalRegistration extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '23 Des',
+                            '',
                             style: Styles.kPublicRegularBodyThree
                                 .copyWith(color: kWhite),
                           ),
@@ -117,13 +104,13 @@ class CardTotalRegistration extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '736',
+                    '-',
                     style: Styles.kPublicSemiBoldHeadingTwo
                         .copyWith(color: kWhite),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 13),
-                    child: const ChartTotalRegistrasi(),
+                    // child: const ChartTotalRegistrasi(),
                   ),
                 ],
               );

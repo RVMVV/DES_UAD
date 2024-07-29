@@ -50,8 +50,8 @@ class DataPMBLoading extends DataPMBState {}
 
 class DataPMBLoaded extends DataPMBState {
   final DataPMB data;
-
-  DataPMBLoaded(this.data);
+  final List<Waktu> tren;
+  DataPMBLoaded(this.data, this.tren);
 }
 
 // Persebaran PMB
@@ -170,4 +170,14 @@ class MhsLokalLoading extends MhsLokalState {}
 class MhsLokalLoaded extends MhsLokalState {
   final List<PersebaranBerdasarkan> datas;
   MhsLokalLoaded(this.datas);
+}
+
+// Tren Pmb Harian
+class TrenPmbHarianState extends PMB {}
+
+class TrenPmbHarianLoading extends TrenPmbHarianState {}
+
+class TrenPmbHarianLoaded extends TrenPmbHarianState {
+  final List<Waktu> datas;
+  TrenPmbHarianLoaded(this.datas);
 }

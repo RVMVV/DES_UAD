@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:des_uad/data/models/akademik/penerimaan_mahasiswa_baru/tren_pmb.dart';
 import '../data/datasources/data_sources.dart';
 import '../data/models/akademik/keberhasilan_studi/perbandingan_keberhasilan_studi.dart';
 import '../data/models/akademik/keberhasilan_studi/studi_mahasiswa.dart';
@@ -76,8 +77,9 @@ class AkademikCubit extends Cubit<AkademikState> {
     emit(DataPMBLoading());
 
     final result = await dataSource.getDataPMB();
+    final tren = await dataSource.getTrenPmb();
 
-    emit(DataPMBLoaded(result));
+    emit(DataPMBLoaded(result, tren));
   }
 
   Future<void> getPersebaranPMB(JenisPMB jenisPMB, int index) async {
@@ -187,5 +189,11 @@ class AkademikCubit extends Cubit<AkademikState> {
     emit(MhsLokalLoading());
     final result = await dataSource.getMhsLokalProdi(fakultas);
     emit(MhsLokalLoaded(result));
+  }
+
+  Future<void> getTrenPmbHarian() async {
+    emit(TrenPmbHarianLoading());
+    final result = await dataSource.getTrenPmb();
+    emit(TrenPmbHarianLoaded(result));
   }
 }

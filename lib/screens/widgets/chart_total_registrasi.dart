@@ -2,57 +2,37 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constant_finals.dart';
+import '../../data/models/akademik/penerimaan_mahasiswa_baru/tren_pmb.dart';
 
 class ChartTotalRegistrasi extends StatefulWidget {
-  const ChartTotalRegistrasi({super.key});
+  List<Waktu> trens;
+  // const ChartTotalRegistrasi({super.key});
+  ChartTotalRegistrasi({Key? key, required this.trens}) : super(key: key);
 
   @override
-  State<ChartTotalRegistrasi> createState() => _ChartTotalRegistrasiState();
+  State<ChartTotalRegistrasi> createState() =>
+      _ChartTotalRegistrasiState(this.trens);
 }
 
 class _ChartTotalRegistrasiState extends State<ChartTotalRegistrasi> {
+  List<Waktu> trens;
+  _ChartTotalRegistrasiState(this.trens);
+
   List<int> showingTooltipOnSpots = [1, 3, 5];
+  List<FlSpot> allSpots = [];
 
-  List<FlSpot> get allSpots => const [
-        FlSpot(0, 1),
-        FlSpot(1, 2),
-        FlSpot(2, 1.5),
-        FlSpot(3, 3),
-        FlSpot(4, 3.5),
-        FlSpot(5, 5),
-        FlSpot(6, 8),
-      ];
+  initState() {
+    double amount = 0;
+    trens.forEach((element) async {
+      allSpots.add(FlSpot(amount, double.parse(element.jumlah)));
+      amount++;
+    });
+  }
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta, double chartWidth) {
+  Widget bottomTitleWidgets(String time, TitleMeta meta, double chartWidth) {
     final style = Styles.kPublicBoldBodyFour.copyWith(
       color: kWhite,
     );
-    String time;
-    switch (value.toInt()) {
-      case 0:
-        time = '00:00';
-        break;
-      case 1:
-        time = '04:00';
-        break;
-      case 2:
-        time = '08:00';
-        break;
-      case 3:
-        time = '12:00';
-        break;
-      case 4:
-        time = '16:00';
-        break;
-      case 5:
-        time = '20:00';
-        break;
-      case 6:
-        time = '23:59';
-        break;
-      default:
-        return Container();
-    }
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -171,8 +151,10 @@ class _ChartTotalRegistrasiState extends State<ChartTotalRegistrasi> {
                   showTitles: true,
                   interval: 1,
                   getTitlesWidget: (value, meta) {
+                    print(trens[value.toInt()].jam);
+                    String a = trens[value.toInt()].jam;
                     return bottomTitleWidgets(
-                      value,
+                      a,
                       meta,
                       constraints.maxWidth,
                     );
