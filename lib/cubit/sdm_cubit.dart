@@ -87,6 +87,12 @@ class SdmCubit extends Cubit<SdmState> {
     emit(PersebaranProdiDosenLoaded(dataPersebaranProdiDosen));
   }
 
+  Future<void> getPersebaranFakultasTendik() async {
+    emit(PersebaranFakultasTendikLoading());
+    final result = await dataSource.getPersebaranFakultasTendik();
+    emit(PersebaranFakultasTendikLoaded(result));
+  }
+
   Future<void> getPersebaranDosenProdiBerdasarkanFakultas(
       String fakKode) async {
     final result =

@@ -5,7 +5,7 @@ class BodySubMenuAkademik extends StatelessWidget {
     super.key,
     required this.appBar,
     required this.children,
-    this.height = 2550,
+    this.height = 3000,
   });
 
   final Widget appBar;
@@ -26,7 +26,9 @@ class BodySubMenuAkademik extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                ),
                 child: Column(children: children),
               ),
             ),

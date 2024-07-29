@@ -730,10 +730,28 @@ class DataSourceImpl implements DataSource {
       final response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         return dosenJabfungFromJson(response.body);
       }
       throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+  
+  @override
+  Future<List<PersebaranFakultas>> getPersebaranFakultasTendik() async {
+    try {
+      final Response response = await get(Uri.parse(
+          '$url${endpoint['sdm']['sdm_tendik']['persebaran_fakultas']}'));
+      if (response.statusCode == 200) {
+        print(response.body);
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
+      }else{
+        throw ServerException();
+      }
     } catch (e) {
       throw ServerException();
     }

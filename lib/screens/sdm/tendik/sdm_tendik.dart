@@ -12,7 +12,8 @@ import '../../widgets/base_container.dart';
 import '../../widgets/big_card_title.dart';
 import '../../widgets/card_ratio.dart';
 import '../widgets/card_bar_chart.dart';
-import '../widgets/card_persebaran.dart';
+import '../widgets/card_persebaran_dosen.dart';
+import '../widgets/card_persebaran_tendik.dart';
 import '../widgets/card_total_gender.dart';
 
 class SDMTendik extends StatelessWidget {
@@ -105,7 +106,6 @@ class SDMTendik extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         current is SdmJabfungTendik,
                     builder: (context, state) {
-                      // print(state);
                       if (state is JabfungTendikLoaded) {
                         final dataJabfungDosen = [
                           charts.Series<DataJabatanFungsionalTendik, String>(
@@ -149,7 +149,7 @@ class SDMTendik extends StatelessWidget {
               ],
             ),
             kGap16,
-            Persebaran(
+            PersebaranTendik(
               title: 'Persebaran Tendik',
             ),
             kGap16,

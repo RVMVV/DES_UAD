@@ -1,31 +1,37 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 
+import '../../../cubit/sdm_cubit.dart';
 import '../../../cubit/sdm_pre_cubit.dart';
 import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../../../data/models/persebaran_berdasarkan.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
-class SdmPersebaranDosenFakultas extends StatelessWidget {
-  const SdmPersebaranDosenFakultas({
-    super.key,
-  });
+
+class SdmPersebaranTendikFakultas extends StatelessWidget {
+  const SdmPersebaranTendikFakultas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SdmPreCubit cubit = context.read<SdmPreCubit>();
+    final SdmCubit cubit = context.read<SdmCubit>();
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Flexible(
           fit: FlexFit.loose,
-          child: BlocBuilder<SdmPreCubit, SdmPreState>(
-            bloc: cubit..getPersebaranFakultasDosen(),
-            buildWhen: (previous, current) => current is PersebaranFakultasDosen,
+          child: BlocBuilder<SdmCubit, SdmState>(
+            bloc: cubit..getPersebaranFakultasTendik(),
+            buildWhen: (previous, current) => current is SdmPersebaranTendik,
             builder: (context, state) {
-              if (state is PersebaranFakultasDosenLoaded) {
+              print(state);
+              if(state is PersebaranFakultasTendikLoading){
+                return Center();
+              }
+              if (state is PersebaranFakultasTendikLoaded) {
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan1',
@@ -70,3 +76,4 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
     );
   }
 }
+

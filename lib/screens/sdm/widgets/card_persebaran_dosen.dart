@@ -7,18 +7,18 @@ import '../../widgets/base_container.dart';
 import 'section_persebaran_fakultas_dosen.dart';
 import 'section_persebaran_prodi_dosen.dart';
 
-class Persebaran extends StatefulWidget {
+class PersebaranDosen extends StatefulWidget {
   final String title;
-  const Persebaran({
+  const PersebaranDosen({
     required this.title,
     super.key,
   });
 
   @override
-  State<Persebaran> createState() => _PersebaranState();
+  State<PersebaranDosen> createState() => _PersebaranState();
 }
 
-class _PersebaranState extends State<Persebaran> {
+class _PersebaranState extends State<PersebaranDosen> {
   bool isFakultasSelected = true;
   String selectedFakultas = 'Teknologi Industri'; //placeholder
   String fakultasKode = '';

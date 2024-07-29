@@ -15,4 +15,6 @@ class SdmPreCubit extends Cubit<SdmPreState> {
     final result = await dataSource.getPersebaranFakultasDosen();
     emit(PersebaranFakultasDosenLoaded(result));
   }
+
+  
 }
