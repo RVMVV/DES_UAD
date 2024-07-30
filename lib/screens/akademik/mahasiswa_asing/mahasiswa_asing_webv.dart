@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MahasiswaAsingWebv extends StatefulWidget {
@@ -11,11 +12,11 @@ class MahasiswaAsingWebv extends StatefulWidget {
 class _MahasiswaAsingWebvState extends State<MahasiswaAsingWebv> {
   @override
   Widget build(BuildContext context) {
-    WebViewController controller;
+    // WebViewController controller;
 
-    controller = WebViewController()
-      ..loadRequest(Uri.parse(
-          'https://museum.uad.ac.id/index.php/auth/Auth/testtt/d9eb71ab162db54d6f1689be0a1ed744db9b91b0'));
+    WebViewController controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse('https://museum.uad.ac.id/testing/index2.php'));
 
     return Container(
       height: 300,

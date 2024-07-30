@@ -11,12 +11,9 @@ class MahasiswaLokalWebv extends StatefulWidget {
 class _MahasiswaLokalWebvState extends State<MahasiswaLokalWebv> {
   @override
   Widget build(BuildContext context) {
-    WebViewController controller;
-
-    controller = WebViewController()
-      ..loadRequest(Uri.parse(
-          'https://museum.uad.ac.id/index.php/auth/Auth/testtt/d9eb71ab162db54d6f1689be0a1ed744db9b91b0'));
-
+    WebViewController controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse('https://museum.uad.ac.id/testing/index2.php'));
     return Container(
       height: 300,
       child: WebViewWidget(controller: controller),
