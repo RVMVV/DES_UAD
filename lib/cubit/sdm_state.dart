@@ -17,8 +17,6 @@ final class SdmJabfungDosen extends SdmState {}
 
 final class SdmJabfungTendik extends SdmState {}
 
-final class SdmJumlahDosenLoading extends SdmJumlah {}
-
 final class SdmProdiDosen extends SdmState {}
 
 final class SdmFakultasDosen extends SdmState {}
@@ -28,6 +26,8 @@ final class SdmPersebaranDosen extends SdmState {}
 final class SdmPersebaranTendik extends SdmState {}
 
 final class SdmDosenJabfung extends SdmState {}
+
+final class SdmJumlahDosenLoading extends SdmJumlah {}
 
 final class SdmJumlahDosenLoaded extends SdmJumlah {
   final DataJumlahDosen data;
@@ -97,6 +97,12 @@ final class PersebaranFakultasTendikLoading extends SdmPersebaranTendik {}
 final class PersebaranFakultasTendikLoaded extends SdmPersebaranTendik {
   final List<PersebaranBerdasarkan> datas;
   PersebaranFakultasTendikLoaded(this.datas);
+}
+
+final class PersebaranProdiTendikLoading extends SdmPersebaranTendik {}
+final class PersebaranProdiTendikLoaded extends SdmPersebaranTendik{
+  final List<PersebaranProdi> datas;
+  PersebaranProdiTendikLoaded(this.datas);
 }
 
 final class DosenJabfungLoading extends SdmDosenJabfung {}
