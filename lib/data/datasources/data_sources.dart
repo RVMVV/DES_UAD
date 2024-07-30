@@ -114,4 +114,5 @@ abstract interface class DataSource {
   Future<PrestasiMahasiswa> getPrestasiMahasiswa();
 
   Future<DosenJabfung> getDosenJabfung(String jabf);
+  Future<dynamic> loginUser(String username, String password);
 }

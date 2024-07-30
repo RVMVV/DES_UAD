@@ -757,6 +757,19 @@ class DataSourceImpl implements DataSource {
   }
 
   @override
+  Future<dynamic> loginUser(String login, String password) async {
+    var bodyForm = {'login': login, 'password': password};
+    try {
+      final Response response = await post(
+          Uri.parse('$url${endpoint['general']['login']}'),
+          body: bodyForm);
+      return response;
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
   Future<List<PersebaranProdi>> getPersebaranProdiTendikBerdasarkanFakultas(
       String fak) async {
     try {
