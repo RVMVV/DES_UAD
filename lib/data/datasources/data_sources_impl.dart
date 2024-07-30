@@ -738,7 +738,7 @@ class DataSourceImpl implements DataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasTendik() async {
     try {
@@ -749,9 +749,22 @@ class DataSourceImpl implements DataSource {
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
-      }else{
+      } else {
         throw ServerException();
       }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<dynamic> loginUser(String login, String password) async {
+    var bodyForm = {'login': login, 'password': password};
+    try {
+      final Response response = await post(
+          Uri.parse('$url${endpoint['general']['login']}'),
+          body: bodyForm);
+      return response;
     } catch (e) {
       throw ServerException();
     }
