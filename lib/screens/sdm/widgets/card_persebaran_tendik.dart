@@ -7,6 +7,7 @@ import '../../widgets/base_container.dart';
 import 'section_persebaran_fakultas_dosen.dart';
 import 'section_persebaran_fakultas_tendik.dart';
 import 'section_persebaran_prodi_dosen.dart';
+import 'section_persebaran_prodi_tendik.dart';
 
 class PersebaranTendik extends StatefulWidget {
   final String title;
@@ -117,18 +118,20 @@ class _PersebaranState extends State<PersebaranTendik> {
             kGap20,
             Visibility(
               visible: isFakultasSelected,
-              child: const SdmPersebaranTendikFakultas(), // -> ganti ke SdmPersebaranTendikFakultas
+              child:
+                  const SdmPersebaranTendikFakultas(), // -> ganti ke SdmPersebaranTendikFakultas
             ),
-            // Visibility(
-            //   visible: !isFakultasSelected,
-            //   child: GestureDetector(
-            //     onTap: () => showFakultasSelection(),
-            //     child: SdmPersebaranProdiDosen(         // -> ganti ke SdmPersebaranTendikProdi
-            //       selectedFakultas: selectedFakultas,
-            //       fakKode: fakultasKode,
-            //     ),
-            //   ),
-            // ),
+            Visibility(
+              visible: !isFakultasSelected,
+              child: GestureDetector(
+                onTap: () => showFakultasSelection(),
+                child: SdmPersebaranTendikProdi(
+                  // -> ganti ke SdmPersebaranTendikProdi
+                  selectedFakultas: selectedFakultas,
+                  fakKode: fakultasKode,
+                ),
+              ),
+            ),
             kGap20,
           ],
         ),
@@ -176,10 +179,12 @@ class _PersebaranState extends State<PersebaranTendik> {
                                 ? const Icon(Icons.check, color: kBlue)
                                 : null,
                             onTap: () {
-                              setState(() {
-                                selectedFakultas = data;
-                                fakultasKode = fkKode;
-                              });
+                              setState(
+                                () {
+                                  selectedFakultas = data;
+                                  fakultasKode = fkKode;
+                                },
+                              );
                               Navigator.pop(context);
                             },
                             title: Text(

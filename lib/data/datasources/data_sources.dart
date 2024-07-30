@@ -87,6 +87,7 @@ abstract interface class DataSource {
   Future<List<DataPendidikanTendik>> getPendidikanTendik();
   //SDM - Persebaran Prodi Dosen
   Future<List<DataPersebaranProdiDosen>> getPersebaranProdiDosen();
+  
   //SDM - Persebaran Fakultas Dosen
   Future<List<PersebaranFakultas>> getPersebaranFakultasDosen();
   //SDM - Persebaran Fakultas Tendik
@@ -95,7 +96,8 @@ abstract interface class DataSource {
   //SDM - Persebaran Dosen Prodi Berdasarkan Fakultas
   Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(
       String fak);
-
+  //SDM - Persebaran Tendik Prodi Berdasarkan Fakultas
+  Future<List<PersebaranProdi>> getPersebaranProdiTendikBerdasarkanFakultas(String fak);
   // Mutu - Akreditasi
   Future<String> getTotalProdi();
   Future<List<PersebaranAkreditasi>> getPersebaranAkreditasi();

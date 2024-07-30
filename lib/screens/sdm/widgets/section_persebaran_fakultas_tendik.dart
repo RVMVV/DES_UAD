@@ -5,7 +5,6 @@ import 'package:community_charts_flutter/community_charts_flutter.dart'
     as charts;
 
 import '../../../cubit/sdm_cubit.dart';
-import '../../../cubit/sdm_pre_cubit.dart';
 import '../../../data/models/akademik/penerimaan_mahasiswa_baru/persebaran_fakultas.dart';
 import '../../../data/models/persebaran_berdasarkan.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
@@ -17,7 +16,6 @@ class SdmPersebaranTendikFakultas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SdmCubit cubit = context.read<SdmCubit>();
-    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

@@ -104,18 +104,21 @@ class _SumberDayaManusiaState extends State<SumberDayaManusia> {
           ],
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          cubit..getJumlahDosenTendik();
-          cubit..getGenderDosen();
-          cubit..getGenderTendik();
-          cubit..getJabfungDosen();
-          cubit..getJabfungTendik();
-          cubit..getPendidikanDosen();
-          cubit..getPendidikanTendik();
-        },
-        child: isDosenSelected ? SDMDosen() : SDMTendik(),
-      ),
+      body: isDosenSelected ? SDMDosen() : SDMTendik(),
+      // RefreshIndicator(
+      //   onRefresh: () async {
+      //     // cubit..getJumlahDosenTendik();
+      //     cubit.getJumlahDosen();
+      //     cubit.getJumlahTendik();
+      //     cubit.getGenderDosen();
+      //     cubit.getGenderTendik();
+      //     cubit.getJabfungDosen();
+      //     cubit.getJabfungTendik();
+      //     cubit.getPendidikanDosen();
+      //     cubit.getPendidikanTendik();
+      //   },
+      //   child: isDosenSelected ? SDMDosen() : SDMTendik(),
+      // ),
       // body: ,
     );
   }

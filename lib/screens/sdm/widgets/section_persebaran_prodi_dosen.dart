@@ -22,7 +22,6 @@ class SdmPersebaranProdiDosen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SdmCubit cubit = context.read<SdmCubit>();
-
     return Column(
       children: [
         Container(
