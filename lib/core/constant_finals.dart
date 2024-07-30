@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const String url = 'https://museum.uad.ac.id/index.php/auth/des/';
 final Map<String, dynamic> endpoint = {
-  'general': {'ref_fakultas': 'ref_fakultas'},
+  'general': {'login': 'login', 'ref_fakultas': 'ref_fakultas'},
   'mahasiswa_asing': {
     'jumlah': 'mahasiswa_asing',
     'persebaran_negara': 'persebaran_mahasiswa_asing',
@@ -60,8 +60,8 @@ final Map<String, dynamic> endpoint = {
       'gender': 'sdm_tendik_gender',
       'fungsional': 'sdm_tendik_fungsional',
       'pendidikan': 'sdm_tendik_pendidikan',
-      'persebaran_fakultas' : 'sdm_tendik_fakultas',
-      'persebaran_prodi' : 'sdm_tendik_prodi',
+      'persebaran_fakultas': 'sdm_tendik_fakultas',
+      'persebaran_prodi': 'sdm_tendik_prodi',
     }
   },
   'prestasi': {'mahasiswa': 'prestasi_tren_tiga_tahun'}
