@@ -19,6 +19,7 @@ class PersebaranDosen extends StatefulWidget {
 }
 
 class _PersebaranState extends State<PersebaranDosen> {
+  bool showAllData = false;
   bool isFakultasSelected = true;
   String selectedFakultas = 'Teknologi Industri'; //placeholder
   String fakultasKode = '';
@@ -116,7 +117,7 @@ class _PersebaranState extends State<PersebaranDosen> {
             kGap20,
             Visibility(
               visible: isFakultasSelected,
-              child: const SdmPersebaranDosenFakultas(),
+              child: SdmPersebaranDosenFakultas(showAllData: showAllData),
             ),
             Visibility(
               visible: !isFakultasSelected,
@@ -128,7 +129,24 @@ class _PersebaranState extends State<PersebaranDosen> {
                 ),
               ),
             ),
-            kGap20,
+            kGap16,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  showAllData = !showAllData;
+                  print(showAllData);
+                });
+              },
+              child: Center(
+                child: Text(
+                  showAllData ? 'Ciutkan' : 'Lihat Semua',
+                  style: Styles.kPublicRegularBodyTwo.copyWith(
+                    color: kGrey500,
+                  ),
+                ),
+              ),
+            ),
+            kGap16,
           ],
         ),
       ),
