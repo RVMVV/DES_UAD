@@ -1,3 +1,4 @@
+import 'package:des_uad/core/constant_finals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart'
@@ -9,13 +10,18 @@ import '../../../data/models/persebaran_berdasarkan.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
 class SdmPersebaranDosenFakultas extends StatelessWidget {
-  const SdmPersebaranDosenFakultas({
+
+  bool showAllData;
+
+  SdmPersebaranDosenFakultas({
+    required this.showAllData,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final SdmPreCubit cubit = context.read<SdmPreCubit>();
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -23,13 +29,17 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
           fit: FlexFit.loose,
           child: BlocBuilder<SdmPreCubit, SdmPreState>(
             bloc: cubit..getPersebaranFakultasDosen(),
-            buildWhen: (previous, current) => current is PersebaranFakultasDosen,
+            buildWhen: (previous, current) =>
+                current is PersebaranFakultasDosen,
             builder: (context, state) {
               if (state is PersebaranFakultasDosenLoaded) {
+                final data = showAllData
+                    ? state.datas
+                    : state.datas.take(5).toList();
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan1',
-                    data: state.datas,
+                    data: data,
                     domainFn: (datum, index) =>
                         (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => datum.getPercent,
@@ -51,14 +61,14 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
                     domainFn: (datum, index) =>
                         (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => 100 - datum.getPercent,
-                    data: state.datas,
+                    data: data,
                     labelAccessorFn: (datum, index) => '',
                     colorFn: (datum, index) =>
                         const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
                 return SizedBox(
-                  height: state.datas.length * 60.0,
+                  height: data.length * 60.0,
                   child: HorizontalBarLabelChart(dataChart),
                 );
               }
@@ -66,6 +76,8 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
             },
           ),
         ),
+        kGap8,
+        const Divider(),
       ],
     );
   }
