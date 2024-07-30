@@ -85,7 +85,9 @@ class SdmPersebaranTendikProdi extends StatelessWidget {
                         const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
-                return HorizontalBarLabelChart(data);
+                return SizedBox(
+                  height: data.length * 60.0,
+                  child: HorizontalBarLabelChart(data));
               }
               return const Center(child: CircularProgressIndicator());
             },

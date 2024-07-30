@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.INTERNET" />
+<application android:usesCleartextTraffic="true"/>
     <application
-        android:label="des_uad"
+        android:label="DES UAD"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
