@@ -72,11 +72,6 @@ class AkreditasiSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const BigCardTitle(title: 'Akreditasi Prodi'),
-                // RoundedIconContainer(
-                //     side: 32,
-                //     color: kBlue.withOpacity(.12),
-                //     iconColor: kBlue,
-                //     asset: icNoteTwo),
               ],
             ),
             SizedBox(
