@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constant_finals.dart';
 import '../../cubit/home_cubit.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late SdmCubit sdmCubit;
   late HomeCubit homeCubit;
-
+  String email = '';
   @override
   void initState() {
     super.initState();
@@ -35,6 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
     homeCubit.getStudentBody();
     sdmCubit.getJumlahDosenTendik();
   }
+
+  // void sess() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   var email = pref.getString('useremail');
+  //   setState(() {
+  //     email = email;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

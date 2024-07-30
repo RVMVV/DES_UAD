@@ -134,7 +134,7 @@ class _PersebaranState extends State<PersebaranDosen> {
               onTap: () {
                 setState(() {
                   showAllData = !showAllData;
-                  print(showAllData);
+
                 });
               },
               child: Center(

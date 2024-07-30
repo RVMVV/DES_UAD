@@ -21,6 +21,7 @@ class PersebaranTendik extends StatefulWidget {
 }
 
 class _PersebaranState extends State<PersebaranTendik> {
+  bool showAllData = false;
   bool isFakultasSelected = true;
   String selectedFakultas = 'Teknologi Industri'; //placeholder
   String fakultasKode = '';
@@ -119,7 +120,7 @@ class _PersebaranState extends State<PersebaranTendik> {
             Visibility(
               visible: isFakultasSelected,
               child:
-                  const SdmPersebaranTendikFakultas(), // -> ganti ke SdmPersebaranTendikFakultas
+                  SdmPersebaranTendikFakultas(showAllData: showAllData,), // -> ganti ke SdmPersebaranTendikFakultas
             ),
             Visibility(
               visible: !isFakultasSelected,
@@ -132,7 +133,21 @@ class _PersebaranState extends State<PersebaranTendik> {
                 ),
               ),
             ),
-            kGap20,
+            kGap16,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  showAllData = !showAllData;
+                });
+              },
+              child: Center(
+                child: Text(
+                  showAllData ? 'Ciutkan' : 'Lihat Semua',
+                  style: Styles.kPublicRegularBodyTwo.copyWith(color: kGrey500),
+                ),
+              ),
+            ),
+            kGap16,
           ],
         ),
       ),

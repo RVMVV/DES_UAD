@@ -4,7 +4,7 @@ import 'package:des_uad/init_screens/fragment_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/login.dart';
+import 'screens/login/login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -24,10 +24,11 @@ class _SplashState extends State<Splash> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     Future.delayed(Duration(seconds: 1), () {
       var token = pref.getString('token');
-      if (token != '') {
+      print(token);
+      if (token != '' && token != null) { 
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => FragmentPage()));
-      } else {
+      } else { 
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => LoginScreen()));
       }
