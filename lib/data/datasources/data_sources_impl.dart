@@ -738,7 +738,7 @@ class DataSourceImpl implements DataSource {
       throw ServerException();
     }
   }
-  
+
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasTendik() async {
     try {
@@ -748,28 +748,29 @@ class DataSourceImpl implements DataSource {
         final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
-      }else{
+      } else {
         throw ServerException();
       }
     } catch (e) {
       throw ServerException();
     }
   }
-  
+
   @override
-  Future<List<PersebaranProdi>> getPersebaranProdiTendikBerdasarkanFakultas(String fak) async {
-   try {
-     final Response response = await get(Uri.parse(
+  Future<List<PersebaranProdi>> getPersebaranProdiTendikBerdasarkanFakultas(
+      String fak) async {
+    try {
+      final Response response = await get(Uri.parse(
           '$url${endpoint['sdm']['sdm_tendik']['persebaran_prodi']}?fak=$fak'));
-    if(response.statusCode == 200){
-      final decoded = jsonDecode(response.body);
-      final List<dynamic> data = decoded['data'];
-      return data.map((e) => PersebaranProdi.fromJson(e)).toList();      
-    }else{
+      if (response.statusCode == 200) {
+        final decoded = jsonDecode(response.body);
+        final List<dynamic> data = decoded['data'];
+        return data.map((e) => PersebaranProdi.fromJson(e)).toList();
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
       throw ServerException();
     }
-   } catch (e) {
-     throw ServerException();
-   }
   }
 }
