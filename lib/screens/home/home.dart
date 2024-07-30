@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             total: state.dataDosen.data.totalDosen,
                             ratio: state.dataDosen.data.rasioDosen,
                             svgIcon: icProfileTwoUser,
-                            seeAll: 'Lihat Semua',
+                            // seeAll: 'Lihat Semua',
                           ),
                           kGap16,
                           CardRatio(
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             total: state.dataTendik.data.totalTendik,
                             ratio: state.dataTendik.data.rasioTendik,
                             svgIcon: icBriefcase,
-                            seeAll: 'Lihat Semua',
+                            // seeAll: 'Lihat Semua',
                           ),
                         ],
                       );
@@ -116,10 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 kGap16,
                 const CardAkreditasiProdi(),
                 kGap16,
-                const CardMahasiswaLulusTBQ(),
-                kGap16,
-                const CardBaitulArqom(),
-                kGap16,
+                // const CardMahasiswaLulusTBQ(),
+                // kGap16,
+                // const CardBaitulArqom(),
+                // kGap16,
                 const CardPrestasiMahasiswa(),
                 kGap16
               ],
