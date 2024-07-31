@@ -148,8 +148,6 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(8.0),
             child: BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
-                print(state);
-
                 if (state is LoginFailed) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

@@ -15,17 +15,20 @@ class LoginCubit extends Cubit<LoginState> {
   final DataSource dataSource;
 
   Future<void> loginUser(String username, String password) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
     emit(LoginLoading());
     var login = await dataSource.loginUser(username, password);
 
     if (login.statusCode == 200) {
-      dynamic data = jsonDecode(login.body);
-      LogIn log = LogIn.fromJson(data);
       SharedPreferences pref = await SharedPreferences.getInstance();
+      dynamic data = jsonDecode(login.body);
+      String cookies = login.headers['set-cookie'] ?? '-';
+      pref.setString('cookies', cookies);
+
+      LogIn log = LogIn.fromJson(data);
       pref.setString('token', log.data.accessToken);
       pref.setString('user_id', log.data.userId);
       pref.setString('useremail', log.data.userEmail);
+
       emit(LoginSuccess());
     } else {
       emit(LoginFailed('Login Gagal'));
