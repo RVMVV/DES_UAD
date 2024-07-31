@@ -166,8 +166,6 @@ class DataSourceImpl implements DataSource {
       String fakKode) async {
     print('aaa ' + fakKode);
     try {
-      // final response = await get(
-      //     Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));  ----> BUG, data tidak berubah mengikuti param.
       final response = await ServiceHelper().service(
         'get',
         '${endpoint['pmb']['persebaran_prodi']}',
@@ -177,8 +175,6 @@ class DataSourceImpl implements DataSource {
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        // print(fakKode);
-        // print(response.body);
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
             .toList();
@@ -213,8 +209,6 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProdi>> getPmbRegulerProdi(String fakKode) async {
     try {
-      // final response = await get(
-      //     Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
       final response = await ServiceHelper().service(
         'get',
         '${endpoint['pmb']['persebaran_prodi']}',
@@ -277,8 +271,6 @@ class DataSourceImpl implements DataSource {
 
   Future<List<Waktu>> getTrenPmb() async {
     try {
-      // final response =
-      //     await get(Uri.parse('$url${endpoint['pmb']['tren_pmb_harian']}'));
       final response = await ServiceHelper().service(
         'get',
         '${endpoint['pmb']['tren_pmb_harian']}',
@@ -299,11 +291,15 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPmbNonRegulerFakultas() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_fakultas']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
+        print(response.body);
         return (decoded['data'] as List)
             .map((e) => PersebaranFakultas.fromJson(e))
             .toList();
@@ -317,10 +313,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProdi>> getPmbNonRegulerProdi(String fakKode) async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_prodi']}',
+        {'fak': fakKode},
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
@@ -335,10 +334,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<TrenKelulusan>> getTrenKelulusan() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['kelulusan']['tren']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['kelulusan']['tren']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => TrenKelulusan.fromJson(e))
@@ -353,10 +355,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PerbandinganKelulusan>> getPerbandinganKelulusan() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['kelulusan']['perbandingan']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['kelulusan']['perbandingan']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PerbandinganKelulusan.fromJson(e))
@@ -371,11 +376,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<StudiMahasiswa> getStudiMahasiswa() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['keberhasilan']['mhs']}'));
+      // final response =
+      //     await get(Uri.parse('$url${endpoint['keberhasilan']['mhs']}'));
+      final response = await ServiceHelper()
+          .service('get', '${endpoint['keberhasilan']['mhs']}', null, null);
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
+        print(response.body);
         return StudiMahasiswa.fromJson(decoded['data']);
       }
 
