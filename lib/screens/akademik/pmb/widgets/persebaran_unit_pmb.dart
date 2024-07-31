@@ -207,6 +207,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                     PersebaranProdiChart(
                       fakKode: selectedFakKode,
                     )
+                  //print selectedFakKode
                 ],
               ),
             ),
@@ -273,6 +274,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                                 });
                               });
                               Navigator.pop(context);
+                              // print(selectedFakKode);
                             },
                             title: Text(
                               data,
