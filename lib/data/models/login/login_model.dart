@@ -29,7 +29,7 @@ class Data {
   String userRole;
   String accessToken;
   String expiredTime;
-  String kodeUnit;
+  // String kodeUnit;
   // String refreshToken;
 
   Data({
@@ -38,7 +38,7 @@ class Data {
     required this.userRole,
     required this.accessToken,
     required this.expiredTime,
-    required this.kodeUnit,
+    // required this.kodeUnit,
     // required this.refreshToken,
   });
 
@@ -48,7 +48,7 @@ class Data {
         userRole: json["user_role"],
         accessToken: json["access_token"],
         expiredTime: json["expired_time"],
-        kodeUnit: json["unit_kode"] ?? '',
+        // kodeUnit: json["unit_kode"] ?? '',
         // refreshToken: json["refresh_token"],
       );
 }
