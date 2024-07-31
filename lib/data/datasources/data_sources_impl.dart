@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constant_finals.dart';
 import '../../core/failure/server_exception.dart';
@@ -56,8 +57,9 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getJumlahMahasiswaAsing() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'));
+      final response = await get(
+          Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'),
+          headers: {});
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -390,10 +392,12 @@ class DataSourceImpl implements DataSource {
 
   @override
   Future<StudentBody> getStudentBody() async {
+    // final token = await SharedPreferences.getInstance().then((value) => value.getString('token'));
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['mahasiswa_status']['jumlah']}'));
       if (response.statusCode == 200) {
+        // print(token);
         return studentBodyFromJson(response.body);
       } else {
         throw ServerException();
