@@ -104,6 +104,8 @@ class AkademikCubit extends Cubit<AkademikState> {
 
   Future<void> getPersebaranPMBProdi(String fakultas) async {
     emit(PersebaranPMBLoading());
+    print('lesgo');
+    print(fakultas);
     final result = await dataSource.getPersebaranProdiMahasiswaBaru(fakultas);
     emit(PersebaranPMBLoaded(result));
   }

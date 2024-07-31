@@ -41,14 +41,16 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getJumlahMahasiswaLokal() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mahasiswa_asing']['jumlah']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return decoded['data']['total_mhs'];
       }
-
       throw ServerException();
     } catch (e) {
       throw ServerException();
@@ -58,8 +60,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getJumlahMahasiswaAsing() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mahasiswa_asing']['jumlah']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -75,8 +81,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranNegara>> getPersebaranNegara() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mahasiswa_asing']['persebaran_negara']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mahasiswa_asing']['persebaran_negara']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -93,8 +103,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<DataPMB> getDataPMB() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['dataPMB']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['dataPMB']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
         return DataPMB.fromJson(decoded['data']);
@@ -108,10 +122,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasMahasiswaBaru() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_fakultas']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranFakultas.fromJson(e))
@@ -126,10 +143,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProvinsi>> getPersebaranProvinsiMahasiswaBaru() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_provinsi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_provinsi']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranProvinsi.fromJson(e))
@@ -144,12 +164,21 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProdi>> getPersebaranProdiMahasiswaBaru(
       String fakKode) async {
+    print('aaa ' + fakKode);
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      // final response = await get(
+      //     Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));  ----> BUG, data tidak berubah mengikuti param.
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_prodi']}',
+        {'fak': fakKode},
+        null,
+      );
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
+        // print(fakKode);
+        // print(response.body);
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
             .toList();
@@ -163,10 +192,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPmbRegulerFakultas() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_fakultas']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranFakultas.fromJson(e))
@@ -181,10 +213,15 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProdi>> getPmbRegulerProdi(String fakKode) async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      // final response = await get(
+      //     Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_prodi']}',
+        {'fak': fakKode},
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
@@ -199,10 +236,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getMhsLokalFakultas() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_fakultas']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranFakultas.fromJson(e))
@@ -217,10 +257,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranProdi>> getMhsLokalProdi(String fakKode) async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['pmb']['persebaran_prodi']}?fak=$fakKode'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['persebaran_prodi']}',
+        {'fak': fakKode},
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranProdi.fromJson(e))
@@ -234,8 +277,14 @@ class DataSourceImpl implements DataSource {
 
   Future<List<Waktu>> getTrenPmb() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['pmb']['tren_pmb_harian']}'));
+      // final response =
+      //     await get(Uri.parse('$url${endpoint['pmb']['tren_pmb_harian']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['pmb']['tren_pmb_harian']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -395,7 +444,7 @@ class DataSourceImpl implements DataSource {
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['mahasiswa_status']['jumlah']}'));
-      if (response.statusCode == 200) {      
+      if (response.statusCode == 200) {
         return studentBodyFromJson(response.body);
       } else {
         throw ServerException();
