@@ -18,10 +18,12 @@ class PersebaranProdiChart extends StatefulWidget {
 }
 
 class _PersebaranProdiChartState extends State<PersebaranProdiChart> {
-  String fakKode;
   _PersebaranProdiChartState(this.fakKode);
+  String fakKode;
+
   @override
   Widget build(BuildContext context) {
+    print('_PersebaranProdiChartState ' + fakKode);
     final akademikCubit = context.read<AkademikCubit>();
     return SizedBox(
       height: 300,
@@ -30,8 +32,7 @@ class _PersebaranProdiChartState extends State<PersebaranProdiChart> {
         buildWhen: (previous, current) => current is PersebaranPMBState,
         builder: (context, state) {
           // print('page prodi');
-          // print(fakKode);
-          // print(state);
+          print(fakKode);
           if (state is PersebaranPMBLoaded) {
             List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
               charts.Series<PersebaranBerdasarkan, String>(

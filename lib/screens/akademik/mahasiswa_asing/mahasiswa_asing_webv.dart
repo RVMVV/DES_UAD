@@ -16,7 +16,9 @@ class _MahasiswaAsingWebvState extends State<MahasiswaAsingWebv> {
 
     WebViewController controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse('https://museum.uad.ac.id/testing/index2.php'));
+      // ..loadRequest(Uri.parse('https://museum.uad.ac.id/testing/index2.php')
+      ..loadRequest(Uri.parse(
+          'https://apexcharts.com/javascript-chart-demos/line-charts/data-labels'));
 
     return Container(
       height: 300,
