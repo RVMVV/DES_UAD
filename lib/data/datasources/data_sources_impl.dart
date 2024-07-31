@@ -392,12 +392,10 @@ class DataSourceImpl implements DataSource {
 
   @override
   Future<StudentBody> getStudentBody() async {
-    // final token = await SharedPreferences.getInstance().then((value) => value.getString('token'));
     try {
       final Response response =
           await get(Uri.parse('$url${endpoint['mahasiswa_status']['jumlah']}'));
-      if (response.statusCode == 200) {
-        // print(token);
+      if (response.statusCode == 200) {      
         return studentBodyFromJson(response.body);
       } else {
         throw ServerException();
