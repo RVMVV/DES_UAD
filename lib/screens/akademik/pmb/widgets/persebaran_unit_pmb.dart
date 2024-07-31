@@ -229,77 +229,76 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   void showFakultasPersebaran2() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: false,
       builder: (BuildContext context) {
-        return SizedBox(
-          width: double.infinity,
-          child: BlocBuilder<PmbCubit, PmbState>(
-            builder: (context, state) {
-              if (state is RefFakultasLoaded) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 32, horizontal: 16),
-                      child: Text(
-                        'Pilih Fakultas',
-                        style: Styles.kPublicSemiBoldHeadingFour
-                            .copyWith(color: kGrey900),
-                      ),
+        final pmbCubit = context.read<PmbCubit>();
+        return BlocBuilder<PmbCubit, PmbState>(
+          bloc: pmbCubit..getRefFakultas(),
+          builder: (context, state) {
+            if (state is RefFakultasLoaded) {
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 32, horizontal: 16),
+                    child: Text(
+                      'Pilih Fakultas',
+                      style: Styles.kPublicSemiBoldHeadingFour
+                          .copyWith(color: kGrey900),
                     ),
-                    Divider(
-                      color: kLightGrey300.withOpacity(30 / 100),
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: state.data.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          String data = state.data[index].fakultas;
-                          String fkKode = state.data[index].fakKode;
-                          return ListTile(
-                            leading: data == selectedFakultas
-                                ? const Icon(Icons.check, color: kBlue)
-                                : null,
-                            onTap: () {
-                              setState(() {
-                                showProdiPmb = false;
-                                selectedFakultas = data;
-                                selectedFakKode = fkKode;
-                              });
+                  ),
+                  Divider(
+                    color: kLightGrey300.withOpacity(30 / 100),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: state.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        String data = state.data[index].fakultas;
+                        String idFak = state.data[index].fakKode;
 
-                              Future.delayed(const Duration(milliseconds: 500),
-                                  () {
-                                setState(() {
-                                  showProdiPmb = true;
-                                });
+                        return ListTile(
+                          leading: data == selectedFakultas
+                              ? const Icon(Icons.check, color: kBlue)
+                              : null,
+                          onTap: () {
+                            setState(() {
+                              showProdiPmb = false;
+                              selectedFakultas = data;
+                              selectedFakKode = idFak;
+                            });
+
+                            Future.delayed(const Duration(milliseconds: 500),
+                                () {
+                              setState(() {
+                                showProdiPmb = true;
                               });
-                              Navigator.pop(context);
-                              // print(selectedFakKode);
-                            },
-                            title: Text(
-                              data,
-                              style: Styles.kInterMediumBodyOne.copyWith(
-                                color: kGrey900,
-                              ),
+                            });
+
+                            Navigator.pop(context);
+                          },
+                          title: Text(
+                            data,
+                            style: Styles.kInterMediumBodyOne.copyWith(
+                              color: kGrey900,
                             ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Divider(
-                              color: kLightGrey300.withOpacity(30 / 100),
-                            ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Divider(
+                            color: kLightGrey300.withOpacity(30 / 100),
+                          ),
+                        );
+                      },
                     ),
-                  ],
-                );
-              }
-              return const SizedBox();
-            },
-          ),
+                  ),
+                ],
+              );
+            }
+            return const SizedBox();
+          },
         );
       },
       backgroundColor: kWhite,
