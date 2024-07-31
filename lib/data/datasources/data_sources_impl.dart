@@ -35,6 +35,7 @@ import '../models/sdm/sdm_pendidikan_dosen_model.dart';
 import '../models/sdm/sdm_pendidikan_tendik_model.dart';
 import '../models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import 'data_sources.dart';
+import 'service_helper.dart';
 
 class DataSourceImpl implements DataSource {
   @override
@@ -57,9 +58,8 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getJumlahMahasiswaAsing() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'),
-          headers: {});
+      final response =
+          await get(Uri.parse('$url${endpoint['mahasiswa_asing']['jumlah']}'));
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -731,8 +731,16 @@ class DataSourceImpl implements DataSource {
   @override
   Future<DosenJabfung> getDosenJabfung(String jabf) async {
     try {
-      final response = await get(Uri.parse(
-          '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
+      // final response = await get(Uri.parse(
+      //     '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
+
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}',
+        {'jabfung': '$jabf'},
+        null,
+      );
+
       if (response.statusCode == 200) {
         // print(response.body);
         return dosenJabfungFromJson(response.body);
