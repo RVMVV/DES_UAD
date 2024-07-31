@@ -396,10 +396,13 @@ class DataSourceImpl implements DataSource {
   Future<List<PerbandinganKeberhasilanStudi>>
       getPerbandinganKeberhasilanStudi() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['keberhasilan']['perbandingan']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['keberhasilan']['perbandingan']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PerbandinganKeberhasilanStudi.fromJson(e))
@@ -415,10 +418,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<Koleksi> getKoleksi() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['perpustakaan']['koleksi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['perpustakaan']['koleksi']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return Koleksi.fromJson(decoded['data']);
       }
@@ -432,10 +438,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getEksemplar() async {
     try {
-      final response =
-          await get(Uri.parse('$url${endpoint['perpustakaan']['eksemplar']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['perpustakaan']['eksemplar']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return decoded['data']['total_eksemplar'];
       }
@@ -449,8 +458,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<StudentBody> getStudentBody() async {
     try {
-      final Response response =
-          await get(Uri.parse('$url${endpoint['mahasiswa_status']['jumlah']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mahasiswa_status']['jumlah']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return studentBodyFromJson(response.body);
       } else {
@@ -464,8 +477,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<AkademikStudentStatus> getStudentStatus() async {
     try {
-      final Response response =
-          await get(Uri.parse('$url${endpoint['mahasiswa_status']['status']}'));
+      // final Response response =
+      //     await get(Uri.parse('$url${endpoint['mahasiswa_status']['status']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mahasiswa_status']['status']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return akademikStudentStatusFromJson(response.body);
       } else {
@@ -480,8 +499,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<SdmJumlahDosen> getJumlahDosen() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_dosen']['ratio_jumlah']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['ratio_jumlah']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return sdmJumlahDosenFromJson(response.body);
       } else {
@@ -495,8 +518,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<SdmJumlahTendik> getJumlahTendik() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['ratio_jumlah']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['ratio_jumlah']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return sdmJumlahTendikFromJson(response.body);
       } else {
@@ -510,8 +537,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<SdmGenderDosen> getGenderDosen() async {
     try {
-      final Response response =
-          await get(Uri.parse('$url${endpoint['sdm']['sdm_dosen']['gender']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['gender']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return sdmGenderDosenFromJson(response.body);
       } else {
@@ -525,8 +556,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<SdmGenderTendik> getGenderTendik() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['gender']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['gender']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return sdmGenderTendikFromJson(response.body);
       } else {
@@ -540,10 +575,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getTotalProdi() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mutu']['akreditasi']['total']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mutu']['akreditasi']['total']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return decoded['data']['total_prodi'];
       }
@@ -556,10 +594,13 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranAkreditasi>> getPersebaranAkreditasi() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mutu']['akreditasi']['prodi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mutu']['akreditasi']['prodi']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranAkreditasi.fromJson(e))
@@ -580,16 +621,18 @@ class DataSourceImpl implements DataSource {
   Future<List<PersebaranAkreditasiInternasional>>
       getPersebaranAkreditasInternasional() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mutu']['akreditasi']['internasional']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mutu']['akreditasi']['internasional']}',
+        null,
+        null,
+      );
       final decoded = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         return (decoded['data'] as List)
             .map((e) => PersebaranAkreditasiInternasional.fromJson(e))
             .toList();
       }
-
       throw ServerException();
     } catch (e) {
       throw ServerException();
@@ -599,11 +642,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataPendidikanDosen>> getPendidikanDosen() async {
     try {
-      final Response response = await get(
-        Uri.parse('$url${endpoint['sdm']['sdm_dosen']['pendidikan']}'),
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['pendidikan']}',
+        null,
+        null,
       );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataPendidikanDosen.fromJson(e)).toList();
       } else {
@@ -617,10 +663,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataJabatanFungsionalDosen>> getJabatanFungsionalDosen() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_dosen']['fungsional']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['fungsional']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataJabatanFungsionalDosen.fromJson(e)).toList();
       } else {
@@ -634,10 +684,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataJabatanFungsionalTendik>> getJabatanFungsionalTendik() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['fungsional']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['fungsional']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data
             .map((e) => DataJabatanFungsionalTendik.fromJson(e))
@@ -653,10 +707,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataPendidikanTendik>> getPendidikanTendik() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_tendik']['pendidikan']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['pendidikan']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataPendidikanTendik.fromJson(e)).toList();
       } else {
@@ -670,10 +728,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataSertifikasiProdi>> getSertifikasiProdi() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['mutu']['akreditasi']['sertifikasi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mutu']['akreditasi']['sertifikasi']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataSertifikasiProdi.fromJson(e)).toList();
       } else {
@@ -687,10 +749,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<DataPersebaranProdiDosen>> getPersebaranProdiDosen() async {
     try {
-      final Response response = await get(
-          Uri.parse('$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => DataPersebaranProdiDosen.fromJson(e)).toList();
       } else {
@@ -704,10 +770,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasDosen() async {
     try {
-      final Response response = await get(Uri.parse(
-          '$url${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['persebaran_fakultas']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
       } else {
@@ -721,8 +791,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<ProdiAkreditasi> getProdiAkreditasi() async {
     try {
-      final response = await get(
-          Uri.parse('$url${endpoint['mutu']['akreditasi']['akre_prodi']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['mutu']['akreditasi']['akre_prodi']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return prodiAkreditasiFromJson(response.body);
       }
@@ -735,8 +809,12 @@ class DataSourceImpl implements DataSource {
   @override
   Future<PrestasiMahasiswa> getPrestasiMahasiswa() async {
     try {
-      final Response response =
-          await get(Uri.parse('$url${endpoint['prestasi']['mahasiswa']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['prestasi']['mahasiswa']}',
+        null,
+        null,
+      );
       if (response.statusCode == 200) {
         return prestasiMahasiswaFromJson(response.body);
       } else {
@@ -750,10 +828,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<RefFak>> refFakultas() async {
     try {
-      final Response response =
-          await get(Uri.parse('$url${endpoint['general']['ref_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['general']['ref_fakultas']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => RefFak.fromJson(e)).toList();
       } else {
@@ -768,10 +850,16 @@ class DataSourceImpl implements DataSource {
   Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(
       String fakKode) async {
     try {
-      final Response response = await get(Uri.parse(
-          '$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
+      // final Response response = await get(Uri.parse(
+      //     '$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}',
+        {'fak': fakKode},
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranProdi.fromJson(e)).toList();
       } else {
@@ -785,13 +873,10 @@ class DataSourceImpl implements DataSource {
   @override
   Future<DosenJabfung> getDosenJabfung(String jabf) async {
     try {
-      // final response = await get(Uri.parse(
-      //     '$url${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}?jabfung=$jabf'));
-
       final response = await ServiceHelper().service(
         'get',
         '${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}',
-        {'jabfung': '$jabf'},
+        {'jabfung': jabf},
         null,
       );
 
@@ -808,10 +893,14 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasTendik() async {
     try {
-      final Response response = await get(Uri.parse(
-          '$url${endpoint['sdm']['sdm_tendik']['persebaran_fakultas']}'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['persebaran_fakultas']}',
+        null,
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranFakultas.fromJson(e)).toList();
       } else {
@@ -839,10 +928,17 @@ class DataSourceImpl implements DataSource {
   Future<List<PersebaranProdi>> getPersebaranProdiTendikBerdasarkanFakultas(
       String fak) async {
     try {
-      final Response response = await get(Uri.parse(
-          '$url${endpoint['sdm']['sdm_tendik']['persebaran_prodi']}?fak=$fak'));
+      // final Response response = await get(Uri.parse(
+      //     '$url${endpoint['sdm']['sdm_tendik']['persebaran_prodi']}?fak=$fak'));
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_tendik']['persebaran_prodi']}',
+        {'fak': fak},
+        null,
+      );
+      final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final decoded = jsonDecode(response.body);
+        print(response.body);
         final List<dynamic> data = decoded['data'];
         return data.map((e) => PersebaranProdi.fromJson(e)).toList();
       } else {
