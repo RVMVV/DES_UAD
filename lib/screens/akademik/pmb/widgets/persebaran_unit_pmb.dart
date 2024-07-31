@@ -27,7 +27,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   bool isFakultasSelected = false;
   bool isProdiSelected = false;
   bool isProvinsiSelected = false;
-  bool showProdi = true;
+  bool showProdiPmb = true;
 
   int selectedTab = 0;
   String selectedFakultas = 'Teknologi Industri';
@@ -177,7 +177,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      showFakultasPersebaran();
+                      showFakultasPersebaran2();
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -203,7 +203,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                       ),
                     ),
                   ),
-                  if (showProdi)
+                  if (showProdiPmb)
                     PersebaranProdiChart(
                       fakKode: selectedFakKode,
                     )
@@ -225,7 +225,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
     );
   }
 
-  void showFakultasPersebaran() {
+  void showFakultasPersebaran2() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: false,
@@ -261,8 +261,16 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
                                 : null,
                             onTap: () {
                               setState(() {
+                                showProdiPmb = false;
                                 selectedFakultas = data;
                                 selectedFakKode = fkKode;
+                              });
+
+                              Future.delayed(const Duration(milliseconds: 500),
+                                  () {
+                                setState(() {
+                                  showProdiPmb = true;
+                                });
                               });
                               Navigator.pop(context);
                             },
