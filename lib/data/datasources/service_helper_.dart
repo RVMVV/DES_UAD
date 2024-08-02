@@ -1,0 +1,31 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
+class ServiceHelpers {
+  Future service(String method, String endpoint, dynamic parameter,
+      dynamic bodyForm) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString('token') ?? '-';
+    String cookies = pref.getString('cookies') ?? '-';
+
+    var header = {
+      'X-RESTAPI-KEY': 'd9eb71ab162db54d6f1689be0a1ed744',
+      'Authorization': 'Bearer ' + token,
+      'Cookie': cookies
+    };
+    var urlApi = "d3v.uad.id";
+    var mod = "/restapi/api.php/des/";
+
+    var urlendpoint = mod + endpoint;
+    dynamic url = Uri.http(urlApi, urlendpoint, parameter);
+    print(url);
+
+    if (method == 'post') {
+      dynamic response = await http.post(url, body: bodyForm, headers: header);
+      return response;
+    } else {
+      dynamic response = await http.get(url, headers: header);
+      return response;
+    }
+  }
+}

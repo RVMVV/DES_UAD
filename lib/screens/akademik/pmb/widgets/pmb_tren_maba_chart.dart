@@ -11,16 +11,17 @@ class PmbTrenMabaChart extends StatefulWidget {
 class _PmbTrenMabaChartState extends State<PmbTrenMabaChart> {
   @override
   Widget build(BuildContext context) {
-    // WebViewController controller;
+    WebViewController controller;
 
-    // controller = WebViewController()
-    //   ..loadRequest(Uri.parse(
-    //       'https://museum.uad.ac.id/index.php/auth/Auth/testtt/d9eb71ab162db54d6f1689be0a1ed744db9b91b0'));
+    controller = WebViewController()
+      ..loadRequest(Uri.parse(
+          'https://museum.uad.ac.id/index.php/auth/Auth/testtt/d9eb71ab162db54d6f1689be0a1ed744db9b91b0'
+          // 'https://museum.uad.ac.id/testing/index2.php'
+          ));
 
-    // return Container(
-    //   height: 400,
-    //   child: WebViewWidget(controller: controller),
-    // );
-    return Text('data');
+    return Container(
+      height: 400,
+      child: WebViewWidget(controller: controller),
+    );
   }
 }

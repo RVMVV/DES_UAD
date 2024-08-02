@@ -36,7 +36,7 @@ import '../models/sdm/sdm_pendidikan_tendik_model.dart';
 import '../models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 import 'data_sources.dart';
 import 'service_helper.dart';
-// import 'service_helper_.dart';
+import 'service_helper_.dart';
 
 class DataSourceImpl implements DataSource {
   @override
@@ -61,7 +61,7 @@ class DataSourceImpl implements DataSource {
   @override
   Future<String> getJumlahMahasiswaAsing() async {
     try {
-      final response = await ServiceHelper().service(
+      final response = await ServiceHelpers().service(
         'get',
         'Mahasiswa_asing/jumlah_mahasiswa',
         null,
@@ -83,19 +83,19 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranNegara>> getPersebaranNegara() async {
     try {
-      final response = await ServiceHelper().service(
-        'get',
-        '${endpoint['mahasiswa_asing']['persebaran_negara']}',
-        null,
-        null,
-      );
-
       // final response = await ServiceHelper().service(
       //   'get',
-      //   'Mahasiswa_asing/persebaran_negara',
-      //   {'tahun': ''},
+      //   '${endpoint['mahasiswa_asing']['persebaran_negara']}',
+      //   null,
       //   null,
       // );
+
+      final response = await ServiceHelpers().service(
+        'get',
+        'Mahasiswa_asing/persebaran_negara',
+        {'tahun': ''},
+        null,
+      );
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -131,19 +131,19 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<PersebaranFakultas>> getPersebaranFakultasMahasiswaBaru() async {
     try {
-      final response = await ServiceHelper().service(
-        'get',
-        '${endpoint['pmb']['persebaran_fakultas']}',
-        null,
-        null,
-      );
-
       // final response = await ServiceHelper().service(
       //   'get',
-      //   'Mahasiswa_baru/persebaran_fakultas',
-      //   {'tahun': ''},
+      //   '${endpoint['pmb']['persebaran_fakultas']}',
+      //   null,
       //   null,
       // );
+
+      final response = await ServiceHelpers().service(
+        'get',
+        'Mahasiswa_baru/persebaran_fakultas',
+        {'tahun': ''},
+        null,
+      );
 
       // print('getPersebaranFakultasMahasiswaBaru');
       // print(response.body);
@@ -848,19 +848,19 @@ class DataSourceImpl implements DataSource {
   @override
   Future<List<RefFak>> refFakultas() async {
     try {
-      final response = await ServiceHelper().service(
-        'get',
-        '${endpoint['general']['ref_fakultas']}',
-        null,
-        null,
-      );
-
       // final response = await ServiceHelper().service(
       //   'get',
-      //   'Mahasiswa_asing/list_fakultas',
+      //   '${endpoint['general']['ref_fakultas']}',
       //   null,
       //   null,
       // );
+
+      final response = await ServiceHelpers().service(
+        'get',
+        'Mahasiswa_asing/list_fakultas',
+        null,
+        null,
+      );
 
       final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {

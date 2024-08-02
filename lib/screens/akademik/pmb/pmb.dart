@@ -11,6 +11,7 @@ import '../../widgets/chart/line_chart_checkbox.dart';
 import '../widgets/app_bar_sub_menu_akademik.dart';
 import '../widgets/body_sub_menu_akademik.dart';
 import 'widgets/item_data_pmb.dart';
+import 'widgets/line_chart.dart';
 import 'widgets/persebaran_unit_pmb.dart';
 import 'widgets/pmb_non_reg.dart';
 import 'widgets/pmb_reg.dart';

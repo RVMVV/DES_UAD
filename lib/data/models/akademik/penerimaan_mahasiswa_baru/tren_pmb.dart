@@ -6,11 +6,10 @@ import 'dart:convert';
 
 TrenPmb trenPmbFromJson(String str) => TrenPmb.fromJson(json.decode(str));
 
-String trenPmbToJson(TrenPmb data) => json.encode(data.toJson());
-
 class TrenPmb {
   bool status;
-  List<Waktu> data;
+  // List<Waktu> data;
+  List<Hari> data;
   String code;
   String message;
 
@@ -23,17 +22,11 @@ class TrenPmb {
 
   factory TrenPmb.fromJson(Map<String, dynamic> json) => TrenPmb(
         status: json["status"],
-        data: List<Waktu>.from(json["data"].map((x) => Waktu.fromJson(x))),
+        // data: List<Waktu>.from(json["data"].map((x) => Waktu.fromJson(x))),
+        data: List<Hari>.from(json["data"].map((x) => Hari.fromJson(x))),
         code: json["code"],
         message: json["message"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-        "code": code,
-        "message": message,
-      };
 }
 
 class Waktu {
@@ -54,4 +47,22 @@ class Waktu {
         "jam": jam,
         "jumlah": jumlah,
       };
+}
+
+class Hari {
+  String hari;
+  String tanggal;
+  String jumlah;
+
+  Hari({
+    required this.hari,
+    required this.tanggal,
+    required this.jumlah,
+  });
+
+  factory Hari.fromJson(Map<String, dynamic> json) => Hari(
+        hari: json["hari"],
+        tanggal: json["tanggal"],
+        jumlah: json["jumlah"],
+      );
 }
