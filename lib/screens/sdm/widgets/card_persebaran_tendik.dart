@@ -140,10 +140,15 @@ class _PersebaranState extends State<PersebaranTendik> {
                   showAllData = !showAllData;
                 });
               },
-              child: Center(
-                child: Text(
-                  showAllData ? 'Ciutkan' : 'Lihat Semua',
-                  style: Styles.kPublicRegularBodyTwo.copyWith(color: kGrey500),
+              child: Visibility(
+                visible: isFakultasSelected,
+                child: Center(
+                  child: Text(
+                    showAllData ? 'Ciutkan' : 'Lihat Semua',
+                    style: Styles.kPublicRegularBodyTwo.copyWith(
+                      color: kGrey500,
+                    ),
+                  ),
                 ),
               ),
             ),

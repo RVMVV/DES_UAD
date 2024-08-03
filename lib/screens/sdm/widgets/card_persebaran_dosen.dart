@@ -137,11 +137,14 @@ class _PersebaranState extends State<PersebaranDosen> {
 
                 });
               },
-              child: Center(
-                child: Text(
-                  showAllData ? 'Ciutkan' : 'Lihat Semua',
-                  style: Styles.kPublicRegularBodyTwo.copyWith(
-                    color: kGrey500,
+              child: Visibility(
+                visible: isFakultasSelected,
+                child: Center(
+                  child: Text(
+                    showAllData ? 'Ciutkan' : 'Lihat Semua',
+                    style: Styles.kPublicRegularBodyTwo.copyWith(
+                      color: kGrey500,
+                    ),
                   ),
                 ),
               ),

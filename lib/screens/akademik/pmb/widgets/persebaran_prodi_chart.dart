@@ -32,7 +32,7 @@ class _PersebaranProdiChartState extends State<PersebaranProdiChart> {
         buildWhen: (previous, current) => current is PersebaranPMBState,
         builder: (context, state) {
           // print('page prodi');
-          print(fakKode);
+          // print(fakKode);
           if (state is PersebaranPMBLoaded) {
             List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
               charts.Series<PersebaranBerdasarkan, String>(
