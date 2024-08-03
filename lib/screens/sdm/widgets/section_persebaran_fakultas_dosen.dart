@@ -10,8 +10,7 @@ import '../../../data/models/persebaran_berdasarkan.dart';
 import '../../widgets/chart/horizontal_bar_chart.dart';
 
 class SdmPersebaranDosenFakultas extends StatelessWidget {
-
-  bool showAllData;
+  final bool showAllData;
 
   SdmPersebaranDosenFakultas({
     required this.showAllData,
@@ -21,7 +20,7 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SdmPreCubit cubit = context.read<SdmPreCubit>();
-    
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -29,42 +28,35 @@ class SdmPersebaranDosenFakultas extends StatelessWidget {
           fit: FlexFit.loose,
           child: BlocBuilder<SdmPreCubit, SdmPreState>(
             bloc: cubit..getPersebaranFakultasDosen(),
-            buildWhen: (previous, current) =>
-                current is PersebaranFakultasDosen,
+            buildWhen: (previous, current) => current is PersebaranFakultasDosen,
             builder: (context, state) {
               if (state is PersebaranFakultasDosenLoaded) {
-                final data = showAllData
-                    ? state.datas
-                    : state.datas.take(5).toList();
+                final dataLength = state.datas.length;
+                final data = showAllData ? state.datas : state.datas.take(dataLength < 5 ? dataLength : 5).toList();
+
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan1',
                     data: data,
-                    domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas + '${index}',
+                    domainFn: (datum, index) => (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => datum.getPercent,
-                    labelAccessorFn: (datum, index) =>
-                        '${(datum as PersebaranFakultas).fakultas} ${datum.getPercent}% ● ${datum.total}',
-                    insideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
+                    labelAccessorFn: (datum, index) => '${(datum as PersebaranFakultas).fakultas} ${datum.getPercent}% ● ${datum.total}',
+                    insideLabelStyleAccessorFn: (datum, index) => const charts.TextStyleSpec(
                       color: charts.MaterialPalette.white,
                       fontWeight: 'bold',
                     ),
-                    outsideLabelStyleAccessorFn: (datum, index) =>
-                        const charts.TextStyleSpec(
+                    outsideLabelStyleAccessorFn: (datum, index) => const charts.TextStyleSpec(
                       color: charts.MaterialPalette.black,
                       fontWeight: 'bold',
                     ),
                   ),
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan2',
-                    domainFn: (datum, index) =>
-                        (datum as PersebaranFakultas).fakultas + '${index}',
+                    domainFn: (datum, index) => (datum as PersebaranFakultas).fakultas + '${index}',
                     measureFn: (datum, index) => 100 - datum.getPercent,
                     data: data,
                     labelAccessorFn: (datum, index) => '',
-                    colorFn: (datum, index) =>
-                        const charts.Color(r: 52, g: 144, b: 252, a: 32),
+                    colorFn: (datum, index) => const charts.Color(r: 52, g: 144, b: 252, a: 32),
                   )
                 ];
                 return SizedBox(

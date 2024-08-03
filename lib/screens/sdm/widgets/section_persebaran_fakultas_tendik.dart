@@ -30,8 +30,8 @@ class SdmPersebaranTendikFakultas extends StatelessWidget {
                 return const Center();
               }
               if (state is PersebaranFakultasTendikLoaded) {
-                final data =
-                    showAllData ? state.datas : state.datas.take(5).toList();
+                final dataLength = state.datas.length;
+                final data = showAllData ? state.datas : state.datas.take(dataLength < 5 ? dataLength : 5).toList();
                 List<charts.Series<PersebaranBerdasarkan, String>> dataChart = [
                   charts.Series<PersebaranBerdasarkan, String>(
                     id: 'PersebaranBerdasarkan1',
