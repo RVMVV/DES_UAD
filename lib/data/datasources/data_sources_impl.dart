@@ -855,13 +855,6 @@ class DataSourceImpl implements DataSource {
         null,
       );
 
-      // final response = await ServiceHelper().service(
-      //   'get',
-      //   'Mahasiswa_asing/list_fakultas',
-      //   null,
-      //   null,
-      // );
-
       final decoded = jsonDecode(response.body);
       if (response.statusCode == 200) {
         final List<dynamic> data = decoded['data'];
@@ -878,8 +871,6 @@ class DataSourceImpl implements DataSource {
   Future<List<PersebaranProdi>> getPersebaranDosenProdiBerdasarkanFakultas(
       String fakKode) async {
     try {
-      // final Response response = await get(Uri.parse(
-      //     '$url${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}?fak=$fakKode'));
       final response = await ServiceHelper().service(
         'get',
         '${endpoint['sdm']['sdm_dosen']['persebaran_prodi']}',
@@ -910,6 +901,26 @@ class DataSourceImpl implements DataSource {
 
       if (response.statusCode == 200) {
         // print(response.body);
+        return dosenJabfungFromJson(response.body);
+      }
+      throw ServerException();
+    } catch (e) {
+      throw ServerException();
+    }
+  }
+
+  // ini untuk pagination
+  @override
+  Future<DosenJabfung> getDosenJabfungPagination (String jabf, int pageNum) async {
+    try {
+      final response = await ServiceHelper().service(
+        'get',
+        '${endpoint['sdm']['sdm_dosen']['dosen_jabfung']}',
+        {'jabfung': jabf, 'pageNumber': pageNum.toString()},
+        null,
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
         return dosenJabfungFromJson(response.body);
       }
       throw ServerException();

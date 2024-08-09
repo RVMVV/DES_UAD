@@ -20,8 +20,9 @@ class PerpustakaanPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Perpustakaan',
         ),
-        height: MediaQuery.sizeOf(context).height,
+        // height: MediaQuery.sizeOf(context).height,
         children: [
+          kGap16,
           BaseContainer.styledBigCard(
             isRow: true,
             children: [

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:des_uad/core/failure/server_exception.dart';
 import 'package:des_uad/data/models/sdm/sdm_jabatan_fung_dosen_model.dart';
 import 'package:des_uad/data/models/sdm/sdm_jabatan_fung_tendik_model.dart';
 import 'package:des_uad/data/models/sdm/sdm_pendidikan_dosen_model.dart';
@@ -18,6 +19,10 @@ import '../data/models/sdm/sdm_persebaran_prodi_dosen_model.dart';
 part 'sdm_state.dart';
 
 class SdmCubit extends Cubit<SdmState> {
+  //eksperimen
+  List<Dosen> _allDosen = [];
+  int _currentPage = 1;
+
   SdmCubit(this.dataSource) : super(SdmInitial());
 
   final DataSource dataSource;
@@ -94,9 +99,11 @@ class SdmCubit extends Cubit<SdmState> {
     emit(PersebaranFakultasTendikLoaded(result));
   }
 
-  Future<void> getPersebaranProdiTendikBerdasarkanFakultas(String fakKode) async {
+  Future<void> getPersebaranProdiTendikBerdasarkanFakultas(
+      String fakKode) async {
     emit(PersebaranProdiTendikLoading());
-    final result = await dataSource.getPersebaranProdiTendikBerdasarkanFakultas(fakKode);
+    final result =
+        await dataSource.getPersebaranProdiTendikBerdasarkanFakultas(fakKode);
     emit(PersebaranProdiTendikLoaded(result));
   }
 
@@ -112,4 +119,55 @@ class SdmCubit extends Cubit<SdmState> {
     final result = await dataSource.getDosenJabfung(jabfung);
     emit(DosenJabfungLoaded(result));
   }
+
+  //nonaktif sementara
+  // Future<void> getDosenJabfungPagination(String jabfung, int pageNum) async {
+  //   emit(DosenJabfungLoading());
+  //   final result = await dataSource.getDosenJabfungPagination(jabfung, pageNum);
+  //   emit(DosenJabfungLoaded(result));
+
+  // }
+
+  //eksperimen - it works but need some works - non active temporary
+  Future<void> getDosenJabfungPagination(String jabfung, int pageNum) async {
+    emit(DosenJabfungPaginationLoading());
+    try {
+      final response =
+          await dataSource.getDosenJabfungPagination(jabfung, pageNum);
+      // Parse response to model
+      final DosenJabfung data = response;
+
+      if (pageNum == 1) {
+        // Jika ini adalah halaman pertama, reset list data
+        _allDosen = data.data;  
+      } else {
+        // Tambahkan data dari halaman berikutnya ke list yang sudah ada
+        _allDosen.addAll(data.data);
+      }
+      _currentPage = pageNum;
+      emit(DosenJabfungPaginationLoaded(_allDosen, _currentPage));
+    } catch (e) {
+      print('something wrong ${e.toString()}');
+      emit(DosenJabfungPaginationError(e.toString()));
+    }
+  }
+
+  // Future<void> getDosenJabfungPagination(String jabfung, int pageNum) async {
+  //   if (_currentPage == pageNum) return; // Avoid reloading the same page
+
+  //   emit(DosenJabfungPaginationLoading());
+  //   try {
+  //     final response = await dataSource.getDosenJabfungPagination(jabfung, pageNum);
+  //     final data = response.data as List;
+  //     List<Dosen> newDosenList = data.map((item) => Dosen.fromJson(item)).toList();
+
+  //     _allDosen.addAll(newDosenList); // Add new data to the list
+  //     _currentPage = pageNum;
+
+  //     emit(DosenJabfungPaginationLoaded(_allDosen, _currentPage));
+  //   } catch (e) {
+  //     print('something wrong ${e.toString()}');
+  //     emit(DosenJabfungPaginationError(e.toString()));
+  //   }
+  // }
 }

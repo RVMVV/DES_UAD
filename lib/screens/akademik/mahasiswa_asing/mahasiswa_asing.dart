@@ -28,8 +28,9 @@ class MahasiswaAsingPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Mahasiswa Asing',
         ),
-        height: 1050,
+        // height: 1050,
         children: [
+          kGap16,
           BaseContainer.styledBigCard(
             isRow: true,
             children: [
@@ -125,6 +126,7 @@ class MahasiswaAsingPage extends StatelessWidget {
               ),
             ],
           ),
+          kGap16,
         ],
       ),
     );

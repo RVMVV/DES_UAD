@@ -15,25 +15,33 @@ class AppBarSubMenuAkademik extends StatelessWidget {
     return Container(
       color: kBlue,
       width: double.infinity,
-      height: 170,
-      child: Stack(
+      height: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: IconButton(
-              highlightColor: Colors.transparent,
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(
-                Icons.arrow_back,
-                color: kWhite,
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              title,
-              style: Styles.kPublicSemiBoldHeadingFour.copyWith(color: kWhite),
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Row(
+              children: [
+                IconButton(
+                  highlightColor: Colors.transparent,
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: kWhite,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Styles.kPublicSemiBoldHeadingFour
+                        .copyWith(color: kWhite),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                // This empty SizedBox balances the IconButton on the left
+                const SizedBox(width: 50), // Assuming IconButton width is 48
+              ],
             ),
           ),
         ],

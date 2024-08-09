@@ -18,7 +18,7 @@ class PublikasiPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Publikasi',
         ),
-        height: MediaQuery.sizeOf(context).height,
+        // height: MediaQuery.sizeOf(context).height,
         children: [
           BaseContainer.styledBigCard(
             children: const [
