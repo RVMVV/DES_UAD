@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constant_finals.dart';
+
 class DosenJabfungItem extends StatefulWidget {
   DosenJabfungItem(
       {super.key,
@@ -75,20 +77,19 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          'Fakultas',
-                        ),
+                        Text('Fakultas',
+                            style: Styles.kPublicRegularBodyTwo
+                                .copyWith(color: kGrey900)),
                         Text(
                           widget.fakultas,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Styles.kPublicBoldBodyTwo
+                              .copyWith(color: kGrey900),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 3),
+                const SizedBox(height: 6),
                 Container(
                   width: 350.0,
                   decoration: BoxDecoration(
@@ -103,13 +104,12 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
                       children: [
                         Text(
                           'Program Studi',
+                          style: Styles.kPublicRegularBodyTwo
+                              .copyWith(color: kGrey900),
                         ),
-                        Text(
-                          widget.prodi,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Text(widget.prodi,
+                            style: Styles.kPublicBoldBodyTwo
+                                .copyWith(color: kGrey900)),
                       ],
                     ),
                   ),
@@ -118,7 +118,7 @@ class _DosenJabfungItemState extends State<DosenJabfungItem> {
             ),
           ),
         ),
-        Divider()
+        const Divider()
       ],
     );
   }

@@ -5,32 +5,26 @@ class BodySubMenuAkademik extends StatelessWidget {
     super.key,
     required this.appBar,
     required this.children,
-    this.height = 3000,
+    // this.height = 3000,
   });
 
   final Widget appBar;
   final List<Widget> children;
-  final double height;
+  // final double height;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
-        height: height,
-        child: Stack(
+        // height: height,
+        child: Column(
           children: [
             appBar,
-            Positioned(
-              top: 120,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                ),
-                child: Column(children: children),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 18,
               ),
+              child: Column(children: children),
             ),
           ],
         ),

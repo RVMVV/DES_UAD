@@ -1,6 +1,8 @@
 import 'package:des_uad/cubit/pmb_cubit.dart';
 import 'package:des_uad/cubit/sdm_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,7 +30,7 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
   bool isProdiSelected = false;
   bool isProvinsiSelected = false;
   bool showProdiPmb = true;
-
+  bool showAllProvinsi = false;
   int selectedTab = 0;
   String selectedFakultas = 'Teknologi Industri';
   String selectedFakKode = 'fti'; // Menambahkan variabel pilihan
@@ -217,9 +219,33 @@ class _PersebaranState extends State<PersebaranUnitPmb> {
             ),
             Visibility(
               visible: (isProvinsiSelected == true) ? true : false,
-              child: PersebaranProvinsiChart(),
+              child: PersebaranProvinsiChart(
+                showAllProvinsi: showAllProvinsi,
+              ),
             ),
             kGap20,
+            Visibility(
+              visible: isProvinsiSelected == true ? true : false,
+              child: const Divider(),
+            ),
+            Visibility(
+              visible: isProvinsiSelected == true ? true : false,
+              child: Center(
+                  child: InkWell(
+                onTap: () {
+                  setState(() {
+                    showAllProvinsi = !showAllProvinsi;
+                  });
+                  print(showAllProvinsi);
+                },
+                child: Text(
+                  showAllProvinsi ? 'Ciutkan' : 'Lihat Semua',
+                  style: Styles.kPublicRegularBodyTwo.copyWith(
+                    color: kGrey500,
+                  ),
+                ),
+              )),
+            ),
           ],
         ),
       ),

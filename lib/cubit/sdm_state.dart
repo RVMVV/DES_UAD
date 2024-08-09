@@ -27,6 +27,9 @@ final class SdmPersebaranTendik extends SdmState {}
 
 final class SdmDosenJabfung extends SdmState {}
 
+//eksperimen
+final class SdmDosenJabfungPagination extends SdmState {}
+
 final class SdmJumlahDosenLoading extends SdmJumlah {}
 
 final class SdmJumlahDosenLoaded extends SdmJumlah {
@@ -87,20 +90,21 @@ final class PersebaranProdiDosenLoaded extends SdmProdiDosen {
   PersebaranProdiDosenLoaded(this.data);
 }
 
-
 final class PersebaranDosenProdiFakultasLoaded extends SdmPersebaranDosen {
   final List<PersebaranBerdasarkan> datas;
   PersebaranDosenProdiFakultasLoaded(this.datas);
 }
 
 final class PersebaranFakultasTendikLoading extends SdmPersebaranTendik {}
+
 final class PersebaranFakultasTendikLoaded extends SdmPersebaranTendik {
   final List<PersebaranBerdasarkan> datas;
   PersebaranFakultasTendikLoaded(this.datas);
 }
 
 final class PersebaranProdiTendikLoading extends SdmPersebaranTendik {}
-final class PersebaranProdiTendikLoaded extends SdmPersebaranTendik{
+
+final class PersebaranProdiTendikLoaded extends SdmPersebaranTendik {
   final List<PersebaranProdi> datas;
   PersebaranProdiTendikLoaded(this.datas);
 }
@@ -110,4 +114,20 @@ final class DosenJabfungLoading extends SdmDosenJabfung {}
 final class DosenJabfungLoaded extends SdmDosenJabfung {
   final DosenJabfung datas;
   DosenJabfungLoaded(this.datas);
+}
+
+//eksperimen
+final class DosenJabfungPaginationLoading extends SdmDosenJabfungPagination {}
+
+final class DosenJabfungPaginationLoaded extends SdmDosenJabfungPagination {
+  final List<Dosen> datas;
+  final int currentPage;
+
+  DosenJabfungPaginationLoaded(this.datas, this.currentPage);
+}
+
+final class DosenJabfungPaginationError extends SdmDosenJabfungPagination {
+  final String error;
+
+  DosenJabfungPaginationError(this.error);
 }

@@ -19,8 +19,9 @@ class AIKPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'AIK',
         ),
-        height: 1950,
+        // height: 1950,
         children: [
+          kGap16,
           BaseContainer.styledBigCard(
             children: [
               const BigCardTitle(
@@ -120,6 +121,7 @@ class AIKPage extends StatelessWidget {
               ),
             ],
           ),
+          kGap16,
         ],
       ),
     );

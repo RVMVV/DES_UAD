@@ -25,8 +25,9 @@ class MahasiswaLokalPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Mahasiswa Lokal',
         ),
-        height: 1250,
+        // height: 1250,
         children: [
+          kGap16,
           BaseContainer.styledBigCard(
             isRow: true,
             children: [
@@ -70,7 +71,6 @@ class MahasiswaLokalPage extends StatelessWidget {
               BigCardTitle(
                 title: 'Tren Mahasiswa Lokal',
               ),
-
               kGap16,
               MahasiswaLokalWebv()
             ],
@@ -79,6 +79,7 @@ class MahasiswaLokalPage extends StatelessWidget {
           MhsLokalChart(
             title: 'Persebaran PMB',
           ),
+          kGap16,
           // BaseContainer.styledBigCard(
           //   children: [
           //     const BigCardTitle(

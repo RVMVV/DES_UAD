@@ -25,9 +25,10 @@ class KeberhasilanStudiPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Keberhasilan Studi',
         ),
-        height: 1600,
+        // height: 1600,
         children: [
           // Studi
+          kGap16,
           BaseContainer.styledBigCard(
             children: [
               const BigCardTitle(
@@ -152,6 +153,7 @@ class KeberhasilanStudiPage extends StatelessWidget {
               ),
             ],
           ),
+          kGap16,
         ],
       ),
     );

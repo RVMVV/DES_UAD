@@ -24,7 +24,7 @@ class KelulusanPage extends StatelessWidget {
         appBar: const AppBarSubMenuAkademik(
           title: 'Kelulusan Mahasiswa',
         ),
-        height: 1100,
+        // height: 1100,
         children: [
           // AppBar
           BaseContainer.styledBigCard(
@@ -104,6 +104,7 @@ class KelulusanPage extends StatelessWidget {
               ),
             ],
           ),
+          kGap16,
         ],
       ),
     );
