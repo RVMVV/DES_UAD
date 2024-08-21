@@ -142,6 +142,7 @@ const Color kLightSkyBlue = Color(0xFFA2CCFE);
 const Color kYellow = Color(0xFFFFB444);
 const Color kPink = Color(0xFFFF5C76);
 const Color kRed = Color(0xFFFF7368);
+const Color kBrickRed = Color(0xFFE3112D);
 const Color kGreen = Color(0xFF00A991);
 const Color kLightGreen = Color(0xFF8AD7CC);
 const Color kPurple = Color(0xFF5F23FD);

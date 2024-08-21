@@ -147,7 +147,7 @@ class SdmCubit extends Cubit<SdmState> {
       _currentPage = pageNum;
       emit(DosenJabfungPaginationLoaded(_allDosen, _currentPage));
     } catch (e) {
-      print('something wrong ${e.toString()}');
+      // print('something wrong ${e.toString()}');
       emit(DosenJabfungPaginationError(e.toString()));
     }
   }

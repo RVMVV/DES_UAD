@@ -14,6 +14,12 @@ final class StudentBodyLoaded extends StudentBodyState {
   final DataStudent data;
   StudentBodyLoaded(this.data);
 }
+final class StudentBodyEmpty extends StudentBodyState{}
+
+final class StudentBodyError extends StudentBodyState {
+  final String message;
+  StudentBodyError(this.message);
+}
 
 
 final class AkademikStudentStatusLoading extends StudentStatusState {}

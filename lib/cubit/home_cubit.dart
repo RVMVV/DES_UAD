@@ -23,4 +23,19 @@ class HomeCubit extends Cubit<HomeState> {
         await dataSource.getStudentStatus();
     emit(AkademikStudentStatusLoaded(akademikStatus.data));
   }
-}
+
+  Future<void> getExceptionForHomepage() async {
+    emit(StudentBodyLoading());
+    try {
+      final data = await dataSource.getStudentBody();
+      if(data.status != 200) {
+        emit(StudentBodyEmpty());
+      }else{
+        emit(StudentBodyLoaded(data.data));
+      }
+    } catch (e) {
+      emit(StudentBodyError('Something Wrong'));
+    }
+
+    }
+  }
