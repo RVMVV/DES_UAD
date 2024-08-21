@@ -920,9 +920,9 @@ class DataSourceImpl implements DataSource {
         null,
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         return dosenJabfungFromJson(response.body);
-      }
+      }      
       throw ServerException();
     } catch (e) {
       throw ServerException();
