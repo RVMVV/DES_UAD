@@ -484,6 +484,7 @@ class DataSourceImpl implements DataSource {
         null,
         null,
       );
+      print(response.body);
       if (response.statusCode == 200) {
         return studentBodyFromJson(response.body);
       } else {

@@ -24,18 +24,57 @@ class HomeCubit extends Cubit<HomeState> {
     emit(AkademikStudentStatusLoaded(akademikStatus.data));
   }
 
+  //nonaktfikan sementara
+  // Future<void> getExceptionForHomepage() async {
+  //   emit(StudentBodyLoading());
+  //   try {
+  //     final data = await dataSource.getStudentBody();
+  //     if (data.data == null) {
+  //       emit(StudentBodyEmpty());
+  //     } else {
+  //       await Future.delayed(const Duration(seconds: 5));
+  //       emit(StudentBodyLoaded(data.data));
+  //     }
+  //   } catch (e) {
+  //     emit(StudentBodyError('Something Wrong'));
+  //   }
+  // }
+
+  //experimen 1
+  // Future<void> getExceptionForHomepage() async {
+  //   emit(StudentBodyLoading());
+  //   try {
+  //     final data = dataSource.getStudentBody();
+  //     final delayFuture = Future.delayed(const Duration(seconds: 5));
+  //     final result = await Future.any([data, delayFuture]);
+  //     if (result is StudentBody) {
+  //       if (result.data == null) {
+  //         emit(StudentBodyEmpty());
+  //       } else {
+  //         emit(StudentBodyLoaded(result.data));
+  //       }
+  //     } else {
+  //        emit(StudentBodyEmpty());
+  //     }
+  //   } catch (e) {
+  //     emit(StudentBodyError('Something Wrong'));
+  //   }
+  // }
+
   Future<void> getExceptionForHomepage() async {
     emit(StudentBodyLoading());
     try {
-      final data = await dataSource.getStudentBody();
-      if(data.status != 200) {
+      final data = await dataSource.getStudentBody(); // Tunggu pengambilan data
+      if (data.data == null) {
         emit(StudentBodyEmpty());
-      }else{
+      } else {
+        
         emit(StudentBodyLoaded(data.data));
       }
     } catch (e) {
+      await Future.delayed(
+          const Duration(seconds: 2)); // Delay 5 detik jika terjadi error
       emit(StudentBodyError('Something Wrong'));
     }
-
-    }
   }
+}
